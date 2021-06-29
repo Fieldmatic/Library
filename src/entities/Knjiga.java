@@ -17,6 +17,7 @@ public class Knjiga {
     private List<String> tagovi;
     private List<String> komentari;
     private List<PrimerakKnjige> primerci;
+    private List<Autorstvo> autori;
 
     public int getId() {
         return id;
@@ -120,5 +121,13 @@ public class Knjiga {
 
     public void setSadrzaj(SadrzajKnjige sadrzaj) {
         this.sadrzaj = sadrzaj;
+    }
+
+    public List<Autorstvo> getAutori() {
+        return autori;
+    }
+
+    public void setAutori(List<Autorstvo> autori) {
+        this.autori = autori;
     }
 }
