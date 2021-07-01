@@ -1,7 +1,9 @@
 package enumerations;
 
 public enum StatusRezervacije {
-    naCekanju,
+    zahtevPoslat,
+    odobrena,
+    odbijena,
     preuzeta,
     spremnaZaPreuzimanje
 }

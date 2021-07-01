@@ -1,12 +1,18 @@
 package entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import enumerations.StatusRezervacije;
+import localDateJson.LocalDateDeserializer;
+import localDateJson.LocalDateSerializer;
 
 import java.time.LocalDate;
 
 public class Rezervacija {
     private int id;
     private PrimerakKnjige rezervisanPrimerak;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate datum;
     private StatusRezervacije status;
 

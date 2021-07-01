@@ -26,4 +26,12 @@ public class Recenzija {
     public void setKomentar(String komentar) {
         this.komentar = komentar;
     }
+
+    @Override
+    public String toString() {
+        return "Recenzija{" +
+                "ocena=" + ocena +
+                ", komentar='" + komentar + '\'' +
+                '}';
+    }
 }
