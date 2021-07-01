@@ -1,11 +1,13 @@
 package userEntities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import enumerations.VrstaNaloga;
 
 public class KorisnickiNalog {
     private String korisnickoIme;
     private String lozinka;
     private VrstaNaloga vrstaNaloga;
+    @JsonBackReference
     private Korisnik korisnik;
 
     public KorisnickiNalog(){

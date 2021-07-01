@@ -16,10 +16,14 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) throws IOException {
         MenadzerBibliotekara mb = new MenadzerBibliotekara();
-        Bibliotekar b = new Bibliotekar("Mico", "Milic", LocalDate.now(), 1234567891, Pol.muski);
+        Bibliotekar b = new Bibliotekar("Mico", "Milic", LocalDate.now(), 812741, Pol.muski);
         KorisnickiNalog k = new KorisnickiNalog("mico", "milic", VrstaNaloga.bibliotekar, b);
         b.setNalog(k);
         mb.dodajBibliotekara(b);
+        Bibliotekar g = new Bibliotekar("Mico", "Milic", LocalDate.now(), 29812741, Pol.muski);
+        mb.dodajBibliotekara(g);
+        mb.ucitajPodatke();
+        System.out.println(mb.bibliotekari);
 
     }
 }

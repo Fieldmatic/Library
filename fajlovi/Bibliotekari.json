@@ -1,1 +1,19 @@
-{"jmbg":1234567891,"ime":"Mico","prezime":"Milic","datumRodjenja":{"year":2021,"month":"JUNE","chronology":{"id":"ISO","calendarType":"iso8601"},"dayOfMonth":30,"dayOfWeek":"WEDNESDAY","dayOfYear":181,"era":"CE","monthValue":6,"leapYear":false},"pol":"muski","nalog":null}
+[ {
+  "jmbg" : 812741,
+  "ime" : "Mico",
+  "prezime" : "Milic",
+  "datumRodjenja" : "2021-07-01",
+  "pol" : "muski",
+  "nalog" : {
+    "korisnickoIme" : "mico",
+    "lozinka" : "milic",
+    "vrstaNaloga" : "bibliotekar"
+  }
+}, {
+  "jmbg" : 29812741,
+  "ime" : "Mico",
+  "prezime" : "Milic",
+  "datumRodjenja" : "2021-07-01",
+  "pol" : "muski",
+  "nalog" : null
+} ]
