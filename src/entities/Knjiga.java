@@ -1,6 +1,9 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Knjiga {
@@ -9,15 +12,27 @@ public class Knjiga {
     private float format;
     private LocalDate datumIzdanja;
     private boolean iznosiSe;
-    private int ocena;
-    private int brojOcena;
     private String izdavac;
-    private int brojPrimeraka;
     private SadrzajKnjige sadrzaj;
-    private List<String> tagovi;
-    private List<String> komentari;
-    private List<PrimerakKnjige> primerci;
-    private List<Autorstvo> autori;
+    private List<Recenzija> recenzije = new ArrayList<Recenzija>();
+    private List<String> tagovi = new ArrayList<String>();
+    @JsonManagedReference
+    private List<PrimerakKnjige> primerci = new ArrayList<PrimerakKnjige>();
+    private List<Autorstvo> autori = new ArrayList<Autorstvo>();
+
+    public Knjiga() {}
+
+    public Knjiga(int id, String naziv, float format, LocalDate datumIzdanja, boolean iznosiSe, String izdavac, SadrzajKnjige sadrzaj, List<String> tagovi, List<Autorstvo> autori) {
+        this.id = id;
+        this.naziv = naziv;
+        this.format = format;
+        this.datumIzdanja = datumIzdanja;
+        this.iznosiSe = iznosiSe;
+        this.izdavac = izdavac;
+        this.sadrzaj = sadrzaj;
+        this.tagovi = tagovi;
+        this.autori = autori;
+    }
 
     public int getId() {
         return id;
@@ -59,22 +74,6 @@ public class Knjiga {
         this.iznosiSe = iznosiSe;
     }
 
-    public int getOcena() {
-        return ocena;
-    }
-
-    public void setOcena(int ocena) {
-        this.ocena = ocena;
-    }
-
-    public int getBrojOcena() {
-        return brojOcena;
-    }
-
-    public void setBrojOcena(int brojOcena) {
-        this.brojOcena = brojOcena;
-    }
-
     public List<String> getTagovi() {
         return tagovi;
     }
@@ -83,28 +82,12 @@ public class Knjiga {
         this.tagovi = tagovi;
     }
 
-    public List<String> getKomentari() {
-        return komentari;
-    }
-
-    public void setKomentari(List<String> komentari) {
-        this.komentari = komentari;
-    }
-
     public String getIzdavac() {
         return izdavac;
     }
 
     public void setIzdavac(String izdavac) {
         this.izdavac = izdavac;
-    }
-
-    public int getBrojPrimeraka() {
-        return brojPrimeraka;
-    }
-
-    public void setBrojPrimeraka(int brojPrimeraka) {
-        this.brojPrimeraka = brojPrimeraka;
     }
 
     public List<PrimerakKnjige> getPrimerci() {
@@ -129,5 +112,13 @@ public class Knjiga {
 
     public void setAutori(List<Autorstvo> autori) {
         this.autori = autori;
+    }
+
+    public List<Recenzija> getRecenzije() {
+        return recenzije;
+    }
+
+    public void setRecenzije(List<Recenzija> recenzije) {
+        this.recenzije = recenzije;
     }
 }

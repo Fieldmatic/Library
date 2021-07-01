@@ -6,6 +6,13 @@ public class Autorstvo {
     private Autor autor;
     private UlogaAutora uloga;
 
+    public Autorstvo() {}
+
+    public Autorstvo(Autor autor, UlogaAutora uloga) {
+        this.autor = autor;
+        this.uloga = uloga;
+    }
+
     public Autor getAutor() {
         return autor;
     }

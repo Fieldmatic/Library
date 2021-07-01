@@ -1,21 +1,21 @@
 package entities;
 
 public class Recenzija {
-    private float ocena;
+    private int ocena;
     private String komentar;
 
     public Recenzija() {}
 
-    public Recenzija(float ocena, String komentar) {
+    public Recenzija(int ocena, String komentar) {
         this.ocena = ocena;
         this.komentar = komentar;
     }
 
-    public float getOcena() {
+    public int getOcena() {
         return ocena;
     }
 
-    public void setOcena(float ocena) {
+    public void setOcena(int ocena) {
         this.ocena = ocena;
     }
 

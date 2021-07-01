@@ -1,0 +1,101 @@
+[ {
+  "id" : 10,
+  "naziv" : "Na Drini Cuprija",
+  "format" : 20.4,
+  "datumIzdanja" : {
+    "year" : 2020,
+    "month" : "DECEMBER",
+    "chronology" : {
+      "id" : "ISO",
+      "calendarType" : "iso8601"
+    },
+    "dayOfWeek" : "SATURDAY",
+    "dayOfYear" : 347,
+    "leapYear" : true,
+    "era" : "CE",
+    "dayOfMonth" : 12,
+    "monthValue" : 12
+  },
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "beletristika",
+    "zanrovi" : [ "biografija", "akcioni" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "Hello", "World!", "How", "Are", "You" ],
+  "primerci" : [ {
+    "id" : 1,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 2,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : true
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Ivo",
+      "prezime" : "Andric"
+    },
+    "uloga" : "pisac"
+  }, {
+    "autor" : {
+      "ime" : "Mika  ",
+      "prezime" : "Antic"
+    },
+    "uloga" : "izdavac"
+  } ]
+}, {
+  "id" : 11,
+  "naziv" : "Na Drini Cuprija",
+  "format" : 20.4,
+  "datumIzdanja" : {
+    "year" : 2020,
+    "month" : "DECEMBER",
+    "chronology" : {
+      "id" : "ISO",
+      "calendarType" : "iso8601"
+    },
+    "dayOfWeek" : "SATURDAY",
+    "dayOfYear" : 347,
+    "leapYear" : true,
+    "era" : "CE",
+    "dayOfMonth" : 12,
+    "monthValue" : 12
+  },
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "beletristika",
+    "zanrovi" : [ "biografija", "akcioni" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "Hello", "World!", "How", "Are", "You" ],
+  "primerci" : [ {
+    "id" : 1,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 2,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : true
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Ivo",
+      "prezime" : "Andric"
+    },
+    "uloga" : "pisac"
+  }, {
+    "autor" : {
+      "ime" : "Mika  ",
+      "prezime" : "Antic"
+    },
+    "uloga" : "izdavac"
+  } ]
+} ]

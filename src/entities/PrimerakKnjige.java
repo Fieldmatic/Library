@@ -1,11 +1,25 @@
 package entities;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class PrimerakKnjige {
     private int id;
+    @JsonBackReference
     private Knjiga knjiga;
     private boolean popravljaSe;
     private boolean pozajmljen;
     private boolean ostecen;
+
+    public PrimerakKnjige() {}
+
+    public PrimerakKnjige(int id, Knjiga knjiga, boolean popravljaSe, boolean pozajmljen, boolean ostecen) {
+        this.id = id;
+        this.knjiga = knjiga;
+        this.popravljaSe = popravljaSe;
+        this.pozajmljen = pozajmljen;
+        this.ostecen = ostecen;
+    }
 
     public int getId() {
         return id;

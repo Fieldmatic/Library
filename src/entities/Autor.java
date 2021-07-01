@@ -4,6 +4,13 @@ public class Autor {
     private String ime;
     private String prezime;
 
+    public Autor() {}
+
+    public Autor(String ime, String prezime) {
+        this.ime = ime;
+        this.prezime = prezime;
+    }
+
     public String getIme() {
         return ime;
     }
