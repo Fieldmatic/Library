@@ -1,0 +1,21 @@
+[ {
+  "tip" : "student",
+  "datumPocetka" : "2021-07-02",
+  "datumKraja" : "2022-07-02"
+}, {
+  "tip" : "zaposlen",
+  "datumPocetka" : "2021-03-02",
+  "datumKraja" : "2022-03-02"
+}, {
+  "tip" : "pocasniClan",
+  "datumPocetka" : "2021-03-02",
+  "datumKraja" : "2022-03-02"
+}, {
+  "tip" : "djak",
+  "datumPocetka" : "2021-05-02",
+  "datumKraja" : "2022-05-02"
+}, {
+  "tip" : "student",
+  "datumPocetka" : "2021-01-02",
+  "datumKraja" : "2022-01-02"
+} ]
