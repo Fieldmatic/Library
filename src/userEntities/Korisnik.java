@@ -1,6 +1,11 @@
 package userEntities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import enumerations.Pol;
+import localDateJson.LocalDateDeserializer;
+import localDateJson.LocalDateSerializer;
 
 import java.time.LocalDate;
 
@@ -8,8 +13,11 @@ public abstract class Korisnik {
     private int jmbg;
     private String ime;
     private String prezime;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate datumRodjenja;
     private Pol pol;
+    @JsonManagedReference
     private KorisnickiNalog nalog;
 
     public Korisnik() {

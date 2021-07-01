@@ -1,21 +1,20 @@
 package repository;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.menadzer;
 import userEntities.Bibliotekar;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerBibliotekara implements menadzer {
-    private List<Bibliotekar> biblitekari;
-    private static final String putanja_do_fajla = "fajlovi/Bibliotekari.json";
+    public List<Bibliotekar> bibliotekari = new ArrayList<Bibliotekar>();
+    private static final String putanjaDoFajla = "fajlovi/Bibliotekari.json";
 
     public MenadzerBibliotekara(){
 
@@ -23,10 +22,11 @@ public class MenadzerBibliotekara implements menadzer {
 
     public void dodajBibliotekara(Bibliotekar b) throws IOException {
         ObjectMapper obj = new ObjectMapper();
-        FileWriter file = new FileWriter(putanja_do_fajla, true);
+        bibliotekari.add(b);
+        FileWriter file = new FileWriter(putanjaDoFajla);
         try{
-            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(b);
-            file.write(jsonStr+"\n");
+            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(bibliotekari);
+            file.write(jsonStr);
             file.close();
         }
         catch (IOException e){
@@ -39,7 +39,9 @@ public class MenadzerBibliotekara implements menadzer {
 
     }
 
-    public void ucitajPodatke() {
-
+    public void ucitajPodatke() throws IOException {
+        ObjectMapper obj = new ObjectMapper();
+        File file = new File(putanjaDoFajla);
+        bibliotekari = Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Bibliotekar[].class));
     }
 }
