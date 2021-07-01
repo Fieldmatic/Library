@@ -9,9 +9,7 @@ public class SadrzajKnjige {
     private String naziv;
     private List<Zanr> zanrovi  = new ArrayList<Zanr>();
 
-    public SadrzajKnjige() {
-        //this.zanrovi = new ArrayList<Zanr>();
-    }
+    public SadrzajKnjige() {}
 
     public SadrzajKnjige(String naziv, List<Zanr> zanrovi) {
         this.naziv = naziv;

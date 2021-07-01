@@ -1,41 +1,57 @@
 package repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Knjiga;
+import entities.PrimerakKnjige;
 import interfaces.menadzer;
+import userEntities.Bibliotekar;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerKnjiga implements menadzer {
-    private List<Knjiga> knjige = new ArrayList<Knjiga>();
-    private static final String putanjaDoFajla = "fajlovi/Knjige.json";
+    private List<Knjiga> knjige = new ArrayList<>();
+    private List<PrimerakKnjige> primerci = new ArrayList<>();
+    private static final String putanjaDoFajlaKnjiga = "fajlovi/Knjige.json";
+    private static final String putanjaDoFajlaPrimeraka = "fajlovi/PrimerciKnjiga.json";
 
     public MenadzerKnjiga() {}
 
     public void dodajKnjigu(Knjiga knjiga) throws IOException {
-        ObjectMapper obj = new ObjectMapper();
-        FileWriter file = new FileWriter(putanjaDoFajla);
-        try {
-            knjige.add(knjiga);
-            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(knjige);
-            file.write(jsonStr);
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        knjige.add(knjiga);
+        azurirajFajl();
+    }
+
+    public void dodajPrimerakKnjige(PrimerakKnjige primerak) throws IOException {
+        primerci.add(primerak);
+        azurirajFajl();
     }
 
     public void ucitajPodatke() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        File file = new File(putanjaDoFajla);
-
-        Knjiga knjiga = objectMapper.readValue(file, Knjiga.class);
+        ObjectMapper obj = new ObjectMapper();
+        knjige = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajlaKnjiga).toFile(), Knjiga[].class)));
+        primerci = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajlaPrimeraka).toFile(), PrimerakKnjige[].class)));
     }
 
-    public void azurirajFajl() {
+    public void azurirajFajl() throws IOException {
+        ObjectMapper obj = new ObjectMapper();
+        FileWriter fajlKnjiga = new FileWriter(putanjaDoFajlaKnjiga);
+        FileWriter fajlPrimeraka = new FileWriter(putanjaDoFajlaPrimeraka);
+        try {
+            String jsonKnjige = obj.writerWithDefaultPrettyPrinter().writeValueAsString(knjige);
+            fajlKnjiga.write(jsonKnjige);
+            fajlKnjiga.close();
 
+            String jsonPrimerci = obj.writerWithDefaultPrettyPrinter().writeValueAsString(primerci);
+            fajlPrimeraka.write(jsonPrimerci);
+            fajlPrimeraka.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

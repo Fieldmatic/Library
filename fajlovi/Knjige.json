@@ -1,29 +1,19 @@
 [ {
-  "id" : 10,
+  "id" : 1,
   "naziv" : "Na Drini Cuprija",
-  "format" : 20.4,
-  "datumIzdanja" : {
-    "year" : 2020,
-    "month" : "DECEMBER",
-    "chronology" : {
-      "id" : "ISO",
-      "calendarType" : "iso8601"
-    },
-    "dayOfWeek" : "SATURDAY",
-    "dayOfYear" : 347,
-    "leapYear" : true,
-    "era" : "CE",
-    "dayOfMonth" : 12,
-    "monthValue" : 12
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
   },
+  "datumIzdanja" : "2005-05-10",
   "iznosiSe" : true,
   "izdavac" : "Laguna",
   "sadrzaj" : {
     "naziv" : "beletristika",
-    "zanrovi" : [ "biografija", "akcioni" ]
+    "zanrovi" : [ "istorijski" ]
   },
   "recenzije" : [ ],
-  "tagovi" : [ "Hello", "World!", "How", "Are", "You" ],
+  "tagovi" : [ "roman", "prolaznost ljudskog zivota", "srednji vek" ],
   "primerci" : [ {
     "id" : 1,
     "popravljaSe" : false,
@@ -41,61 +31,282 @@
       "prezime" : "Andric"
     },
     "uloga" : "pisac"
-  }, {
-    "autor" : {
-      "ime" : "Mika  ",
-      "prezime" : "Antic"
-    },
-    "uloga" : "izdavac"
   } ]
 }, {
-  "id" : 11,
-  "naziv" : "Na Drini Cuprija",
-  "format" : 20.4,
-  "datumIzdanja" : {
-    "year" : 2020,
-    "month" : "DECEMBER",
-    "chronology" : {
-      "id" : "ISO",
-      "calendarType" : "iso8601"
-    },
-    "dayOfWeek" : "SATURDAY",
-    "dayOfYear" : 347,
-    "leapYear" : true,
-    "era" : "CE",
-    "dayOfMonth" : 12,
-    "monthValue" : 12
+  "id" : 2,
+  "naziv" : "Ahilova pesma",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
   },
+  "datumIzdanja" : "2015-10-10",
   "iznosiSe" : true,
   "izdavac" : "Laguna",
   "sadrzaj" : {
     "naziv" : "beletristika",
-    "zanrovi" : [ "biografija", "akcioni" ]
+    "zanrovi" : [ "drama", "ljubavni" ]
   },
   "recenzije" : [ ],
-  "tagovi" : [ "Hello", "World!", "How", "Are", "You" ],
+  "tagovi" : [ "nagradjene knjige", "nagrada orindz", "grcka u doba junaka" ],
   "primerci" : [ {
-    "id" : 1,
+    "id" : 3,
     "popravljaSe" : false,
     "pozajmljen" : false,
     "ostecen" : false
   }, {
-    "id" : 2,
+    "id" : 4,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : true
+  }, {
+    "id" : 5,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Madlin",
+      "prezime" : "Miler"
+    },
+    "uloga" : "pisac"
+  }, {
+    "autor" : {
+      "ime" : "Nevena",
+      "prezime" : "Andric"
+    },
+    "uloga" : "prevodilac"
+  } ]
+}, {
+  "id" : 3,
+  "naziv" : "Iskon",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
+  },
+  "datumIzdanja" : "2020-01-01",
+  "iznosiSe" : false,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "publicistika",
+    "zanrovi" : [ "popularnaNauka", "edukativni" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "istorija", "sudbina", "zemlja" ],
+  "primerci" : [ {
+    "id" : 6,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 7,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Luis",
+      "prezime" : "Dartnel"
+    },
+    "uloga" : "pisac"
+  }, {
+    "autor" : {
+      "ime" : "Ksenija",
+      "prezime" : "Vlatkovic"
+    },
+    "uloga" : "prevodilac"
+  } ]
+}, {
+  "id" : 4,
+  "naziv" : "Senke",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
+  },
+  "datumIzdanja" : "2021-03-01",
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "beletristika",
+    "zanrovi" : [ "trileri" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "ubistvo" ],
+  "primerci" : [ {
+    "id" : 8,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Aleks",
+      "prezime" : "Nort"
+    },
+    "uloga" : "pisac"
+  } ]
+}, {
+  "id" : 5,
+  "naziv" : "Oko otoka",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
+  },
+  "datumIzdanja" : "2019-09-07",
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "beletristika",
+    "zanrovi" : [ "istorijski", "drama" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "domaci autori", "Goli otok" ],
+  "primerci" : [ {
+    "id" : 9,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 10,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 11,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Vanja",
+      "prezime" : "Bulic"
+    },
+    "uloga" : "pisac"
+  } ]
+}, {
+  "id" : 6,
+  "naziv" : "Una",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
+  },
+  "datumIzdanja" : "2019-07-07",
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "beletristika",
+    "zanrovi" : [ "ljubavni", "drama" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "domaci autori", "potreba za slobodom" ],
+  "primerci" : [ {
+    "id" : 12,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 13,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 14,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Momo",
+      "prezime" : "Kapor"
+    },
+    "uloga" : "pisac"
+  }, {
+    "autor" : {
+      "ime" : "Ana",
+      "prezime" : "Kapor"
+    },
+    "uloga" : "pisacPredgovora"
+  } ]
+}, {
+  "id" : 7,
+  "naziv" : "Austrijanka",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
+  },
+  "datumIzdanja" : "2021-04-12",
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "publicistika",
+    "zanrovi" : [ "istorijski", "drama" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "istorija", "1942", "Jasenovac" ],
+  "primerci" : [ {
+    "id" : 15,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  } ],
+  "autori" : [ {
+    "autor" : {
+      "ime" : "Zoran",
+      "prezime" : "Milekic"
+    },
+    "uloga" : "pisac"
+  } ]
+}, {
+  "id" : 8,
+  "naziv" : "Igra s vukovima",
+  "format" : {
+    "width" : 13.0,
+    "height" : 20.0
+  },
+  "datumIzdanja" : "2021-05-15",
+  "iznosiSe" : true,
+  "izdavac" : "Laguna",
+  "sadrzaj" : {
+    "naziv" : "beletristika",
+    "zanrovi" : [ "istorijski", "avanturisticki", "drama", "filmovaneKnjige" ]
+  },
+  "recenzije" : [ ],
+  "tagovi" : [ "otkrivanje sopstvenog identiteta", "snimljen film", "7 Oskara" ],
+  "primerci" : [ {
+    "id" : 16,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 17,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : true
+  }, {
+    "id" : 18,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  }, {
+    "id" : 19,
     "popravljaSe" : false,
     "pozajmljen" : false,
     "ostecen" : true
   } ],
   "autori" : [ {
     "autor" : {
-      "ime" : "Ivo",
-      "prezime" : "Andric"
+      "ime" : "Majkl",
+      "prezime" : "Blejk"
     },
     "uloga" : "pisac"
   }, {
     "autor" : {
-      "ime" : "Mika  ",
-      "prezime" : "Antic"
+      "ime" : "Tatjana",
+      "prezime" : "Milosavljevic"
     },
-    "uloga" : "izdavac"
+    "uloga" : "prevodilac"
   } ]
 } ]

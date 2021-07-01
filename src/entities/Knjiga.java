@@ -1,7 +1,12 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import localDateJson.LocalDateDeserializer;
+import localDateJson.LocalDateSerializer;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +14,9 @@ import java.util.List;
 public class Knjiga {
     private int id;
     private String naziv;
-    private float format;
+    private Dimension format;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate datumIzdanja;
     private boolean iznosiSe;
     private String izdavac;
@@ -22,7 +29,7 @@ public class Knjiga {
 
     public Knjiga() {}
 
-    public Knjiga(int id, String naziv, float format, LocalDate datumIzdanja, boolean iznosiSe, String izdavac, SadrzajKnjige sadrzaj, List<String> tagovi, List<Autorstvo> autori) {
+    public Knjiga(int id, String naziv, Dimension format, LocalDate datumIzdanja, boolean iznosiSe, String izdavac, SadrzajKnjige sadrzaj, List<String> tagovi, List<Autorstvo> autori) {
         this.id = id;
         this.naziv = naziv;
         this.format = format;
@@ -48,14 +55,6 @@ public class Knjiga {
 
     public void setNaziv(String naziv) {
         this.naziv = naziv;
-    }
-
-    public float getFormat() {
-        return format;
-    }
-
-    public void setFormat(float format) {
-        this.format = format;
     }
 
     public LocalDate getDatumIzdanja() {
@@ -120,5 +119,31 @@ public class Knjiga {
 
     public void setRecenzije(List<Recenzija> recenzije) {
         this.recenzije = recenzije;
+    }
+
+    public Dimension getFormat() {
+        return format;
+    }
+
+    public void setFormat(Dimension format) {
+        this.format = format;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Knjiga{" +
+                "id=" + id +
+                ", naziv='" + naziv + '\'' +
+                ", format=" + format +
+                ", datumIzdanja=" + datumIzdanja +
+                ", iznosiSe=" + iznosiSe +
+                ", izdavac='" + izdavac + '\'' +
+                ", sadrzaj=" + sadrzaj +
+                ", recenzije=" + recenzije +
+                ", tagovi=" + tagovi +
+                ", primerci=" + primerci +
+                ", autori=" + autori +
+                '}';
     }
 }

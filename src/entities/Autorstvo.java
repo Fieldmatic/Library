@@ -28,4 +28,12 @@ public class Autorstvo {
     public void setUloga(UlogaAutora uloga) {
         this.uloga = uloga;
     }
+
+    @Override
+    public String toString() {
+        return "Autorstvo{" +
+                "autor=" + autor +
+                ", uloga=" + uloga +
+                '}';
+    }
 }
