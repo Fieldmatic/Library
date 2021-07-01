@@ -1,19 +1,48 @@
 [ {
-  "jmbg" : 812741,
+  "jmbg" : "110420009713",
   "ime" : "Mico",
   "prezime" : "Milic",
-  "datumRodjenja" : "2021-07-01",
+  "datumRodjenja" : "2000-04-11",
   "pol" : "muski",
   "nalog" : {
-    "korisnickoIme" : "mico",
-    "lozinka" : "milic",
+    "korisnickoIme" : "ivan",
+    "lozinka" : "ivan",
+    "vrstaNaloga" : "bibliotekarZaKatalogizaciju"
+  }
+}, {
+  "jmbg" : "311219998321",
+  "ime" : "Ivana",
+  "prezime" : "Stevanovic",
+  "datumRodjenja" : "1999-12-31",
+  "pol" : "zenski",
+  "nalog" : {
+    "korisnickoIme" : "ivana",
+    "lozinka" : "stevanovic",
     "vrstaNaloga" : "bibliotekar"
   }
 }, {
-  "jmbg" : 29812741,
-  "ime" : "Mico",
-  "prezime" : "Milic",
-  "datumRodjenja" : "2021-07-01",
+  "jmbg" : "0515200098712",
+  "ime" : "Vladan",
+  "prezime" : "Mikic",
+  "datumRodjenja" : "2000-05-15",
+  "pol" : "muski",
+  "nalog" : {
+    "korisnickoIme" : "vladan",
+    "lozinka" : "mikic",
+    "vrstaNaloga" : "bibliotekar"
+  }
+}, {
+  "jmbg" : "0406200093815",
+  "ime" : "Zoran",
+  "prezime" : "Zoranovic",
+  "datumRodjenja" : "2000-04-06",
+  "pol" : "muski",
+  "nalog" : null
+}, {
+  "jmbg" : "1507200091823",
+  "ime" : "Ivan",
+  "prezime" : "Ivanovic",
+  "datumRodjenja" : "2000-07-15",
   "pol" : "muski",
   "nalog" : null
 } ]

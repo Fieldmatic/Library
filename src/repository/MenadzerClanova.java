@@ -2,7 +2,7 @@ package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.menadzer;
-import userEntities.Bibliotekar;
+import userEntities.Clan;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenadzerBibliotekara implements menadzer {
-    private List<Bibliotekar> bibliotekari = new ArrayList<>();
-    private static final String putanjaDoFajla = "fajlovi/Bibliotekari.json";
+public class MenadzerClanova implements menadzer {
+    private List<Clan> clanovi = new ArrayList<>();
+    private static final String putanjaDoFajla = "fajlovi/Clanovi.json";
 
-    public MenadzerBibliotekara(){}
+    public MenadzerClanova(){}
 
-    public void dodajBibliotekara(Bibliotekar b) throws IOException {
-        bibliotekari.add(b);
+    public void dodajClana(Clan c) throws IOException {
+        clanovi.add(c);
         azurirajFajl();
     }
 
@@ -27,7 +27,7 @@ public class MenadzerBibliotekara implements menadzer {
         ObjectMapper obj = new ObjectMapper();
         FileWriter file = new FileWriter(putanjaDoFajla);
         try{
-            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(bibliotekari);
+            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(clanovi);
             file.write(jsonStr);
             file.close();
         }
@@ -38,6 +38,6 @@ public class MenadzerBibliotekara implements menadzer {
 
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
-        bibliotekari = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Bibliotekar[].class)));
+        clanovi = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Clan[].class)));
     }
 }

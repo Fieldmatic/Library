@@ -10,7 +10,7 @@ import localDateJson.LocalDateSerializer;
 import java.time.LocalDate;
 
 public abstract class Korisnik {
-    private int jmbg;
+    private String jmbg;
     private String ime;
     private String prezime;
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -20,11 +20,9 @@ public abstract class Korisnik {
     @JsonManagedReference
     private KorisnickiNalog nalog;
 
-    public Korisnik() {
+    public Korisnik() {}
 
-    }
-
-    public Korisnik(String ime, String prezime, LocalDate datumRodjenja, int jmbg, Pol pol) {
+    public Korisnik(String ime, String prezime, LocalDate datumRodjenja, String jmbg, Pol pol) {
         this.jmbg = jmbg;
         this.ime = ime;
         this.prezime = prezime;
@@ -56,11 +54,11 @@ public abstract class Korisnik {
         this.datumRodjenja = datumRodjenja;
     }
 
-    public int getJmbg() {
+    public String getJmbg() {
         return jmbg;
     }
 
-    public void setJmbg(int jmbg) {
+    public void setJmbg(String jmbg) {
         this.jmbg = jmbg;
     }
 

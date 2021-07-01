@@ -1,0 +1,81 @@
+[ {
+  "jmbg" : "0103200098765",
+  "ime" : "Ognjen",
+  "prezime" : "Ognjenovic",
+  "datumRodjenja" : "2000-03-01",
+  "pol" : "muski",
+  "nalog" : {
+    "korisnickoIme" : "ognjen",
+    "lozinka" : "ognjen",
+    "vrstaNaloga" : "clan"
+  },
+  "clanarina" : {
+    "tip" : "student",
+    "datumPocetka" : "2021-07-02",
+    "datumKraja" : "2022-07-02"
+  }
+}, {
+  "jmbg" : "011199582745",
+  "ime" : "Milos",
+  "prezime" : "Spasic",
+  "datumRodjenja" : "1995-11-01",
+  "pol" : "muski",
+  "nalog" : {
+    "korisnickoIme" : "milos",
+    "lozinka" : "spasic",
+    "vrstaNaloga" : "clan"
+  },
+  "clanarina" : {
+    "tip" : "zaposlen",
+    "datumPocetka" : "2021-03-02",
+    "datumKraja" : "2022-03-02"
+  }
+}, {
+  "jmbg" : "1707199582745",
+  "ime" : "Bojan",
+  "prezime" : "Bojanic",
+  "datumRodjenja" : "1995-07-17",
+  "pol" : "muski",
+  "nalog" : {
+    "korisnickoIme" : "bojan",
+    "lozinka" : "bojan",
+    "vrstaNaloga" : "clan"
+  },
+  "clanarina" : {
+    "tip" : "pocasniClan",
+    "datumPocetka" : "2021-03-02",
+    "datumKraja" : "2022-03-02"
+  }
+}, {
+  "jmbg" : "1209199792845",
+  "ime" : "Tamara",
+  "prezime" : "Kalinic",
+  "datumRodjenja" : "1997-09-12",
+  "pol" : "zenski",
+  "nalog" : {
+    "korisnickoIme" : "tamara",
+    "lozinka" : "kalinic",
+    "vrstaNaloga" : "clan"
+  },
+  "clanarina" : {
+    "tip" : "djak",
+    "datumPocetka" : "2021-05-02",
+    "datumKraja" : "2022-05-02"
+  }
+}, {
+  "jmbg" : "0307199588745",
+  "ime" : "Dunja",
+  "prezime" : "Jovanic",
+  "datumRodjenja" : "1995-07-03",
+  "pol" : "zenski",
+  "nalog" : {
+    "korisnickoIme" : "dunja",
+    "lozinka" : "jovanic",
+    "vrstaNaloga" : "clan"
+  },
+  "clanarina" : {
+    "tip" : "student",
+    "datumPocetka" : "2021-01-02",
+    "datumKraja" : "2022-01-02"
+  }
+} ]

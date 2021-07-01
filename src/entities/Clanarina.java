@@ -1,14 +1,24 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import enumerations.TipClanarine;
+import localDateJson.LocalDateDeserializer;
+import localDateJson.LocalDateSerializer;
 import userEntities.Clan;
 
 import java.time.LocalDate;
 
 public class Clanarina {
     private TipClanarine tip;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate datumPocetka;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate datumKraja;
+    @JsonBackReference
     private Clan clan;
 
     public Clanarina() {

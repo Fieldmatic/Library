@@ -1,28 +1,44 @@
 package repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.menadzer;
+import userEntities.Bibliotekar;
 import userEntities.KorisnickiNalog;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerKorisnickihNaloga implements menadzer {
-    private List<KorisnickiNalog> nalozi;
-    private static final String putanja_do_fajla = "fajlovi/Nalozi.json";
+    private List<KorisnickiNalog> nalozi = new ArrayList<>();
+    private static final String putanjaDoFajla = "fajlovi/Nalozi.json";
 
 
-    public MenadzerKorisnickihNaloga(){
+    public MenadzerKorisnickihNaloga(){}
 
+    public void dodajNalog(KorisnickiNalog kn) throws IOException {
+        nalozi.add(kn);
+        azurirajFajl();
     }
 
-    public void dodajNalog(){
-
+    public void azurirajFajl() throws IOException {
+        ObjectMapper obj = new ObjectMapper();
+        FileWriter file = new FileWriter(putanjaDoFajla);
+        try{
+            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(nalozi);
+            file.write(jsonStr);
+            file.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
-    public void azurirajFajl() {
-
-    }
-
-    public void ucitajPodatke() {
-
+    public void ucitajPodatke() throws IOException {
+        ObjectMapper obj = new ObjectMapper();
+        nalozi = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), KorisnickiNalog[].class)));
     }
 }
