@@ -6,11 +6,9 @@ import java.time.LocalDate;
 
 public class Bibliotekar extends Korisnik {
 
-    public Bibliotekar(){
+    public Bibliotekar(){}
 
-    }
-
-    public Bibliotekar(String ime, String prezime, LocalDate datumRodjenja, int jmbg, Pol pol) {
+    public Bibliotekar(String ime, String prezime, LocalDate datumRodjenja, String jmbg, Pol pol) {
         super(ime, prezime, datumRodjenja, jmbg, pol);
     }
 

@@ -10,9 +10,7 @@ public class KorisnickiNalog {
     @JsonBackReference
     private Korisnik korisnik;
 
-    public KorisnickiNalog(){
-
-    }
+    public KorisnickiNalog(){}
 
     public KorisnickiNalog(String korisnickoIme, String lozinka, VrstaNaloga vrstaNaloga, Korisnik korisnik) {
         this.korisnickoIme = korisnickoIme;
