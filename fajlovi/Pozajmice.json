@@ -1,0 +1,34 @@
+[ {
+  "id" : 1,
+  "pozajmljenPrimerak" : {
+    "id" : 4,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : true
+  },
+  "datumPocetka" : "2021-07-02",
+  "datumKraja" : "2021-07-25",
+  "status" : "aktivna"
+}, {
+  "id" : 2,
+  "pozajmljenPrimerak" : {
+    "id" : 6,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  },
+  "datumPocetka" : "2021-07-02",
+  "datumKraja" : "2021-07-20",
+  "status" : "aktivna"
+}, {
+  "id" : 3,
+  "pozajmljenPrimerak" : {
+    "id" : 9,
+    "popravljaSe" : false,
+    "pozajmljen" : false,
+    "ostecen" : false
+  },
+  "datumPocetka" : "2021-07-02",
+  "datumKraja" : "2021-07-15",
+  "status" : "aktivna"
+} ]
