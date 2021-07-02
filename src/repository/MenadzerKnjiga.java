@@ -1,11 +1,9 @@
 package repository;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Knjiga;
 import entities.PrimerakKnjige;
 import interfaces.menadzer;
-import userEntities.Bibliotekar;
 
 import java.io.*;
 import java.nio.file.Paths;
