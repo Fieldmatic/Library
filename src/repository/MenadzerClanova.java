@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerClanova implements menadzer {
-    private List<Clan> clanovi = new ArrayList<>();
+    public List<Clan> clanovi = new ArrayList<>();
     private static final String putanjaDoFajla = "fajlovi/Clanovi.json";
 
     public MenadzerClanova(){}

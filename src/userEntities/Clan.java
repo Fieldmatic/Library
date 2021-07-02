@@ -2,13 +2,20 @@ package userEntities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import entities.Clanarina;
+import entities.Pozajmica;
+import entities.Rezervacija;
 import enumerations.Pol;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Clan extends Korisnik {
     @JsonManagedReference
     private Clanarina clanarina;
+    private List<Pozajmica> pozajmice = new ArrayList<>();
+    private List<Rezervacija> rezervacije = new ArrayList<>();
+
 
     public Clan(){}
 
@@ -24,10 +31,27 @@ public class Clan extends Korisnik {
         this.clanarina = clanarina;
     }
 
+    public List<Pozajmica> getPozajmice() {
+        return pozajmice;
+    }
+
+    public void setPozajmice(List<Pozajmica> pozajmice) {
+        this.pozajmice = pozajmice;
+    }
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "Clan{" +
                 "clanarina=" + clanarina +
                 '}';
     }
+
 }
