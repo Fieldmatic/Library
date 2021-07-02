@@ -3,8 +3,8 @@
   "pozajmljenPrimerak" : {
     "id" : 4,
     "popravljaSe" : false,
-    "pozajmljen" : false,
-    "ostecen" : true
+    "pozajmljen" : true,
+    "ostecen" : false
   },
   "datumPocetka" : "2021-07-02",
   "datumKraja" : "2021-07-25",
@@ -14,7 +14,7 @@
   "pozajmljenPrimerak" : {
     "id" : 6,
     "popravljaSe" : false,
-    "pozajmljen" : false,
+    "pozajmljen" : true,
     "ostecen" : false
   },
   "datumPocetka" : "2021-07-02",
@@ -25,7 +25,7 @@
   "pozajmljenPrimerak" : {
     "id" : 9,
     "popravljaSe" : false,
-    "pozajmljen" : false,
+    "pozajmljen" : true,
     "ostecen" : false
   },
   "datumPocetka" : "2021-07-02",

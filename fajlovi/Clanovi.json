@@ -13,7 +13,31 @@
     "tip" : "student",
     "datumPocetka" : "2021-07-02",
     "datumKraja" : "2022-07-02"
-  }
+  },
+  "pozajmice" : [ {
+    "id" : 1,
+    "pozajmljenPrimerak" : {
+      "id" : 4,
+      "popravljaSe" : false,
+      "pozajmljen" : true,
+      "ostecen" : false
+    },
+    "datumPocetka" : "2021-07-02",
+    "datumKraja" : "2021-07-25",
+    "status" : "aktivna"
+  },{
+    "id" : 2,
+    "pozajmljenPrimerak" : {
+      "id" : 6,
+      "popravljaSe" : false,
+      "pozajmljen" : true,
+      "ostecen" : false
+    },
+    "datumPocetka" : "2021-07-02",
+    "datumKraja" : "2021-07-20",
+    "status" : "aktivna"
+  } ],
+  "rezervacije" : [ ]
 }, {
   "jmbg" : "011199582745",
   "ime" : "Milos",
@@ -29,7 +53,20 @@
     "tip" : "zaposlen",
     "datumPocetka" : "2021-03-02",
     "datumKraja" : "2022-03-02"
-  }
+  },
+  "pozajmice" : [ {
+    "id" : 3,
+    "pozajmljenPrimerak" : {
+      "id" : 9,
+      "popravljaSe" : false,
+      "pozajmljen" : true,
+      "ostecen" : false
+    },
+    "datumPocetka" : "2021-07-02",
+    "datumKraja" : "2021-07-15",
+    "status" : "aktivna"
+  } ],
+  "rezervacije" : [ ]
 }, {
   "jmbg" : "1707199582745",
   "ime" : "Bojan",
@@ -45,7 +82,9 @@
     "tip" : "pocasniClan",
     "datumPocetka" : "2021-03-02",
     "datumKraja" : "2022-03-02"
-  }
+  },
+  "pozajmice" : [ ],
+  "rezervacije" : [ ]
 }, {
   "jmbg" : "1209199792845",
   "ime" : "Tamara",
@@ -61,7 +100,9 @@
     "tip" : "djak",
     "datumPocetka" : "2021-05-02",
     "datumKraja" : "2022-05-02"
-  }
+  },
+  "pozajmice" : [ ],
+  "rezervacije" : [ ]
 }, {
   "jmbg" : "0307199588745",
   "ime" : "Dunja",
@@ -77,5 +118,7 @@
     "tip" : "student",
     "datumPocetka" : "2021-01-02",
     "datumKraja" : "2022-01-02"
-  }
+  },
+  "pozajmice" : [ ],
+  "rezervacije" : [ ]
 } ]

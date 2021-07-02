@@ -68,4 +68,15 @@ public class Pozajmica {
     public void setStatus(StatusPozajmice status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Pozajmica{" +
+                "id=" + id +
+                ", pozajmljenPrimerak=" + pozajmljenPrimerak +
+                ", datumPocetka=" + datumPocetka +
+                ", datumKraja=" + datumKraja +
+                ", status=" + status +
+                '}';
+    }
 }
