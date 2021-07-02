@@ -1,6 +1,6 @@
 package main;
 
-import glavniProzori.Prijavljivanje;
+import gui.Prijavljivanje;
 import repository.Fabrika;
 
 import java.io.IOException;

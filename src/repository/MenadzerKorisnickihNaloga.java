@@ -1,8 +1,7 @@
 package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.menadzer;
-import userEntities.Bibliotekar;
+import interfaces.Menadzer;
 import userEntities.KorisnickiNalog;
 
 import java.io.FileWriter;
@@ -12,10 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenadzerKorisnickihNaloga implements menadzer {
+public class MenadzerKorisnickihNaloga implements Menadzer {
     private List<KorisnickiNalog> nalozi = new ArrayList<>();
     private static final String putanjaDoFajla = "fajlovi/Nalozi.json";
-
 
     public MenadzerKorisnickihNaloga(){}
 
@@ -40,5 +38,22 @@ public class MenadzerKorisnickihNaloga implements menadzer {
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
         nalozi = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), KorisnickiNalog[].class)));
+    }
+
+    public KorisnickiNalog pronadjiNalogSaUsername(String korisnickoIme){
+        for(KorisnickiNalog nalog: this.nalozi) {
+            if (nalog.getKorisnickoIme().equals(korisnickoIme)){
+                return nalog;
+            }
+        }
+        return null;
+    }
+
+    public boolean validnostPrijave(String korisnickoIme, String lozinka) {
+        KorisnickiNalog nalog = pronadjiNalogSaUsername(korisnickoIme);
+        if ((!nalog.equals(null)) && (nalog.getLozinka().equals(lozinka))) {
+            return true;
+        }
+        return false;
     }
 }

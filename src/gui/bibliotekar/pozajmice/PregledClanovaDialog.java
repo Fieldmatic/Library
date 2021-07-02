@@ -27,7 +27,7 @@ public class PregledClanovaDialog extends JDialog {
 
     public PregledClanovaDialog(Fabrika repo) {
         this.repo = repo;
-        this.data = repo.getMenadzerClanova().clanovi;
+        this.data = repo.getMenadzerClanova().getClanovi();
         this.tabela = new JTable(new PregledClanovaModel(this.data));
         initDialog();
     }

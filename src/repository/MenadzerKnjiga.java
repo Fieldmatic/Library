@@ -3,7 +3,7 @@ package repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Knjiga;
 import entities.PrimerakKnjige;
-import interfaces.menadzer;
+import interfaces.Menadzer;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenadzerKnjiga implements menadzer {
+public class MenadzerKnjiga implements Menadzer {
     private List<Knjiga> knjige = new ArrayList<>();
     private List<PrimerakKnjige> primerci = new ArrayList<>();
     private static final String putanjaDoFajlaKnjiga = "fajlovi/Knjige.json";

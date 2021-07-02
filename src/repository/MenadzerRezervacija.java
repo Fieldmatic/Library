@@ -2,7 +2,7 @@ package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Rezervacija;
-import interfaces.menadzer;
+import interfaces.Menadzer;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenadzerRezervacija implements menadzer {
+public class MenadzerRezervacija implements Menadzer {
     private List<Rezervacija> rezervacije = new ArrayList<>();
     private static final String putanjaDoFajla = "fajlovi/Rezervacije.json";
 

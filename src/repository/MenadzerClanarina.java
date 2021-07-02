@@ -2,7 +2,7 @@ package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Clanarina;
-import interfaces.menadzer;
+import interfaces.Menadzer;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenadzerClanarina implements menadzer {
+public class MenadzerClanarina implements Menadzer {
     private List<Clanarina> clanarine = new ArrayList<>();
     private static final String putanjaDoFajla = "fajlovi/Clanarine.json";
 
