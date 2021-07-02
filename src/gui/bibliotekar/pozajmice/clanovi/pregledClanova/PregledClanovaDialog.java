@@ -1,4 +1,4 @@
-package gui.bibliotekar.pozajmice;
+package gui.bibliotekar.pozajmice.clanovi.pregledClanova;
 
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
@@ -19,15 +19,15 @@ import java.util.Map;
 
 public class PregledClanovaDialog extends JDialog {
 
-    private Fabrika repo;
-    private List<Clan> data;
-    private JTable tabela;
-    private JTextField tfPretraga;
+    protected Fabrika repo;
+    protected List<Clan> data;
+    protected JTable tabela;
+    protected JTextField tfPretraga;
     protected TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
 
-    public PregledClanovaDialog(Fabrika repo) {
+    public PregledClanovaDialog(Fabrika repo, List<Clan> data) {
         this.repo = repo;
-        this.data = repo.getMenadzerClanova().getClanovi();
+        this.data = data;
         this.tabela = new JTable(new PregledClanovaModel(this.data));
         initDialog();
     }
@@ -63,6 +63,7 @@ public class PregledClanovaDialog extends JDialog {
 
         tfPretraga =  new JTextField(20);
         add(pretragaPanel(), BorderLayout.SOUTH);
+        System.out.println(tabela.getValueAt(0, 5));
     }
 
     public void refresh() {
@@ -76,6 +77,7 @@ public class PregledClanovaDialog extends JDialog {
         put(2, 1);
         put(3, 1);
         put(4, 1);
+        put(5, 1);
     }};
 
     protected void sort(int index) {
@@ -87,17 +89,20 @@ public class PregledClanovaDialog extends JDialog {
             public int compare(Clan c1, Clan c2) {
                 switch (index) {
                     case 0:
-                        retVal = c1.getIme().compareTo(c2.getIme());
+                        retVal = c1.getNalog().getKorisnickoIme().compareTo(c2.getNalog().getKorisnickoIme());
                         break;
                     case 1:
-                        retVal = c1.getPrezime().compareTo(c2.getPrezime());
+                        retVal = c1.getIme().compareTo(c2.getIme());
+                        break;
                     case 2:
+                        retVal = c1.getPrezime().compareTo(c2.getPrezime());
+                    case 3:
                         retVal = c1.getDatumRodjenja().compareTo(c2.getDatumRodjenja());
                         break;
-                    case 3:
+                    case 4:
                         retVal = c1.getClanarina().getTip().compareTo(c2.getClanarina().getTip());
                         break;
-                    case 4:
+                    case 5:
                         retVal = c1.getClanarina().getDatumKraja().compareTo(c2.getClanarina().getDatumKraja());
                         break;
                     default:

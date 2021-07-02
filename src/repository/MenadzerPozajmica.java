@@ -38,4 +38,8 @@ public class MenadzerPozajmica implements Menadzer {
             e.printStackTrace();
         }
     }
+
+    public List<Pozajmica> getPozajmice() {
+        return pozajmice;
+    }
 }

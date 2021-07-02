@@ -58,4 +58,5 @@ public class Fabrika {
     public MenadzerKorisnickihNaloga getMenadzerKorisnickihNaloga() {
         return menadzerKorisnickihNaloga;
     }
+
 }

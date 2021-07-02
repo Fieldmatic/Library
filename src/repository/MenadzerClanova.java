@@ -51,6 +51,17 @@ public class MenadzerClanova implements Menadzer {
         return null;
     }
 
+    public Clan pronadjiClanaPoKorImenu(String korIme) {
+        for (Clan c : this.clanovi) {
+            if (c.getNalog().getKorisnickoIme().equals(korIme)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+
+
     public List<Clan> getClanovi() {
         return clanovi;
     }

@@ -70,7 +70,6 @@ public class Clanarina {
                 ", datumPocetka=" + datumPocetka +
                 ", datumKraja=" + datumKraja +
                 ", datumKraja=" + datumKraja +
-                ", clan=" + clan +
                 '}';
     }
 

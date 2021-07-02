@@ -1,13 +1,20 @@
 package gui.bibliotekar.pozajmice;
 
+import entities.Pozajmica;
+import enumerations.StatusPozajmice;
+import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
+import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
+import userEntities.Clan;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BibliotekarPozajmice extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -72,14 +79,12 @@ public class BibliotekarPozajmice extends JFrame {
         JMenuItem PregledClanova = new JMenuItem("Pregled clanova");
         PregledClanova.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pregled.png")));
         PregledClanova.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledClanova.addActionListener(e -> new PregledClanovaDialog(repo));
+        PregledClanova.addActionListener(e -> new PregledClanovaDialog(repo, repo.getMenadzerClanova().getClanovi()));
 
         JMenuItem PregledClanovaKojiKasne = new JMenuItem("Pregled clanova koji kasne sa vracanjem knjiga");
         PregledClanovaKojiKasne.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pregled.png")));
         PregledClanovaKojiKasne.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledClanovaKojiKasne.addActionListener(e -> {
-            //prozorZaPrikazClanova
-        });
+        PregledClanovaKojiKasne.addActionListener(e -> pregledKasnjenja(repo));
 
         JMenuItem DeaktivacijaClana = new JMenuItem("Deaktivacija Clana");
         DeaktivacijaClana.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/deaktivacija.png")));
@@ -170,5 +175,22 @@ public class BibliotekarPozajmice extends JFrame {
         Background.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/bibliotekarPozadina.png")));
         Background.setBounds(0, 0, 907, 574);
         contentPane.add(Background);
+    }
+
+    private Object pregledKasnjenja(Fabrika repo) {
+            List<Clan> clanovi = new ArrayList<>();
+            for (Clan c : repo.getMenadzerClanova().getClanovi()) {
+                for (Pozajmica p : c.getPozajmice()) {
+                    if (p.getStatus().equals(StatusPozajmice.istekla)) {
+                        clanovi.add(c);
+                        break;
+                    }
+                }
+            }
+            if (!clanovi.isEmpty())
+                return new PregledKasnjenjaDialog(repo, clanovi);
+            else
+                JOptionPane.showMessageDialog(null, "Nema clanova sa kasnjenjem.", "Greška", JOptionPane.WARNING_MESSAGE);
+            return null;
     }
 }
