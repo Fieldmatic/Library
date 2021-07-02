@@ -3,6 +3,7 @@ package repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.menadzer;
 import userEntities.Bibliotekar;
+import userEntities.KorisnickiNalog;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,5 +40,14 @@ public class MenadzerBibliotekara implements menadzer {
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
         bibliotekari = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Bibliotekar[].class)));
+    }
+
+    public Bibliotekar pronadjiBibliotekaraPoNalogu(KorisnickiNalog nalog) {
+        for (Bibliotekar b : this.bibliotekari) {
+            if (b.getNalog().getKorisnickoIme().equals(nalog.getKorisnickoIme())) {
+                return b;
+            }
+        }
+        return null;
     }
 }

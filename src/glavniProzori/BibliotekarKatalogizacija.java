@@ -1,5 +1,8 @@
 package glavniProzori;
 
+import repository.Fabrika;
+import userEntities.Bibliotekar;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -13,11 +16,11 @@ public class BibliotekarKatalogizacija extends JFrame {
     private JPanel contentPane;
 
 
-    public static void main(String[] args/*, RepoContainer repo, Bibliotekar bibliotekar*/) {
+    public static void main(String[] args, Fabrika fabrika, Bibliotekar bibliotekar) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    BibliotekarKatalogizacija frame = new BibliotekarKatalogizacija(/*repo, bibliotekar*/);
+                    BibliotekarKatalogizacija frame = new BibliotekarKatalogizacija(fabrika, bibliotekar);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -26,9 +29,9 @@ public class BibliotekarKatalogizacija extends JFrame {
         });
     }
 
-    public BibliotekarKatalogizacija(/*RepoContainer repo, Bibliotekar bibliotekar*/) {
+    public BibliotekarKatalogizacija(Fabrika fabrika, Bibliotekar bibliotekar) {
         setResizable(false);
-        setTitle("Bibliotekar za katalogizaciju");
+        setTitle("Bibliotekar-katalogizacija");
         setIconImage(Toolkit.getDefaultToolkit().getImage(Prijavljivanje.class.getResource("/slike/logo.jpg")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 920, 590);

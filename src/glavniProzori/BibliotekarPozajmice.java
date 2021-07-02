@@ -1,5 +1,6 @@
 package glavniProzori;
 
+import repository.Fabrika;
 import userEntities.Bibliotekar;
 
 import javax.swing.*;
@@ -15,11 +16,11 @@ public class BibliotekarPozajmice extends JFrame {
     private JPanel contentPane;
 
 
-    public static void main(String[] args/*, RepoContainer repo, Bibliotekar bibliotekar*/) {
+    public static void main(String[] args, Fabrika fabrika, Bibliotekar bibliotekar) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    BibliotekarPozajmice frame = new BibliotekarPozajmice(/*repo, bibliotekar*/);
+                    BibliotekarPozajmice frame = new BibliotekarPozajmice(fabrika, bibliotekar);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -28,10 +29,10 @@ public class BibliotekarPozajmice extends JFrame {
         });
     }
 
-    public BibliotekarPozajmice(/*RepoContainer repo, Bibliotekar bibliotekar*/) {
+    public BibliotekarPozajmice(Fabrika fabrika, Bibliotekar bibliotekar) {
         setResizable(false);
-        setTitle("Bibliotekar pozajmice");
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(MedicalTechnicianScreen.class.getResource("/image/medlab.png")));
+        setTitle("Bibliotekar-pozajmljivanje");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(BibliotekarPozajmice.class.getResource("/slike/logo.jpg")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 920, 590);
 
@@ -94,7 +95,7 @@ public class BibliotekarPozajmice extends JFrame {
             }
         });
 
-        JMenuItem DeaktivacijaClana = new JMenuItem("Deaktivacija Clana");
+        JMenuItem DeaktivacijaClana = new JMenuItem("Deaktivacija clana");
         DeaktivacijaClana.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/deaktivacija.png")));
         DeaktivacijaClana.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         DeaktivacijaClana.addActionListener(new ActionListener() {
