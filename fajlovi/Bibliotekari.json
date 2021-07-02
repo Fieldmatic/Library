@@ -37,12 +37,20 @@
   "prezime" : "Zoranovic",
   "datumRodjenja" : "2000-04-06",
   "pol" : "muski",
-  "nalog" : null
+  "nalog" : {
+    "korisnickoIme" : "zoran",
+    "lozinka" : "zoran",
+    "vrstaNaloga" : "bibliotekarZaPozajmice"
+  }
 }, {
   "jmbg" : "1507200091823",
   "ime" : "Ivan",
   "prezime" : "Ivanovic",
   "datumRodjenja" : "2000-07-15",
   "pol" : "muski",
-  "nalog" : null
+  "nalog" : {
+    "korisnickoIme": "ivan",
+    "lozinka": "ivan",
+    "vrstaNaloga": "bibliotekarZaKatalogizaciju"
+  }
 } ]

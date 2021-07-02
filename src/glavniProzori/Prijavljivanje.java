@@ -1,6 +1,10 @@
 package glavniProzori;
 
+import enumerations.VrstaNaloga;
 import repository.Fabrika;
+import userEntities.Bibliotekar;
+import userEntities.Clan;
+import userEntities.KorisnickiNalog;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -59,40 +63,46 @@ public class Prijavljivanje extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameText.getText();
                 String password = String.valueOf(passwordField.getPassword());
-                /*if (!repo.getChecks().isUsernameValid(username)) {
-                    JOptionPane.showMessageDialog(frame,"Korisnicko ime nije ispravno. Molim Vas, pokusajte ponovo!","Greska",JOptionPane.ERROR_MESSAGE);
-                } else if (!repo.getChecks().isPasswordValid(username, password)) {
-                    JOptionPane.showMessageDialog(frame,"Lozinka nije ispravna. Molim Vas, pokusajte ponovo!","Greska",JOptionPane.ERROR_MESSAGE);
-                } else if (repo.getChecks().checkIfInputIsBlank(username) || repo.getChecks().checkIfInputIsBlank(password)) {
-                    JOptionPane.showMessageDialog(frame,"Morate uneti podatke. Molim Vas, pokusajte ponovo!","Greska",JOptionPane.ERROR_MESSAGE);
-                } else {
-                    User user = repo.getUserManager().getUserByUsername(username);
-                    if (user.getRole().equals("administrator")) {
-                        JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", administrator.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        AdministratorMenu administrator = new AdministratorMenu(repo);
-                        administrator.setVisible(true);
-                        MainFrame.this.setVisible(false);
-                        MainFrame.this.dispose();
-                    } else if (user.getRole().equals("medical_technician")) {
-                        JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", medicinski tehnicar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        MedicalTechnicianMenu medTech = new MedicalTechnicianMenu(repo, user);
-                        medTech.setVisible(true);
-                        MainFrame.this.setVisible(false);
-                        MainFrame.this.dispose();
-                    } else if (user.getRole().equals("patient")) {
-                        JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", pacijent.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        PatientMenu patient = new PatientMenu(repo, user);
-                        patient.setVisible(true);
-                        MainFrame.this.setVisible(false);
-                        MainFrame.this.dispose();
-                    } else if (user.getRole().equals("laboratory_technician")) {
-                        JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", laborant.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        LaboratoryTechnicianMenu labTech = new LaboratoryTechnicianMenu(repo, user);
-                        labTech.setVisible(true);
-                        MainFrame.this.setVisible(false);
-                        MainFrame.this.dispose();
+                if (repozitorijum.getMenadzerKorisnickihNaloga().validnostPrijave(username, password)) {
+                    KorisnickiNalog nalog = repozitorijum.getMenadzerKorisnickihNaloga().pronadjiNalogSaUsername(username);
+                    if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekarZaPozajmice) {
+                        Bibliotekar b = repozitorijum.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar za pozajmice.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        BibliotekarPozajmice bp = new BibliotekarPozajmice(repozitorijum, b);
+                        bp.setVisible(true);
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    } else if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekarZaKatalogizaciju) {
+                        Bibliotekar b = repozitorijum.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar za katalogizaciju.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora bibliotekara za katalogizaciju
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    } else if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekar) {
+                        Bibliotekar b = repozitorijum.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora bibliotekara
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    } else if (nalog.getVrstaNaloga() == VrstaNaloga.admin) {
+                        Bibliotekar b = repozitorijum.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", admin bibliotekar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora bibliotekara admina
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
                     }
-                }*/
+                    else if (nalog.getVrstaNaloga() == VrstaNaloga.clan) {
+                        Clan c = repozitorijum.getMenadzerClanova().pronadjiClanaPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + c.getIme() + " " + c.getPrezime() + ", clan.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora clana
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    }
+                }
             }
         });
         button.setBackground(Color.DARK_GRAY);

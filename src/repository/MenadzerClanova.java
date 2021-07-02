@@ -2,7 +2,9 @@ package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.menadzer;
+import userEntities.Bibliotekar;
 import userEntities.Clan;
+import userEntities.KorisnickiNalog;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerClanova implements menadzer {
-    public List<Clan> clanovi = new ArrayList<>();
+    private List<Clan> clanovi = new ArrayList<>();
     private static final String putanjaDoFajla = "fajlovi/Clanovi.json";
 
     public MenadzerClanova(){}
@@ -39,5 +41,14 @@ public class MenadzerClanova implements menadzer {
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
         clanovi = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Clan[].class)));
+    }
+
+    public Clan pronadjiClanaPoNalogu(KorisnickiNalog nalog) {
+        for (Clan c : this.clanovi) {
+            if (c.getNalog().getKorisnickoIme().equals(nalog.getKorisnickoIme())) {
+                return c;
+            }
+        }
+        return null;
     }
 }
