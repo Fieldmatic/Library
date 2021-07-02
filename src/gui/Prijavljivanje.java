@@ -1,10 +1,18 @@
 package gui;
 
+import enumerations.VrstaNaloga;
+import gui.bibliotekar.BibliotekarKatalogizacija;
+import gui.bibliotekar.pozajmice.BibliotekarPozajmice;
 import repository.Fabrika;
+import userEntities.Bibliotekar;
+import userEntities.Clan;
+import userEntities.KorisnickiNalog;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Prijavljivanje extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -15,19 +23,21 @@ public class Prijavljivanje extends JFrame {
     private JLabel label;
 
 
-    public static void main(String[] args, Fabrika repozitorijum) {
-        EventQueue.invokeLater(() -> {
-            try {
-                Prijavljivanje prijava = new Prijavljivanje(repozitorijum);
-                prijava.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
+    public static void main(String[] args, Fabrika fabrika) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Prijavljivanje prijava = new Prijavljivanje(fabrika);
+                    prijava.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
 
-    public Prijavljivanje(Fabrika repozitorijum) {
+    public Prijavljivanje(Fabrika fabrika) {
         setIconImage(Toolkit.getDefaultToolkit().getImage(Prijavljivanje.class.getResource("/slike/logo.jpg")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 920, 644);
@@ -51,43 +61,51 @@ public class Prijavljivanje extends JFrame {
         contentPane.add(usernameText);
         usernameText.setColumns(10);
         JButton button = new JButton("Prijavi se");
-        button.addActionListener(e -> {
-            String username = usernameText.getText();
-            String password = String.valueOf(passwordField.getPassword());
-            /*if (!repo.getChecks().isUsernameValid(username)) {
-                JOptionPane.showMessageDialog(frame,"Korisnicko ime nije ispravno. Molim Vas, pokusajte ponovo!","Greska",JOptionPane.ERROR_MESSAGE);
-            } else if (!repo.getChecks().isPasswordValid(username, password)) {
-                JOptionPane.showMessageDialog(frame,"Lozinka nije ispravna. Molim Vas, pokusajte ponovo!","Greska",JOptionPane.ERROR_MESSAGE);
-            } else if (repo.getChecks().checkIfInputIsBlank(username) || repo.getChecks().checkIfInputIsBlank(password)) {
-                JOptionPane.showMessageDialog(frame,"Morate uneti podatke. Molim Vas, pokusajte ponovo!","Greska",JOptionPane.ERROR_MESSAGE);
-            } else {
-                User user = repo.getUserManager().getUserByUsername(username);
-                if (user.getRole().equals("administrator")) {
-                    JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", administrator.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                    AdministratorMenu administrator = new AdministratorMenu(repo);
-                    administrator.setVisible(true);
-                    MainFrame.this.setVisible(false);
-                    MainFrame.this.dispose();
-                } else if (user.getRole().equals("medical_technician")) {
-                    JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", medicinski tehnicar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                    MedicalTechnicianMenu medTech = new MedicalTechnicianMenu(repo, user);
-                    medTech.setVisible(true);
-                    MainFrame.this.setVisible(false);
-                    MainFrame.this.dispose();
-                } else if (user.getRole().equals("patient")) {
-                    JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", pacijent.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                    PatientMenu patient = new PatientMenu(repo, user);
-                    patient.setVisible(true);
-                    MainFrame.this.setVisible(false);
-                    MainFrame.this.dispose();
-                } else if (user.getRole().equals("laboratory_technician")) {
-                    JOptionPane.showMessageDialog(contentPane,"Ulogovali ste se kao " + user.getName() + " " + user.getSurname() + ", laborant.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                    LaboratoryTechnicianMenu labTech = new LaboratoryTechnicianMenu(repo, user);
-                    labTech.setVisible(true);
-                    MainFrame.this.setVisible(false);
-                    MainFrame.this.dispose();
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameText.getText();
+                String password = String.valueOf(passwordField.getPassword());
+                if (fabrika.getMenadzerKorisnickihNaloga().validnostPrijave(username, password)) {
+                    KorisnickiNalog nalog = fabrika.getMenadzerKorisnickihNaloga().pronadjiNalogSaUsername(username);
+                    if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekarZaPozajmice) {
+                        Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar za pozajmice.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        BibliotekarPozajmice bp = new BibliotekarPozajmice(fabrika, b);
+                        bp.setVisible(true);
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    } else if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekarZaKatalogizaciju) {
+                        Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar za katalogizaciju.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        BibliotekarKatalogizacija bibliotekarKatalogizacija = new BibliotekarKatalogizacija(fabrika, b);
+                        bibliotekarKatalogizacija.setVisible(true);
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    } else if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekar) {
+                        Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora bibliotekara
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    } else if (nalog.getVrstaNaloga() == VrstaNaloga.admin) {
+                        Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", admin bibliotekar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora bibliotekara admina
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    }
+                    else if (nalog.getVrstaNaloga() == VrstaNaloga.clan) {
+                        Clan c = fabrika.getMenadzerClanova().pronadjiClanaPoNalogu(nalog);
+                        JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + c.getIme() + " " + c.getPrezime() + ", clan.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
+                        //kreiranje instance glavnog prozora clana
+                        //postaviti instancu kao vidljivu
+                        Prijavljivanje.this.setVisible(false);
+                        Prijavljivanje.this.dispose();
+                    }
                 }
-            }*/
+            }
         });
         button.setBackground(Color.DARK_GRAY);
         button.setForeground(Color.WHITE);
@@ -112,5 +130,5 @@ public class Prijavljivanje extends JFrame {
         label.setBounds(-49, 0, 951, 600);
         contentPane.add(label);
     }
-
 }
+
