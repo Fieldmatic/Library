@@ -1,12 +1,11 @@
-package glavniProzori;
+package gui.bibliotekar.pozajmice;
 
+import repository.Fabrika;
 import userEntities.Bibliotekar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,20 +14,18 @@ public class BibliotekarPozajmice extends JFrame {
     private JPanel contentPane;
 
 
-    public static void main(String[] args/*, RepoContainer repo, Bibliotekar bibliotekar*/) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    BibliotekarPozajmice frame = new BibliotekarPozajmice(/*repo, bibliotekar*/);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                BibliotekarPozajmice frame = new BibliotekarPozajmice(new Fabrika(), new Bibliotekar());
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
-    public BibliotekarPozajmice(/*RepoContainer repo, Bibliotekar bibliotekar*/) {
+    public BibliotekarPozajmice(Fabrika repo, Bibliotekar bibliotekar) {
         setResizable(false);
         setTitle("Bibliotekar pozajmice");
         //setIconImage(Toolkit.getDefaultToolkit().getImage(MedicalTechnicianScreen.class.getResource("/image/medlab.png")));
@@ -50,20 +47,16 @@ public class BibliotekarPozajmice extends JFrame {
         JMenuItem PregledKnjiga = new JMenuItem("Pregled Knjiga");
         PregledKnjiga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pregled.png")));
         PregledKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledKnjiga.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorzapregled
+        PregledKnjiga.addActionListener(e -> {
+            //prozorzapregled
 
-            }
         });
 
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
         PretragaKnjiga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pregled.png")));
         PretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PretragaKnjiga.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               //prozorZaPretragu
-            }
+        PretragaKnjiga.addActionListener(e -> {
+           //prozorZaPretragu
         });
         KnjigeMeni.add(PretragaKnjiga);
         KnjigeMeni.add(PregledKnjiga);
@@ -79,28 +72,20 @@ public class BibliotekarPozajmice extends JFrame {
         JMenuItem PregledClanova = new JMenuItem("Pregled clanova");
         PregledClanova.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pregled.png")));
         PregledClanova.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledClanova.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPrikazClanova
-            }
-        });
+        PregledClanova.addActionListener(e -> new PregledClanovaDialog(repo));
 
         JMenuItem PregledClanovaKojiKasne = new JMenuItem("Pregled clanova koji kasne sa vracanjem knjiga");
         PregledClanovaKojiKasne.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pregled.png")));
         PregledClanovaKojiKasne.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledClanovaKojiKasne.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPrikazClanova
-            }
+        PregledClanovaKojiKasne.addActionListener(e -> {
+            //prozorZaPrikazClanova
         });
 
         JMenuItem DeaktivacijaClana = new JMenuItem("Deaktivacija Clana");
         DeaktivacijaClana.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/deaktivacija.png")));
         DeaktivacijaClana.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        DeaktivacijaClana.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaDeaktivaciju
-            }
+        DeaktivacijaClana.addActionListener(e -> {
+            //prozorZaDeaktivaciju
         });
 
 
@@ -118,10 +103,8 @@ public class BibliotekarPozajmice extends JFrame {
 
         JMenuItem OdobravanjeRezervacija = new JMenuItem("Odobravanje rezervacija");
         OdobravanjeRezervacija.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/odobravanje.png")));
-        OdobravanjeRezervacija.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaOdobravanjeRezervacije
-            }
+        OdobravanjeRezervacija.addActionListener(e -> {
+            //prozorZaOdobravanjeRezervacije
         });
         OdobravanjeRezervacija.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         Rezervacije.add(OdobravanjeRezervacija);
@@ -137,28 +120,22 @@ public class BibliotekarPozajmice extends JFrame {
         JMenuItem izvestajCitanost = new JMenuItem("Citanost");
         izvestajCitanost.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         izvestajCitanost.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/citanje.png")));
-        izvestajCitanost.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorIzvestajCitanost
-            }
+        izvestajCitanost.addActionListener(e -> {
+            //prozorIzvestajCitanost
         });
 
         JMenuItem izvestajNabavka = new JMenuItem("Nabavka");
         izvestajNabavka.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         izvestajNabavka.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/nabavka.png")));
-        izvestajNabavka.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorizvestajNabavka
-            }
+        izvestajNabavka.addActionListener(e -> {
+            //prozorizvestajNabavka
         });
 
         JMenuItem izvestajRadUSmenama = new JMenuItem("Rad u smenama");
         izvestajRadUSmenama.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         izvestajRadUSmenama.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/smene.png")));
-        izvestajRadUSmenama.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorizvestajRadUSmenama
-            }
+        izvestajRadUSmenama.addActionListener(e -> {
+            //prozorizvestajRadUSmenama
         });
 
 

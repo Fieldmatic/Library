@@ -1,4 +1,4 @@
-package glavniProzori;
+package gui.bibliotekar;
 
 import javax.swing.*;
 
