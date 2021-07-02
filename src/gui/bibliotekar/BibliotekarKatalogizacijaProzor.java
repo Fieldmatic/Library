@@ -1,5 +1,7 @@
 package gui.bibliotekar;
 
+import gui.Prijavljivanje;
+import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
 
@@ -11,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class BibliotekarKatalogizacija extends JFrame {
+public class BibliotekarKatalogizacijaProzor extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
@@ -20,7 +22,7 @@ public class BibliotekarKatalogizacija extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    BibliotekarKatalogizacija frame = new BibliotekarKatalogizacija(fabrika, bibliotekar);
+                    BibliotekarKatalogizacijaProzor frame = new BibliotekarKatalogizacijaProzor(fabrika, bibliotekar);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -29,10 +31,10 @@ public class BibliotekarKatalogizacija extends JFrame {
         });
     }
 
-    public BibliotekarKatalogizacija(Fabrika fabrika, Bibliotekar bibliotekar) {
+    public BibliotekarKatalogizacijaProzor(Fabrika fabrika, Bibliotekar bibliotekar) {
         setResizable(false);
-        setTitle("Bibliotekar-katalogizacija");
-//        setIconImage(Toolkit.getDefaultToolkit().getImage(Prijavljivanje.class.getResource("/slike/logo.jpg")));
+        setTitle("Bibliotekar - katalogizacija");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(BibliotekarKatalogizacijaProzor.class.getResource("/slike/logo.jpg")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 920, 590);
 
@@ -41,7 +43,7 @@ public class BibliotekarKatalogizacija extends JFrame {
         setJMenuBar(menuBar);
 
         JLabel IkonicaKnjige = new JLabel("");
-        IkonicaKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/knjiga.png")));
+        IkonicaKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/knjiga.png")));
         menuBar.add(IkonicaKnjige);
 
         JMenu KnjigeMeni = new JMenu("Knjige");
@@ -51,9 +53,9 @@ public class BibliotekarKatalogizacija extends JFrame {
         //azuriranje knjige
         JMenu knjigeMeniZaAzuriranje = new JMenu("Azuriranje");
         knjigeMeniZaAzuriranje.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        knjigeMeniZaAzuriranje.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/azuriranje.png")));
+        knjigeMeniZaAzuriranje.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/azuriranje.png")));
         JMenuItem dodavanjeKnjige = new JMenuItem("Dodavanje knjige");
-        dodavanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/dodajKnjigu.png")));
+        dodavanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/dodajKnjigu.png")));
         dodavanjeKnjige.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         dodavanjeKnjige.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +64,7 @@ public class BibliotekarKatalogizacija extends JFrame {
             }
         });
         JMenuItem brisanjeKnjige = new JMenuItem("Brisanje knjige");
-        brisanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/brisanjeKnjige.png")));
+        brisanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/brisanjeKnjige.png")));
         brisanjeKnjige.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         brisanjeKnjige.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -71,7 +73,7 @@ public class BibliotekarKatalogizacija extends JFrame {
             }
         });
         JMenuItem modifikacijaKnjige = new JMenuItem("Izmena knjige");
-        modifikacijaKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/azuriranje.png")));
+        modifikacijaKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/azuriranje.png")));
         modifikacijaKnjige.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         modifikacijaKnjige.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -84,7 +86,7 @@ public class BibliotekarKatalogizacija extends JFrame {
         knjigeMeniZaAzuriranje.add(modifikacijaKnjige);
 
         JMenuItem PregledKnjiga = new JMenuItem("Pregled Knjiga");
-        PregledKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/pregled.png")));
+        PregledKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PregledKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         PregledKnjiga.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -94,7 +96,7 @@ public class BibliotekarKatalogizacija extends JFrame {
         });
 
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
-        PretragaKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/pregled.png")));
+        PretragaKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         PretragaKnjiga.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -106,7 +108,7 @@ public class BibliotekarKatalogizacija extends JFrame {
         KnjigeMeni.add(knjigeMeniZaAzuriranje);
 
         JLabel IkonicaClanovi = new JLabel("");
-        IkonicaClanovi.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/clanovi.png")));
+        IkonicaClanovi.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/clanovi.png")));
         menuBar.add(IkonicaClanovi);
 
         JMenu Clanovi = new JMenu("Clanovi");
@@ -114,36 +116,28 @@ public class BibliotekarKatalogizacija extends JFrame {
         menuBar.add(Clanovi);
 
         JMenuItem PregledClanova = new JMenuItem("Pregled clanova");
-        PregledClanova.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/pregled.png")));
+        PregledClanova.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PregledClanova.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledClanova.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPrikazClanova
-            }
-        });
+        PregledClanova.addActionListener(e -> new PregledClanovaDialog(fabrika, fabrika.getMenadzerClanova().getClanovi()));
 
         JMenuItem PregledClanovaKojiKasne = new JMenuItem("Pregled clanova koji kasne sa vracanjem knjiga");
-        PregledClanovaKojiKasne.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/pregled.png")));
+        PregledClanovaKojiKasne.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PregledClanovaKojiKasne.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledClanovaKojiKasne.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPrikazClanova
-            }
-        });
+        //PregledClanovaKojiKasne.addActionListener(e -> pregledKasnjenja(fabrika));
 
         Clanovi.add(PregledClanova);
         Clanovi.add(PregledClanovaKojiKasne);
 
-        JLabel IkonicaRezervacije = new JLabel("");
-        IkonicaRezervacije.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/rezervacije.png")));
-        menuBar.add(IkonicaRezervacije);
+        JLabel ikonicaRecenzije = new JLabel("");
+        ikonicaRecenzije.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/recenzije.png")));
+        menuBar.add(ikonicaRecenzije);
 
         JMenu recenzije = new JMenu("Recenzije");
         recenzije.setFont(new Font("Yu Gothic", Font.PLAIN, 16));
         menuBar.add(recenzije);
 
         JMenuItem odobravanjeRecenzije = new JMenuItem("Odobravanje recenzija");
-        odobravanjeRecenzije.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/odobravanje.png")));
+        odobravanjeRecenzije.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/odobravanje.png")));
         odobravanjeRecenzije.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //prozor za odobravanje recenzije
@@ -153,7 +147,7 @@ public class BibliotekarKatalogizacija extends JFrame {
         recenzije.add(odobravanjeRecenzije);
 
         JLabel IkonicaIzvestaj = new JLabel("");
-        IkonicaIzvestaj.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/izvestaj.png")));
+        IkonicaIzvestaj.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/izvestaj.png")));
         menuBar.add(IkonicaIzvestaj);
 
         JMenu Izvestaji = new JMenu("Izvestaji");
@@ -162,7 +156,7 @@ public class BibliotekarKatalogizacija extends JFrame {
 
         JMenuItem izvestajCitanost = new JMenuItem("Citanost");
         izvestajCitanost.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        izvestajCitanost.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/citanje.png")));
+        izvestajCitanost.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/citanje.png")));
         izvestajCitanost.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //prozorIzvestajCitanost
@@ -171,7 +165,7 @@ public class BibliotekarKatalogizacija extends JFrame {
 
         JMenuItem izvestajNabavka = new JMenuItem("Nabavka");
         izvestajNabavka.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        izvestajNabavka.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/nabavka.png")));
+        izvestajNabavka.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/nabavka.png")));
         izvestajNabavka.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //prozorizvestajNabavka
@@ -180,7 +174,7 @@ public class BibliotekarKatalogizacija extends JFrame {
 
         JMenuItem izvestajRadUSmenama = new JMenuItem("Rad u smenama");
         izvestajRadUSmenama.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        izvestajRadUSmenama.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/smene.png")));
+        izvestajRadUSmenama.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/smene.png")));
         izvestajRadUSmenama.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //prozorizvestajRadUSmenama
@@ -197,26 +191,24 @@ public class BibliotekarKatalogizacija extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel Logout = new JLabel("");
-        Logout.addMouseListener(new MouseAdapter() {
+        JLabel logoutLabel = new JLabel("");
+        logoutLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int choice = JOptionPane.showConfirmDialog(BibliotekarKatalogizacija.this, "Jeste li sigurni? ", "Potvrda", JOptionPane.YES_NO_OPTION);
-                if (choice == JOptionPane.YES_OPTION) {
-                    BibliotekarKatalogizacija.this.dispose();
-                    //MainScreen.main(repo);  login prozor
-                }
-                else {
-                    return;
+                int result =JOptionPane.showConfirmDialog(contentPane ,"Jeste li sigurni da zelite da se odjavite?", "Odjava", JOptionPane.YES_NO_OPTION);
+                if(result == JOptionPane.YES_OPTION){
+                    BibliotekarKatalogizacijaProzor.this.dispose();
+                    Prijavljivanje prijava = new Prijavljivanje(fabrika);
+                    prijava.setVisible(true);
                 }
             }
         });
-        //Logout.setIcon(new ImageIcon(MedicalTechnicianScreen.class.getResource("/image/logout.png")));
-        Logout.setBounds(606, 304, 40, 40);
-        contentPane.add(Logout);
+        logoutLabel.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/odjaviSe.png")));
+        logoutLabel.setBounds(800, 425, 139, 98);
+        contentPane.add(logoutLabel);
 
         JLabel Background = new JLabel("");
-        Background.setIcon(new ImageIcon(BibliotekarKatalogizacija.class.getResource("/slike/bibliotekarPozadina.png")));
+        Background.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/bibliotekarPozadina.png")));
         Background.setBounds(0, 0, 907, 574);
         contentPane.add(Background);
     }
