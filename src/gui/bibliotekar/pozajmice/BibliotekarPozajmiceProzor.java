@@ -3,6 +3,7 @@ package gui.bibliotekar.pozajmice;
 import entities.Pozajmica;
 import enumerations.StatusPozajmice;
 import gui.Prijavljivanje;
+import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
 import gui.pregledKnjiga.PregledKnjigaDialog;
@@ -13,6 +14,8 @@ import userEntities.Clan;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -92,10 +95,17 @@ public class BibliotekarPozajmiceProzor extends JFrame {
             //prozorZaDeaktivaciju
         });
 
-
+        JMenuItem DodavanjeClana = new JMenuItem("Dodaj Clana");
+        DodavanjeClana.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/dodavanje.png")));
+        DodavanjeClana.setFont(new Font("Yu Gothic", Font.BOLD, 12));
+        DodavanjeClana.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {RegistracijaClana.main(fabrika);}
+         });
         Clanovi.add(PregledClanova);
         Clanovi.add(PregledClanovaKojiKasne);
         Clanovi.add(DeaktivacijaClana);
+        Clanovi.add(DodavanjeClana);
 
         JLabel IkonicaRezervacije = new JLabel("");
         IkonicaRezervacije.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/rezervacije.png")));

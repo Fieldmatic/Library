@@ -14,8 +14,7 @@ import java.util.List;
 public class MenadzerKnjiga implements Menadzer {
     private List<Knjiga> knjige = new ArrayList<>();
     private List<PrimerakKnjige> primerci = new ArrayList<>();
-    private static final String putanjaDoFajlaKnjiga = "fajlovi/Knjige.json";
-    private static final String putanjaDoFajlaPrimeraka = "fajlovi/PrimerciKnjiga.json";
+    private static final String putanjaDoFajla = "fajlovi/Knjige.json";
 
     public MenadzerKnjiga() {}
 
@@ -26,7 +25,6 @@ public class MenadzerKnjiga implements Menadzer {
 
     public void dodajPrimerakKnjige(PrimerakKnjige primerak) throws IOException {
         primerci.add(primerak);
-        azurirajFajl();
     }
 
     public Knjiga pronadjiKnjiguPoId(int id) {
@@ -40,22 +38,26 @@ public class MenadzerKnjiga implements Menadzer {
 
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
-        knjige = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajlaKnjiga).toFile(), Knjiga[].class)));
-        primerci = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajlaPrimeraka).toFile(), PrimerakKnjige[].class)));
+        knjige = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Knjiga[].class)));
+        ucitajPrimerke();
+    }
+
+    private void ucitajPrimerke() {
+        for (Knjiga k : knjige) {
+            for (PrimerakKnjige p : k.getPrimerci()){
+                p.setKnjiga(k);
+                primerci.add(p);
+            }
+        }
     }
 
     public void azurirajFajl() throws IOException {
         ObjectMapper obj = new ObjectMapper();
-        FileWriter fajlKnjiga = new FileWriter(putanjaDoFajlaKnjiga);
-        FileWriter fajlPrimeraka = new FileWriter(putanjaDoFajlaPrimeraka);
+        FileWriter fajlKnjiga = new FileWriter(putanjaDoFajla);
         try {
             String jsonKnjige = obj.writerWithDefaultPrettyPrinter().writeValueAsString(knjige);
             fajlKnjiga.write(jsonKnjige);
             fajlKnjiga.close();
-
-            String jsonPrimerci = obj.writerWithDefaultPrettyPrinter().writeValueAsString(primerci);
-            fajlPrimeraka.write(jsonPrimerci);
-            fajlPrimeraka.close();
 
         } catch (IOException e) {
             e.printStackTrace();

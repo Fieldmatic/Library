@@ -1,6 +1,12 @@
 package repository;
 
+import auxiliary.Provere;
+import entities.Pozajmica;
+import enumerations.StatusPozajmice;
+import userEntities.Clan;
+
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Fabrika {
     private MenadzerKnjiga menadzerKnjiga;
@@ -10,21 +16,23 @@ public class Fabrika {
     private MenadzerPozajmica menadzerPozajmica;
     private MenadzerRezervacija menadzerRezervacija;
     private MenadzerKorisnickihNaloga menadzerKorisnickihNaloga;
+    private Provere provere;
 
     public Fabrika() throws IOException {
         this.menadzerKnjiga = new MenadzerKnjiga();
         this.menadzerClanova = new MenadzerClanova();
-        this.menadzerClanarina = new MenadzerClanarina();
+        this.menadzerClanarina = new MenadzerClanarina(menadzerClanova);
         this.menadzerBibliotekara = new MenadzerBibliotekara();
-        this.menadzerPozajmica = new MenadzerPozajmica();
+        this.menadzerPozajmica = new MenadzerPozajmica(menadzerClanova, menadzerKnjiga);
         this.menadzerRezervacija = new MenadzerRezervacija();
-        this.menadzerKorisnickihNaloga = new MenadzerKorisnickihNaloga();
+        this.menadzerKorisnickihNaloga = new MenadzerKorisnickihNaloga(menadzerBibliotekara, menadzerClanova);
+        this.provere = new Provere(menadzerKorisnickihNaloga);
 
         this.menadzerKnjiga.ucitajPodatke();
         this.menadzerClanova.ucitajPodatke();
         this.menadzerClanarina.ucitajPodatke();
         this.menadzerBibliotekara.ucitajPodatke();
-        //this.menadzerPozajmica.ucitajPodatke();
+        this.menadzerPozajmica.ucitajPodatke();
         //this.menadzerRezervacija.ucitajPodatke();
         this.menadzerKorisnickihNaloga.ucitajPodatke();
         //mozda treba neki apdejt negde
@@ -57,6 +65,9 @@ public class Fabrika {
 
     public MenadzerKorisnickihNaloga getMenadzerKorisnickihNaloga() {
         return menadzerKorisnickihNaloga;
+    }
+    public Provere getProvere() {
+        return provere;
     }
 
 }

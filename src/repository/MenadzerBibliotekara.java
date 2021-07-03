@@ -42,6 +42,10 @@ public class MenadzerBibliotekara implements Menadzer {
         bibliotekari = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Bibliotekar[].class)));
     }
 
+    public List<Bibliotekar> getBibliotekari() {
+        return bibliotekari;
+    }
+
     public Bibliotekar pronadjiBibliotekaraPoNalogu(KorisnickiNalog nalog) {
         for (Bibliotekar b : this.bibliotekari) {
             if (b.getNalog().getKorisnickoIme().equals(nalog.getKorisnickoIme())) {
@@ -50,4 +54,5 @@ public class MenadzerBibliotekara implements Menadzer {
         }
         return null;
     }
+
 }
