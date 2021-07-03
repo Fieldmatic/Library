@@ -1,5 +1,6 @@
 package repository;
 
+import auxiliary.Provere;
 import entities.Pozajmica;
 import enumerations.StatusPozajmice;
 import userEntities.Clan;
@@ -15,6 +16,7 @@ public class Fabrika {
     private MenadzerPozajmica menadzerPozajmica;
     private MenadzerRezervacija menadzerRezervacija;
     private MenadzerKorisnickihNaloga menadzerKorisnickihNaloga;
+    private Provere provere;
 
     public Fabrika() throws IOException {
         this.menadzerKnjiga = new MenadzerKnjiga();
@@ -24,6 +26,7 @@ public class Fabrika {
         this.menadzerPozajmica = new MenadzerPozajmica(menadzerClanova, menadzerKnjiga);
         this.menadzerRezervacija = new MenadzerRezervacija();
         this.menadzerKorisnickihNaloga = new MenadzerKorisnickihNaloga(menadzerBibliotekara, menadzerClanova);
+        this.provere = new Provere(menadzerKorisnickihNaloga);
 
         this.menadzerKnjiga.ucitajPodatke();
         this.menadzerClanova.ucitajPodatke();
@@ -62,6 +65,9 @@ public class Fabrika {
 
     public MenadzerKorisnickihNaloga getMenadzerKorisnickihNaloga() {
         return menadzerKorisnickihNaloga;
+    }
+    public Provere getProvere() {
+        return provere;
     }
 
 }
