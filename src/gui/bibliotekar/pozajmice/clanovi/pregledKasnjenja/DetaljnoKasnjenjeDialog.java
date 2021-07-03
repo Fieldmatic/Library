@@ -72,7 +72,6 @@ public class DetaljnoKasnjenjeDialog extends JDialog {
 
         tfPretraga =  new JTextField(20);
         add(pretragaPanel(), BorderLayout.SOUTH);
-        System.out.println(tabela.getValueAt(0, 5));
     }
 
     public void refresh() {

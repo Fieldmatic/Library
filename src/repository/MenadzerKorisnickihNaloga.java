@@ -1,43 +1,34 @@
 package repository;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.Menadzer;
+import userEntities.Bibliotekar;
+import userEntities.Clan;
 import userEntities.KorisnickiNalog;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class MenadzerKorisnickihNaloga implements Menadzer {
+public class MenadzerKorisnickihNaloga {
     private List<KorisnickiNalog> nalozi = new ArrayList<>();
     private static final String putanjaDoFajla = "fajlovi/Nalozi.json";
+    private MenadzerBibliotekara menadzerBibliotekara;
+    private MenadzerClanova menadzerClanova;
 
-    public MenadzerKorisnickihNaloga(){}
+    public MenadzerKorisnickihNaloga(MenadzerBibliotekara menadzerBibliotekara, MenadzerClanova menadzerClanova){
+        this.menadzerBibliotekara = menadzerBibliotekara;
+        this.menadzerClanova = menadzerClanova;
+    }
 
     public void dodajNalog(KorisnickiNalog kn) throws IOException {
         nalozi.add(kn);
-        azurirajFajl();
     }
 
-    public void azurirajFajl() throws IOException {
-        ObjectMapper obj = new ObjectMapper();
-        FileWriter file = new FileWriter(putanjaDoFajla);
-        try{
-            String jsonStr = obj.writerWithDefaultPrettyPrinter().writeValueAsString(nalozi);
-            file.write(jsonStr);
-            file.close();
+    public void ucitajPodatke() {
+        for (Bibliotekar b: menadzerBibliotekara.getBibliotekari()){
+            nalozi.add(b.getNalog());
         }
-        catch (IOException e){
-            e.printStackTrace();
+        for (Clan c : menadzerClanova.getClanovi()){
+            nalozi.add(c.getNalog());
         }
-    }
-
-    public void ucitajPodatke() throws IOException {
-        ObjectMapper obj = new ObjectMapper();
-        nalozi = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), KorisnickiNalog[].class)));
     }
 
     public KorisnickiNalog pronadjiNalogSaUsername(String korisnickoIme){
@@ -55,5 +46,9 @@ public class MenadzerKorisnickihNaloga implements Menadzer {
             return true;
         }
         return false;
+    }
+
+    public List<KorisnickiNalog> getNalozi() {
+        return nalozi;
     }
 }

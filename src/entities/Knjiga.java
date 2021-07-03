@@ -142,7 +142,6 @@ public class Knjiga {
                 ", sadrzaj=" + sadrzaj +
                 ", recenzije=" + recenzije +
                 ", tagovi=" + tagovi +
-                ", primerci=" + primerci +
                 ", autori=" + autori +
                 '}';
     }
