@@ -80,33 +80,33 @@ public class RegistracijaClana extends JFrame {
 
         korisnickoIme = new JTextField();
         korisnickoIme.setForeground(Color.WHITE);
-        korisnickoIme.setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        korisnickoIme.setFont(new Font("Yu Gothic", Font.BOLD, 14));
         korisnickoIme.setOpaque(false);
-        korisnickoIme.setBounds(112, 60, 110, 20);
+        korisnickoIme.setBounds(112, 60, 140, 20);
         contentPane.add(korisnickoIme);
         korisnickoIme.setColumns(10);
 
         ime = new JTextField();
         ime.setForeground(Color.WHITE);
-        ime.setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        ime.setFont(new Font("Yu Gothic", Font.BOLD, 14));
         ime.setOpaque(false);
-        ime.setBounds(112, 110, 110, 20);
+        ime.setBounds(112, 112, 140, 20);
         contentPane.add(ime);
         ime.setColumns(10);
 
         prezime = new JTextField();
         prezime.setForeground(Color.WHITE);
-        prezime.setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        prezime.setFont(new Font("Yu Gothic", Font.BOLD, 14));
         prezime.setOpaque(false);
-        prezime.setBounds(112, 135, 110, 20);
+        prezime.setBounds(112, 135, 140, 20);
         contentPane.add(prezime);
         prezime.setColumns(10);
 
         jmbg = new JTextField();
         jmbg.setForeground(Color.white);
-        jmbg.setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        jmbg.setFont(new Font("Yu Gothic", Font.BOLD, 14));
         jmbg.setOpaque(false);
-        jmbg.setBounds(112, 160, 110, 20);
+        jmbg.setBounds(112, 160, 140, 20);
         contentPane.add(jmbg);
         jmbg.setColumns(10);
 
@@ -114,7 +114,7 @@ public class RegistracijaClana extends JFrame {
         rodjendan.setBackground(Color.BLACK);
         rodjendan.setForeground(Color.WHITE);
         rodjendan.setOpaque(false);
-        rodjendan.setSize(110, 20);
+        rodjendan.setSize(140, 20);
         rodjendan.setLocation(112, 185);
         getContentPane().add(rodjendan);
 
@@ -124,7 +124,7 @@ public class RegistracijaClana extends JFrame {
         musko.setOpaque(false);
         pol.add(musko);
         musko.setSelected(true);
-        musko.setBounds(75, 270, 85, 23);
+        musko.setBounds(100, 270, 85, 23);
         contentPane.add(musko);
 
         JRadioButton zensko = new JRadioButton("Zensko");
@@ -140,7 +140,7 @@ public class RegistracijaClana extends JFrame {
 
             }
         });
-        zensko.setBounds(160, 270, 85, 23);
+        zensko.setBounds(180, 270, 85, 23);
         contentPane.add(zensko);
 
         JComboBox<String> tipClana = new JComboBox<>();
@@ -154,7 +154,7 @@ public class RegistracijaClana extends JFrame {
         tipClana.addItem("nezaposlen");
         tipClana.addItem("djak");
         tipClana.addItem("dete");
-        tipClana.setBounds(112, 210, 110, 20);
+        tipClana.setBounds(112, 210, 140, 20);
         contentPane.add(tipClana);
 
         JLabel LkorisnickoIme = new JLabel("Korisnicko ime:");
@@ -171,9 +171,9 @@ public class RegistracijaClana extends JFrame {
 
         lozinka = new JPasswordField();
         lozinka.setForeground(Color.WHITE);
-        lozinka.setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        lozinka.setFont(new Font("Yu Gothic", Font.BOLD, 14));
         lozinka.setOpaque(false);
-        lozinka.setBounds(112, 85, 110, 20);
+        lozinka.setBounds(112, 85, 140, 20);
         contentPane.add(lozinka);
 
         JLabel Lime = new JLabel("Ime:");
@@ -211,7 +211,7 @@ public class RegistracijaClana extends JFrame {
         clanarina1.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         clanarina1.setOpaque(false);
         trajanjeClanarine.add(clanarina1);
-        clanarina1.setBounds(58, 235, 114, 23);
+        clanarina1.setBounds(78, 235, 114, 23);
         clanarina1.setSelected(true);
         contentPane.add(clanarina1);
 
@@ -220,7 +220,7 @@ public class RegistracijaClana extends JFrame {
         clanarina2.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         clanarina2.setOpaque(false);
         trajanjeClanarine.add(clanarina2);
-        clanarina2.setBounds(158, 235, 140, 23);
+        clanarina2.setBounds(178, 235, 140, 23);
         contentPane.add(clanarina2);
 
 
@@ -295,8 +295,10 @@ public class RegistracijaClana extends JFrame {
                 }
             }
         });
-        Registruj.setBounds(112, 410, 110, 54);
+        Registruj.setBounds(112, 320, 140, 30);
         contentPane.add(Registruj);
+
+        RegistracijaClana.this.getRootPane().setDefaultButton(Registruj);
 
         JLabel logoutLabel = new JLabel("");
         logoutLabel.addMouseListener(new MouseAdapter() {
@@ -309,7 +311,7 @@ public class RegistracijaClana extends JFrame {
             }
         });
         logoutLabel.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/odjaviSe.png")));
-        logoutLabel.setBounds(550, 400, 139, 98);
+        logoutLabel.setBounds(535, 395, 100, 60);
         contentPane.add(logoutLabel);
 
         JLabel Background = new JLabel("");

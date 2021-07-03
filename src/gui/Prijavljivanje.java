@@ -42,7 +42,7 @@ public class Prijavljivanje extends JFrame {
     public Prijavljivanje(Fabrika fabrika) {
         setIconImage(Toolkit.getDefaultToolkit().getImage(Prijavljivanje.class.getResource("/slike/logo.jpg")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 920, 644);
+        setBounds(100, 100, 900, 620);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         setContentPane(contentPane);
@@ -107,6 +107,9 @@ public class Prijavljivanje extends JFrame {
                         Prijavljivanje.this.dispose();
                     }
                 }
+                else {
+                    JOptionPane.showMessageDialog(contentPane, "Pogresno korisnicko ime ili lozinka !", "GRESKA", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         button.setBackground(Color.DARK_GRAY);
@@ -114,6 +117,8 @@ public class Prijavljivanje extends JFrame {
         button.setFont(new Font("Arial Black", Font.PLAIN, 26));
         button.setBounds(575, 189, 246, 60);
         contentPane.add(button);
+
+        Prijavljivanje.this.getRootPane().setDefaultButton(button);
 
 
         JLabel passwordLabel = new JLabel("");
