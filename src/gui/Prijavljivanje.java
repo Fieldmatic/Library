@@ -1,8 +1,10 @@
 package gui;
 
 import enumerations.VrstaNaloga;
-import gui.bibliotekar.BibliotekarKatalogizacija;
-import gui.bibliotekar.pozajmice.BibliotekarPozajmice;
+import gui.bibliotekar.BibliotekarKatalogizacijaProzor;
+import gui.bibliotekar.BibliotekarProzor;
+import gui.bibliotekar.pozajmice.BibliotekarPozajmiceProzor;
+import gui.clan.ClanProzor;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
 import userEntities.Clan;
@@ -70,22 +72,22 @@ public class Prijavljivanje extends JFrame {
                     if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekarZaPozajmice) {
                         Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
                         JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar za pozajmice.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        BibliotekarPozajmice bp = new BibliotekarPozajmice(fabrika, b);
+                        BibliotekarPozajmiceProzor bp = new BibliotekarPozajmiceProzor(fabrika, b);
                         bp.setVisible(true);
                         Prijavljivanje.this.setVisible(false);
                         Prijavljivanje.this.dispose();
                     } else if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekarZaKatalogizaciju) {
                         Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
                         JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar za katalogizaciju.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        BibliotekarKatalogizacija bibliotekarKatalogizacija = new BibliotekarKatalogizacija(fabrika, b);
+                        BibliotekarKatalogizacijaProzor bibliotekarKatalogizacija = new BibliotekarKatalogizacijaProzor(fabrika, b);
                         bibliotekarKatalogizacija.setVisible(true);
                         Prijavljivanje.this.setVisible(false);
                         Prijavljivanje.this.dispose();
                     } else if (nalog.getVrstaNaloga() == VrstaNaloga.bibliotekar) {
                         Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
                         JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", bibliotekar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        //kreiranje instance glavnog prozora bibliotekara
-                        //postaviti instancu kao vidljivu
+                        BibliotekarProzor bibliotekarProzor = new BibliotekarProzor(fabrika, b);
+                        bibliotekarProzor.setVisible(true);
                         Prijavljivanje.this.setVisible(false);
                         Prijavljivanje.this.dispose();
                     } else if (nalog.getVrstaNaloga() == VrstaNaloga.admin) {
@@ -99,8 +101,8 @@ public class Prijavljivanje extends JFrame {
                     else if (nalog.getVrstaNaloga() == VrstaNaloga.clan) {
                         Clan c = fabrika.getMenadzerClanova().pronadjiClanaPoNalogu(nalog);
                         JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + c.getIme() + " " + c.getPrezime() + ", clan.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        //kreiranje instance glavnog prozora clana
-                        //postaviti instancu kao vidljivu
+                        ClanProzor clan = new ClanProzor(fabrika);
+                        clan.setVisible(true);
                         Prijavljivanje.this.setVisible(false);
                         Prijavljivanje.this.dispose();
                     }
