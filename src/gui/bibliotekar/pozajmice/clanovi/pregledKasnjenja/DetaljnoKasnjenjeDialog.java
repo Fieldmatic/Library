@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -54,6 +55,7 @@ public class DetaljnoKasnjenjeDialog extends JDialog {
         MigLayout layout = new MigLayout();
         setLayout(layout);
 
+        justifyContent(SwingConstants.LEFT);
         tabela.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         tabela.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabela.getTableHeader().setReorderingAllowed(false);
@@ -72,6 +74,15 @@ public class DetaljnoKasnjenjeDialog extends JDialog {
 
         tfPretraga =  new JTextField(20);
         add(pretragaPanel(), BorderLayout.SOUTH);
+    }
+
+    private void justifyContent(int justify) {
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setHorizontalAlignment(justify);
+        for (int i = 0; i < tabela.getColumnCount(); i++) {
+            tabela.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+
     }
 
     public void refresh() {
