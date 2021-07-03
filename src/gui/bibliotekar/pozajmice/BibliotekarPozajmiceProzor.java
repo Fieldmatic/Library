@@ -5,6 +5,7 @@ import enumerations.StatusPozajmice;
 import gui.Prijavljivanje;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
+import gui.pregledKnjiga.PregledKnjigaDialog;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
 import userEntities.Clan;
@@ -55,10 +56,7 @@ public class BibliotekarPozajmiceProzor extends JFrame {
         JMenuItem PregledKnjiga = new JMenuItem("Pregled Knjiga");
         PregledKnjiga.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/pregled.png")));
         PregledKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledKnjiga.addActionListener(e -> {
-            //prozorzapregled
-
-        });
+        PregledKnjiga.addActionListener(e -> new PregledKnjigaDialog(fabrika, fabrika.getMenadzerKnjiga().getKnjige()));
 
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
         PretragaKnjiga.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/pregled.png")));

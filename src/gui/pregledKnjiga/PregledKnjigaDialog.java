@@ -1,8 +1,9 @@
-package gui.bibliotekar.pozajmice.clanovi.pregledClanova;
+package gui.pregledKnjiga;
 
+import entities.Knjiga;
+import gui.Prijavljivanje;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
-import userEntities.Clan;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -10,6 +11,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Comparator;
@@ -17,23 +20,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PregledClanovaDialog extends JDialog {
-
+public class PregledKnjigaDialog extends JDialog  {
     protected Fabrika repo;
-    protected List<Clan> data;
+    protected List<Knjiga> data;
     protected JTable tabela;
     protected JTextField tfPretraga;
     protected TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
 
-    public PregledClanovaDialog(Fabrika repo, List<Clan> data) {
+    public PregledKnjigaDialog(Fabrika repo, List<Knjiga> data) {
         this.repo = repo;
         this.data = data;
-        this.tabela = new JTable(new PregledClanovaModel(this.data));
+        this.tabela = new JTable(new PregledKnjigaModel(this.data));
         initDialog();
+        initActions();
     }
 
     private void initDialog() {
-        this.setTitle("Pregled clanova");
+        this.setTitle("Pregled knjiga");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         initGUI();
@@ -63,11 +66,10 @@ public class PregledClanovaDialog extends JDialog {
 
         tfPretraga =  new JTextField(20);
         add(pretragaPanel(), BorderLayout.SOUTH);
-        System.out.println(tabela.getValueAt(0, 5));
     }
 
     public void refresh() {
-        PregledClanovaModel m = (PregledClanovaModel) this.tabela.getModel();
+        PregledKnjigaModel m = (PregledKnjigaModel) this.tabela.getModel();
         m.fireTableDataChanged();
     }
 
@@ -83,27 +85,18 @@ public class PregledClanovaDialog extends JDialog {
     protected void sort(int index) {
         // index of table column
 
-        this.data.sort(new Comparator<Clan>() {
+        this.data.sort(new Comparator<Knjiga>() {
             int retVal = 0;
 
-            public int compare(Clan c1, Clan c2) {
+            public int compare(Knjiga c1, Knjiga c2) {
                 switch (index) {
                     case 0:
-                        retVal = c1.getNalog().getKorisnickoIme().compareTo(c2.getNalog().getKorisnickoIme());
+                        retVal = c1.getNaziv().compareTo(c2.getNaziv());
                         break;
                     case 1:
-                        retVal = c1.getIme().compareTo(c2.getIme());
-                        break;
+                        retVal = c1.getDatumIzdanja().compareTo(c2.getDatumIzdanja());
                     case 2:
-                        retVal = c1.getPrezime().compareTo(c2.getPrezime());
-                    case 3:
-                        retVal = c1.getDatumRodjenja().compareTo(c2.getDatumRodjenja());
-                        break;
-                    case 4:
-                        retVal = c1.getClanarina().getTip().compareTo(c2.getClanarina().getTip());
-                        break;
-                    case 5:
-                        retVal = c1.getClanarina().getDatumKraja().compareTo(c2.getClanarina().getDatumKraja());
+                        retVal = c1.getSadrzaj().getNaziv().compareTo(c2.getSadrzaj().getNaziv());
                         break;
                     default:
                         System.out.println("Prosirena tabela");
@@ -113,8 +106,6 @@ public class PregledClanovaDialog extends JDialog {
                 return retVal * sortOrder.get(index);
             }
         });
-
-        System.out.println("column " + index + " row " + sortOrder.get(index));
         sortOrder.put(index, sortOrder.get(index) * -1);
         refresh();
     }
@@ -125,9 +116,13 @@ public class PregledClanovaDialog extends JDialog {
         JLabel lblPretraga = new JLabel("Pretraga:");
         lblPretraga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
 //        lblPretraga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pretraga.png")));
-        p.add(lblPretraga);
 
+        JLabel passwordLabel = new JLabel("Za informacije o autorima izaberite knjigu.");
+        passwordLabel.setBounds(500, 100, 65, 58);
+        passwordLabel.setIcon(new ImageIcon(Prijavljivanje.class.getResource("/slike/notification.png")));
+        p.add(lblPretraga);
         p.add(tfPretraga);
+        p.add(passwordLabel);
 
         tfPretraga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -149,7 +144,24 @@ public class PregledClanovaDialog extends JDialog {
                 }
             }
         });
-
         return p;
+    }
+
+    private void initActions() {
+        tabela.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    int row = tabela.getSelectedRow();
+                    if (row == -1)
+                        JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greška", JOptionPane.WARNING_MESSAGE);
+                    else {
+                        Knjiga c = repo.getMenadzerKnjiga().pronadjiKnjiguPoId((int) tabela.getValueAt(row, 0));
+                        new PregledAutoraKnjigeDialog(c);
+                    }
+                }
+            }
+        });
     }
 }

@@ -29,6 +29,15 @@ public class MenadzerKnjiga implements Menadzer {
         azurirajFajl();
     }
 
+    public Knjiga pronadjiKnjiguPoId(int id) {
+        for (Knjiga k : this.knjige) {
+            if (k.getId() == id) {
+                return k;
+            }
+        }
+        return null;
+    }
+
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
         knjige = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajlaKnjiga).toFile(), Knjiga[].class)));
@@ -51,5 +60,13 @@ public class MenadzerKnjiga implements Menadzer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Knjiga> getKnjige() {
+        return knjige;
+    }
+
+    public List<PrimerakKnjige> getPrimerci() {
+        return primerci;
     }
 }

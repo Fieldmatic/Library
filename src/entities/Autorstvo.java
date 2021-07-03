@@ -31,9 +31,6 @@ public class Autorstvo {
 
     @Override
     public String toString() {
-        return "Autorstvo{" +
-                "autor=" + autor +
-                ", uloga=" + uloga +
-                '}';
+        return autor + "(" + uloga + ")";
     }
 }

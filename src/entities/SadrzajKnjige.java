@@ -32,6 +32,14 @@ public class SadrzajKnjige {
         this.zanrovi = zanrovi;
     }
 
+    public String zanroviToString() {
+        String zanroviString = "";
+        for (Zanr zanr : this.zanrovi) {
+            zanroviString += zanr + ",";
+        }
+        return zanroviString.substring(0, zanroviString.length() - 1);
+    }
+
     @Override
     public String toString() {
         return "SadrzajKnjige{" +
