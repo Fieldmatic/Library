@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Autorstvo;
 import entities.Knjiga;
 import entities.PrimerakKnjige;
+import entities.Recenzija;
 import enumerations.UlogaAutora;
 import enumerations.Zanr;
 import interfaces.Menadzer;
@@ -227,5 +228,14 @@ public class MenadzerKnjiga implements Menadzer {
         for (PrimerakKnjige p : k.getPrimerci())
             if (!p.isPozajmljen() || !p.isPopravljaSe()) return p;
         return null;
+    }
+
+    public boolean vecOcenio(Knjiga k, String username){
+        for (Recenzija r : k.getRecenzije()){
+            if (r.getClan().getNalog().getKorisnickoIme().equals(username)){
+                return true;
+            }
+        }
+        return false;
     }
 }

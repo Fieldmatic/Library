@@ -139,6 +139,10 @@ public class Knjiga {
         this.recenzije = recenzije;
     }
 
+    public void dodajRecenziju(Recenzija r){
+        this.recenzije.add(r);
+    }
+
     public Dimension getFormat() {
         return format;
     }
@@ -152,7 +156,8 @@ public class Knjiga {
         int avgOcena = 0;
             for (Recenzija r : this.getRecenzije())
                 avgOcena += r.getOcena();
-        return avgOcena / this.getRecenzije().size();
+        if (this.getRecenzije().size() == 0) return 0;
+        return (avgOcena / this.getRecenzije().size());
     }
 
     @Override

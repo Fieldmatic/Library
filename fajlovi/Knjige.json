@@ -46,7 +46,51 @@
     "naziv" : "beletristika",
     "zanrovi" : [ "drama", "ljubavni" ]
   },
-  "recenzije" : [ ],
+  "recenzije" : [ {
+    "ocena" : 5,
+    "komentar" : "predobra",
+    "clan" : {
+      "jmbg" : "0103200098765",
+      "ime" : "Ognjen",
+      "prezime" : "Ognjenovic",
+      "datumRodjenja" : "2000-03-01",
+      "pol" : "muski",
+      "nalog" : {
+        "korisnickoIme" : "ognjen",
+        "lozinka" : "ognjen",
+        "vrstaNaloga" : "clan"
+      },
+      "clanarina" : {
+        "tip" : "student",
+        "datumPocetka" : "2021-07-02",
+        "datumKraja" : "2022-07-02"
+      },
+      "pozajmice" : [ {
+        "id" : 1,
+        "pozajmljenPrimerak" : {
+          "id" : 4,
+          "popravljaSe" : false,
+          "pozajmljen" : false,
+          "ostecen" : true
+        },
+        "datumPocetka" : "2021-07-02",
+        "datumKraja" : "2021-07-25",
+        "status" : "aktivna"
+      }, {
+        "id" : 2,
+        "pozajmljenPrimerak" : {
+          "id" : 6,
+          "popravljaSe" : false,
+          "pozajmljen" : false,
+          "ostecen" : false
+        },
+        "datumPocetka" : "2021-07-02",
+        "datumKraja" : "2021-07-02",
+        "status" : "istekla"
+      } ],
+      "rezervacije" : [ ]
+    }
+  } ],
   "tagovi" : [ "nagradjene knjige", "nagrada orindz", "grcka u doba junaka" ],
   "primerci" : [ {
     "id" : 3,
@@ -91,7 +135,51 @@
     "naziv" : "publicistika",
     "zanrovi" : [ "popularnaNauka", "edukativni" ]
   },
-  "recenzije" : [ ],
+  "recenzije" : [ {
+    "ocena" : 5,
+    "komentar" : "gg",
+    "clan" : {
+      "jmbg" : "0103200098765",
+      "ime" : "Ognjen",
+      "prezime" : "Ognjenovic",
+      "datumRodjenja" : "2000-03-01",
+      "pol" : "muski",
+      "nalog" : {
+        "korisnickoIme" : "ognjen",
+        "lozinka" : "ognjen",
+        "vrstaNaloga" : "clan"
+      },
+      "clanarina" : {
+        "tip" : "student",
+        "datumPocetka" : "2021-07-02",
+        "datumKraja" : "2022-07-02"
+      },
+      "pozajmice" : [ {
+        "id" : 1,
+        "pozajmljenPrimerak" : {
+          "id" : 4,
+          "popravljaSe" : false,
+          "pozajmljen" : false,
+          "ostecen" : true
+        },
+        "datumPocetka" : "2021-07-02",
+        "datumKraja" : "2021-07-25",
+        "status" : "aktivna"
+      }, {
+        "id" : 2,
+        "pozajmljenPrimerak" : {
+          "id" : 6,
+          "popravljaSe" : false,
+          "pozajmljen" : false,
+          "ostecen" : false
+        },
+        "datumPocetka" : "2021-07-02",
+        "datumKraja" : "2021-07-02",
+        "status" : "istekla"
+      } ],
+      "rezervacije" : [ ]
+    }
+  } ],
   "tagovi" : [ "istorija", "sudbina", "zemlja" ],
   "primerci" : [ {
     "id" : 6,
