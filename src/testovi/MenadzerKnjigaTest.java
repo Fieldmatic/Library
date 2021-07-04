@@ -83,7 +83,7 @@ class MenadzerKnjigaTest {
     @Test
     void presekPretrage2() {
         rezultatPretrage = new ArrayList<>();
-        napraviPresjek(menadzerKnjiga.nadjiKnjigePoNazivu("na savi cuprija"));
+        napraviPresjek(menadzerKnjiga.nadjiKnjigePoNazivu("na savi cuprija")); // pogresan parametar
         napraviPresjek(menadzerKnjiga.nadjiKnjigePoNazivuSadrzaja("beletristika"));
         napraviPresjek(menadzerKnjiga.nadjiKnjigePoZanru(Zanr.istorijski));
         napraviPresjek(menadzerKnjiga.nadjiKnjigePoImenuAutora("Ivo"));
