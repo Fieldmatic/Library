@@ -65,4 +65,11 @@ public class MenadzerClanova implements Menadzer {
     public List<Clan> getClanovi() {
         return clanovi;
     }
+
+    public List<Clan> getClanoviSaRezervacijom() {
+        List<Clan> ret = new ArrayList<>();
+        for (Clan c: getClanovi())
+            if (!c.getRezervacije().isEmpty())  ret.add(c);
+        return ret;
+    }
 }

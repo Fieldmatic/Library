@@ -24,6 +24,7 @@ public class PregledClanovaDialog extends JDialog {
     protected JTable tabela;
     protected JPanel pretragaPanel;
     protected JTextField tfPretraga;
+    protected JLabel lblInfo;
     protected TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
 
     public PregledClanovaDialog(Fabrika repo, List<Clan> data) {
@@ -42,7 +43,7 @@ public class PregledClanovaDialog extends JDialog {
         this.setVisible(true);
     }
 
-    private void initGUI() {
+    protected void initGUI() {
         MigLayout layout = new MigLayout();
         setLayout(layout);
 

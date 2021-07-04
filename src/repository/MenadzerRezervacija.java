@@ -38,4 +38,14 @@ public class MenadzerRezervacija implements Menadzer {
             e.printStackTrace();
         }
     }
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public Rezervacija pronadjiRezervacijuPoId(Integer id) {
+        for (Rezervacija r: rezervacije)
+            if (r.getId() == id) return r;
+        return null;
+    }
 }
