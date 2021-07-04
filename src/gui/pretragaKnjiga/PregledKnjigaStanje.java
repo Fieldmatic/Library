@@ -43,6 +43,8 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
                                 repo.getMenadzerPozajmica().dodajPozajmicu(p);
                                 c.dodajPozajmicu(p);
                                 repo.getMenadzerClanova().azurirajFajl();
+                                JOptionPane.showMessageDialog(null, "Pozajmica uspesno dodata.", "Pozajmica", JOptionPane.INFORMATION_MESSAGE);
+
                             } catch (NullPointerException | IOException ex) {
                                 JOptionPane.showMessageDialog(null, "Clan nije pronadjen.", "Greška", JOptionPane.WARNING_MESSAGE);
                             }
