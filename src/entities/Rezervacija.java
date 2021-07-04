@@ -16,6 +16,15 @@ public class Rezervacija {
     private LocalDate datum;
     private StatusRezervacije status;
 
+    public Rezervacija(int id, PrimerakKnjige rezervisanPrimerak, LocalDate datum, StatusRezervacije status) {
+        this.id = id;
+        this.rezervisanPrimerak = rezervisanPrimerak;
+        this.datum = datum;
+        this.status = status;
+    }
+
+    public Rezervacija() {}
+
     public int getId() {
         return id;
     }

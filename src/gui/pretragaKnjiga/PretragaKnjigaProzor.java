@@ -5,9 +5,11 @@ import entities.Knjiga;
 import enumerations.UlogaAutora;
 import enumerations.VrstaNaloga;
 import enumerations.Zanr;
+import gui.clan.PregledKnjigaRezervacija;
 import gui.pregledKnjiga.PregledKnjigaDialog;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
+import userEntities.Clan;
 import userEntities.Korisnik;
 
 import javax.swing.*;
@@ -25,6 +27,7 @@ public class PretragaKnjigaProzor extends JFrame {
 
     private Fabrika repo;
     private Korisnik korisnik;
+    private boolean samoPretraga;
     private JPanel contentPane;
     private JTextField tfNazivKnjige;
     private JComboBox<Object> cbNazivSadrzaja;
@@ -33,23 +36,24 @@ public class PretragaKnjigaProzor extends JFrame {
     private JTextField tfPrezimeAutora;
     private JComboBox<Object> cbUlogaAutora;
     private JTextField tfTagovi;
-    private JTextField tfOcena; // zmijenicu sa StarRating
+    private JTextField tfOcena;
     private JDateChooser dcDatIzdavanja;
     private JTextField tfIzdavac;
     private JButton btnPretrazi;
     private List<Knjiga> rezultatPretrage;
 
-    public PretragaKnjigaProzor(Fabrika repo, Korisnik k) {
+    public PretragaKnjigaProzor(Fabrika repo, Korisnik k, boolean samoPretraga) {
         this.repo = repo;
         this.korisnik = k;
+        this.samoPretraga = samoPretraga;
         rezultatPretrage = new ArrayList<>();
         pretragaKnjigaProzor();
     }
 
-    public static void main(Fabrika fabrika, Korisnik k) {
+    public static void main(Fabrika fabrika, Korisnik k, boolean samoPretraga) {
         EventQueue.invokeLater(() -> {
             try {
-                PretragaKnjigaProzor frame = new PretragaKnjigaProzor(fabrika, k);
+                PretragaKnjigaProzor frame = new PretragaKnjigaProzor(fabrika, k, samoPretraga);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -189,13 +193,17 @@ public class PretragaKnjigaProzor extends JFrame {
     private void initActions() {
         btnPretrazi.addActionListener(e -> {
             uradiPretragu();
-            if (!rezultatPretrage.isEmpty())
+            if (!rezultatPretrage.isEmpty()) {
                 if (korisnik.getNalog().getVrstaNaloga().equals(VrstaNaloga.bibliotekarZaPozajmice))
                     new PregledKnjigaPozajmljivanje(repo, rezultatPretrage);
+                else if (korisnik.getNalog().getVrstaNaloga().equals(VrstaNaloga.clan) && !samoPretraga)
+                    new PregledKnjigaRezervacija(repo, rezultatPretrage, (Clan) korisnik);
                 else
                     new PregledKnjigaDialog(repo, rezultatPretrage);
+                PretragaKnjigaProzor.this.dispose();
+            }
             else
-                 JOptionPane.showMessageDialog(this, "Nije pronadjena ni jedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
+                 JOptionPane.showMessageDialog(this, "Nije pronadjena nijedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 
@@ -218,9 +226,6 @@ public class PretragaKnjigaProzor extends JFrame {
             napraviPresjek(nadjiKnjigePoDatIzdavanja(dcDatIzdavanja));
          if (!tfIzdavac.getText().equals(""))
             napraviPresjek(nadjiKnjigePoIzdavacu(tfIzdavac));
-
-        System.out.println(rezultatPretrage);
-
     }
 
     private void napraviPresjek(List<Knjiga> knjige) {
