@@ -49,6 +49,14 @@ public class MenadzerKnjiga implements Menadzer {
         return false;
     }
 
+    public PrimerakKnjige dobaviZauzetPrimerakKnjige(Knjiga knjiga) {
+        for (PrimerakKnjige primerakKnjige: knjiga.getPrimerci()) {
+            if (primerakKnjige.isPozajmljen())
+                return primerakKnjige;
+        }
+        return null;
+    }
+
     public int dobaviSlobodanIdKnjige() {
         Knjiga poslednjaKnjiga = this.knjige.get(this.knjige.size() - 1);
         int idPoslednjeKnjige = poslednjaKnjiga.getId();

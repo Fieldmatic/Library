@@ -60,6 +60,10 @@ public class Clan extends Korisnik {
         pozajmice.add(p);
     }
 
+    public void dodajRezervaciju(Rezervacija r) {
+        rezervacije.add(r);
+    }
+
     public boolean uslovPozajmice() {
         if (getClanarina().getTip().equals(TipClanarine.djak) || getClanarina().getTip().equals(TipClanarine.student)
                 || getClanarina().getTip().equals(TipClanarine.dete))

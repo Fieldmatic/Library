@@ -2,6 +2,7 @@ package gui.pretragaKnjiga;
 
 import entities.Knjiga;
 import entities.Pozajmica;
+import entities.PrimerakKnjige;
 import gui.pregledKnjiga.PregledKnjigaDialog;
 import repository.Fabrika;
 import userEntities.Clan;
@@ -28,7 +29,7 @@ public class PregledKnjigaPozajmljivanje extends PregledKnjigaDialog {
         tabela.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
+                //super.keyPressed(e);
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     int row = tabela.getSelectedRow();
                     if (row == -1)
@@ -44,13 +45,16 @@ public class PregledKnjigaPozajmljivanje extends PregledKnjigaDialog {
                                 if (c.getClanarina().getDatumKraja().isBefore(LocalDate.now()))
                                     JOptionPane.showMessageDialog(null, "Clanu: " + korIme + " je istekla clanarina.", "Greška", JOptionPane.WARNING_MESSAGE);
                                 else {
-                                    Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(repo.getMenadzerKnjiga().nadjiSlobodanPrimerak((k)), c);
-                                    repo.getMenadzerPozajmica().dodajPozajmicu(p);
+                                    PrimerakKnjige primerakKnjige = repo.getMenadzerKnjiga().nadjiSlobodanPrimerak((k));
+                                    primerakKnjige.setPozajmljen(true);
+                                    Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(primerakKnjige, c);
                                     if (!c.uslovPozajmice())
                                         JOptionPane.showMessageDialog(null, "Clan: " + korIme + " je posudio maksimalan broj knjiga.", "Greška", JOptionPane.WARNING_MESSAGE);
                                     else {
+                                        repo.getMenadzerPozajmica().dodajPozajmicu(p);
                                         c.dodajPozajmicu(p);
                                         repo.getMenadzerClanova().azurirajFajl();
+                                        repo.getMenadzerKnjiga().azurirajFajl();
                                         JOptionPane.showMessageDialog(null, "Pozajmica uspesno dodata.", "Pozajmica", JOptionPane.INFORMATION_MESSAGE);
                                     }
                                 }

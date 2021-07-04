@@ -71,6 +71,14 @@ public class MenadzerRezervacija {
         return rezervacijeZaOdobravanje;
     }
 
+    public int dobaviSlobodanIdRezervacije() {
+        if (this.rezervacije.isEmpty())
+            return 0;
+        Rezervacija poslednjaRezervacija = this.rezervacije.get(this.rezervacije.size() - 1);
+        int idPoslednjeRezervacije = poslednjaRezervacija.getId();
+        return idPoslednjeRezervacije + 1;
+    }
+
     public List<Rezervacija> getRezervacije() {
         return rezervacije;
     }

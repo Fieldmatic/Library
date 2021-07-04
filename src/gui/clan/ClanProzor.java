@@ -69,7 +69,7 @@ public class ClanProzor extends JFrame {
         pretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         pretragaKnjiga.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {PretragaKnjigaProzor.main(fabrika, clan);}
+            public void actionPerformed(ActionEvent e) {PretragaKnjigaProzor.main(fabrika, clan, true);}
 
         });
         knjigeMeni.add(pretragaKnjiga);
@@ -115,9 +115,9 @@ public class ClanProzor extends JFrame {
         JMenuItem odobravanjeRezervacije = new JMenuItem("Rezervisi knjigu");
         odobravanjeRezervacije.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/rezervisiKnjigu.png")));
         odobravanjeRezervacije.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozor za rezervisanje knjige
-            }
+            @Override
+            public void actionPerformed(ActionEvent e) {PretragaKnjigaProzor.main(fabrika, clan, false);}
+
         });
         odobravanjeRezervacije.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         rezervacije.add(odobravanjeRezervacije);
