@@ -35,6 +35,7 @@ public class PretragaKnjigaProzor extends JFrame {
 
     public PretragaKnjigaProzor(Fabrika repo) {
         this.repo = repo;
+        rezultatPretrage = new ArrayList<>();
         pretragaKnjigaProzor();
     }
 
@@ -69,21 +70,29 @@ public class PretragaKnjigaProzor extends JFrame {
         contentPane.setLayout(layout);
 
         addLabel("Naziv:", contentPane);
+        tfNazivKnjige = new JTextField();
         addTextField(tfNazivKnjige, contentPane);
 
+        cbNazivSadrzaja = new JComboBox<>();
+        cbZanr = new JComboBox<>();
         addSadrzajPanel();
+        cbUlogaAutora = new JComboBox<>();
         addAutorPanel();
 
         addLabel("Tagovi:", contentPane);
+        tfTagovi = new JTextField();
         addTextField(tfTagovi, contentPane);
 
         addLabel("Ocena:", contentPane);
+        tfOcena = new JTextField();
         addTextField(tfOcena, contentPane);
 
         addLabel("Datum izdavanja:", contentPane);
+        dcDatIzdavanja = new JDateChooser();
         addDateChooser(dcDatIzdavanja);
 
         addLabel("Izdavac", contentPane);
+        tfIzdavac = new JTextField();
         addTextField(tfIzdavac, contentPane);
 
         addButtonPretrazi();
@@ -92,7 +101,6 @@ public class PretragaKnjigaProzor extends JFrame {
 
 
     private void addDateChooser(JDateChooser dc) {
-        dc = new JDateChooser();
         dc.setBackground(Color.BLACK);
         dc.setForeground(Color.WHITE);
         getContentPane().add(dc);
@@ -121,8 +129,10 @@ public class PretragaKnjigaProzor extends JFrame {
         autorPanel.setBorder(BorderFactory.createTitledBorder(null, "Autor", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Yu Gothic", Font.BOLD, 12)));
 
         addLabel("Ime:", autorPanel);
+        tfImeAutora = new JTextField();
         addTextField(tfImeAutora, autorPanel);
         addLabel("Prezime:", autorPanel);
+        tfPrezimeAutora = new JTextField();
         addTextField(tfPrezimeAutora, autorPanel);
         addLabel("Uloga:", autorPanel);
         addComboBox(Arrays.asList(UlogaAutora.values()), cbUlogaAutora, autorPanel);
@@ -132,7 +142,6 @@ public class PretragaKnjigaProzor extends JFrame {
     }
 
     private void addComboBox(List<Object> data, JComboBox<Object> cb, JPanel panel) {
-        cb = new JComboBox<>();
         cb.setBackground(Color.LIGHT_GRAY);
         cb.setForeground(Color.WHITE);
         cb.setFont(new Font("Yu Gothic", Font.BOLD, 12));
@@ -145,17 +154,15 @@ public class PretragaKnjigaProzor extends JFrame {
 
 
     private void addTextField(JTextField tf, JPanel panel) {
-        tf = initTextField();
+        initTextField(tf);
         panel.add(tf);
     }
 
-    private JTextField initTextField() {
-        JTextField tf = new JTextField();
+    private void initTextField(JTextField tf) {
         tf.setForeground(Color.WHITE);
         tf.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         tf.setOpaque(false);
         tf.setColumns(10);
-        return tf;
     }
 
     private void addLabel(String text, JPanel panel) {
@@ -174,11 +181,11 @@ public class PretragaKnjigaProzor extends JFrame {
 
     private void initActions() {
         btnPretrazi.addActionListener(e -> {
-            uradiPretragu(tfNazivKnjige, cbNazivSadrzaja, cbZanr, tfImeAutora, tfPrezimeAutora, cbUlogaAutora, tfTagovi, tfOcena, dcDatIzdavanja, tfIzdavac);
+            uradiPretragu();
         });
     }
 
-    private void uradiPretragu(JTextField tfNazivKnjige, JComboBox<Object> cbNazivSadrzaja, JComboBox<Object> cbZanr, JTextField tfImeAutora, JTextField tfPrezimeAutora, JComboBox<Object> cbUlogaAutora, JTextField tfTagovi, JTextField tfOcena, JDateChooser dcDatIzdavanja, JTextField tfIzdavac) {
+    private void uradiPretragu() {
         if (!tfNazivKnjige.getText().equals(""))
             napraviPresjek(nadjiKnjigePoNazivu(tfNazivKnjige));
         if (cbNazivSadrzaja.getSelectedItem() != null)
