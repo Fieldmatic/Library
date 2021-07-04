@@ -229,12 +229,7 @@ public class PretragaKnjigaProzor extends JFrame {
     }
 
     private void napraviPresjek(List<Knjiga> knjige) {
-        if (rezultatPretrage.isEmpty())
-                rezultatPretrage.addAll(knjige);
-        else {
-            rezultatPretrage = new ArrayList<>(presjeci(knjige));
-        }
-
+        rezultatPretrage = new ArrayList<>(presjeci(knjige));
     }
 
     private Set<Knjiga> presjeci(List<Knjiga> knjige) {
