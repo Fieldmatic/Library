@@ -1,6 +1,6 @@
 package main;
 
-import gui.Prijavljivanje;
+import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
 
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         Fabrika fabrikaRepozitorijuma = new Fabrika();
-        Prijavljivanje.main(args, fabrikaRepozitorijuma);
+        PretragaKnjigaProzor.main(fabrikaRepozitorijuma);
+//        BibliotekarPozajmiceProzor.main(args, fabrikaRepozitorijuma, new Bibliotekar());
+//        Prijavljivanje.main(args, fabrikaRepozitorijuma);
     }
 }

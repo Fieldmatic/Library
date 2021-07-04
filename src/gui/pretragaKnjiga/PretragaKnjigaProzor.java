@@ -7,7 +7,6 @@ import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -90,7 +89,7 @@ public class PretragaKnjigaProzor extends JFrame {
         JButton btnPretrazi = new JButton("Pretrazi");
         btnPretrazi.setBackground(Color.BLUE);
         btnPretrazi.setForeground(UIManager.getColor("Button.background"));
-        btnPretrazi.setFont(new Font("Yu Gothic UI", Font.BOLD, 16));
+        btnPretrazi.setFont(new Font("Yu Gothic UI", Font.BOLD, 14));
         getContentPane().add(btnPretrazi, "center, span 2");
     }
 
@@ -98,7 +97,6 @@ public class PretragaKnjigaProzor extends JFrame {
         dc = new JDateChooser();
         dc.setBackground(Color.BLACK);
         dc.setForeground(Color.WHITE);
-        dc.setOpaque(false);
         getContentPane().add(dc);
     }
 
@@ -107,8 +105,7 @@ public class PretragaKnjigaProzor extends JFrame {
         sadrzajPanel.setOpaque(false);
         MigLayout layout = new MigLayout("wrap 2", "[sg1][sg1]", "");
         sadrzajPanel.setLayout(layout);
-        Border border = new TitledBorder("Sadrzaj");
-        sadrzajPanel.setBorder(border);
+        sadrzajPanel.setBorder(BorderFactory.createTitledBorder(null, "Sadrzaj", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Yu Gothic", Font.BOLD, 12)));
 
         addLabel("Naziv:", sadrzajPanel);
         addComboBox(Stream.of("Beletristrika", "Publicistika").collect(Collectors.toList()), cbNazivSadrzaja, sadrzajPanel);
@@ -123,8 +120,7 @@ public class PretragaKnjigaProzor extends JFrame {
         autorPanel.setOpaque(false);
         MigLayout layout = new MigLayout("wrap 2", "[sg1][sg1]", "");
         autorPanel.setLayout(layout);
-        Border border = new TitledBorder("Autor");
-        autorPanel.setBorder(border);
+        autorPanel.setBorder(BorderFactory.createTitledBorder(null, "Autor", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Yu Gothic", Font.BOLD, 12)));
 
         addLabel("Ime:", autorPanel);
         addTextField(tfImeAutora, autorPanel);
@@ -141,7 +137,7 @@ public class PretragaKnjigaProzor extends JFrame {
         cb = new JComboBox<>();
         cb.setBackground(Color.LIGHT_GRAY);
         cb.setForeground(Color.WHITE);
-        cb.setFont(new Font("Yu Gothic", Font.BOLD, 14));
+        cb.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         for (Object o : data)
             cb.addItem(o);
         cb.setPrototypeDisplayValue("XXXXXXXXXXX");
@@ -157,7 +153,7 @@ public class PretragaKnjigaProzor extends JFrame {
     private JTextField initTextField() {
         JTextField tf = new JTextField();
         tf.setForeground(Color.WHITE);
-        tf.setFont(new Font("Yu Gothic", Font.BOLD, 14));
+        tf.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         tf.setOpaque(false);
         tf.setColumns(10);
         return tf;
@@ -165,6 +161,7 @@ public class PretragaKnjigaProzor extends JFrame {
 
     private void addLabel(String text, JPanel panel) {
         JLabel lbl = new JLabel(text);
+        lbl.setFont(new Font("Yu Gothic UI", Font.BOLD, 14));
         panel.add(lbl);
     }
 }
