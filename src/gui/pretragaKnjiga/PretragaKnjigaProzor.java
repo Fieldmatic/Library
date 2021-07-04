@@ -121,7 +121,7 @@ public class PretragaKnjigaProzor extends JFrame {
         sadrzajPanel.setBorder(BorderFactory.createTitledBorder(null, "Sadrzaj", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Yu Gothic", Font.BOLD, 12)));
 
         addLabel("Naziv:", sadrzajPanel);
-        addComboBox(Stream.of("Beletristrika", "Publicistika").collect(Collectors.toList()), cbNazivSadrzaja, sadrzajPanel);
+        addComboBox(Stream.of("Beletristika", "Publicistika").collect(Collectors.toList()), cbNazivSadrzaja, sadrzajPanel);
         addLabel("Zanr:", sadrzajPanel);
         addComboBox(Arrays.asList(Zanr.values()), cbZanr, sadrzajPanel);
 
