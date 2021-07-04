@@ -4,7 +4,6 @@ import com.toedter.calendar.JDateChooser;
 import entities.Knjiga;
 import enumerations.UlogaAutora;
 import enumerations.Zanr;
-import gui.pregledKnjiga.PregledKnjigaDialog;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 
@@ -186,7 +185,7 @@ public class PretragaKnjigaProzor extends JFrame {
         btnPretrazi.addActionListener(e -> {
             uradiPretragu();
             if (!rezultatPretrage.isEmpty())
-                new PregledKnjigaDialog(repo, rezultatPretrage);
+                new PregledKnjigaStanje(repo, rezultatPretrage);
             else
                  JOptionPane.showMessageDialog(this, "Nije pronadjena ni jedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
         });

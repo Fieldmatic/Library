@@ -26,6 +26,7 @@ public class PregledKnjigaDialog extends JDialog  {
     protected JTable tabela;
     protected JTextField tfPretraga;
     protected TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
+    protected JLabel lblInfo;
 
     public PregledKnjigaDialog(Fabrika repo, List<Knjiga> data) {
         this.repo = repo;
@@ -117,12 +118,12 @@ public class PregledKnjigaDialog extends JDialog  {
         lblPretraga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
 //        lblPretraga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pretraga.png")));
 
-        JLabel passwordLabel = new JLabel("Za informacije o autorima izaberite knjigu.");
-        passwordLabel.setBounds(500, 100, 65, 58);
-        passwordLabel.setIcon(new ImageIcon(Prijavljivanje.class.getResource("/slike/notification.png")));
+        lblInfo = new JLabel("Za informacije o autorima izaberite knjigu.");
+        lblInfo.setBounds(500, 100, 65, 58);
+        lblInfo.setIcon(new ImageIcon(Prijavljivanje.class.getResource("/slike/notification.png")));
         p.add(lblPretraga);
         p.add(tfPretraga);
-        p.add(passwordLabel);
+        p.add(lblInfo);
 
         tfPretraga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -147,7 +148,7 @@ public class PregledKnjigaDialog extends JDialog  {
         return p;
     }
 
-    private void initActions() {
+    protected void initActions() {
         tabela.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -157,8 +158,8 @@ public class PregledKnjigaDialog extends JDialog  {
                     if (row == -1)
                         JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greška", JOptionPane.WARNING_MESSAGE);
                     else {
-                        Knjiga c = repo.getMenadzerKnjiga().pronadjiKnjiguPoId((int) tabela.getValueAt(row, 0));
-                        new PregledAutoraKnjigeDialog(c);
+                        Knjiga k = repo.getMenadzerKnjiga().pronadjiKnjiguPoId((int) tabela.getValueAt(row, 0));
+                        new PregledAutoraKnjigeDialog(k);
                     }
                 }
             }
