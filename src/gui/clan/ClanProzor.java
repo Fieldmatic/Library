@@ -2,6 +2,7 @@ package gui.clan;
 
 import gui.Prijavljivanje;
 import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
+import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
 import userEntities.Clan;
 
@@ -66,9 +67,9 @@ public class ClanProzor extends JFrame {
         pretragaKnjiga.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/pregled.png")));
         pretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         pretragaKnjiga.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPretragu
-            }
+            @Override
+            public void actionPerformed(ActionEvent e) {PretragaKnjigaProzor.main(fabrika);}
+
         });
         knjigeMeni.add(pretragaKnjiga);
         knjigeMeni.add(pregledKnjiga);
