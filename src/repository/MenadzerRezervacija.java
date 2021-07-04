@@ -83,9 +83,6 @@ public class MenadzerRezervacija {
         return rezervacije;
     }
 
-    public List<Rezervacija> getRezervacije() {
-        return rezervacije;
-    }
 
     public Rezervacija pronadjiRezervacijuPoId(Integer id) {
         for (Rezervacija r: rezervacije)
