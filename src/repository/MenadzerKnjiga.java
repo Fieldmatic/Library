@@ -29,10 +29,6 @@ public class MenadzerKnjiga implements Menadzer {
         azurirajFajl();
     }
 
-    public void dodajPrimerakKnjige(PrimerakKnjige primerak) throws IOException {
-        primerci.add(primerak);
-    }
-
     public Knjiga pronadjiKnjiguPoId(int id) {
         for (Knjiga k : this.knjige) {
             if (k.getId() == id) {

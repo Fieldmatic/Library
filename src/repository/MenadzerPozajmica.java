@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MenadzerPozajmica {
     private List<Pozajmica> pozajmice = new ArrayList<>();
-    private static final String putanjaDoFajla = "fajlovi/Pozajmice.json";
     private MenadzerClanova menadzerClanova;
     private MenadzerKnjiga menadzerKnjiga;
 

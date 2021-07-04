@@ -13,7 +13,7 @@ public class PregledRezervacijaModel extends DataModel<Rezervacija> {
     public PregledRezervacijaModel(Fabrika repo, List<Rezervacija> data) {
         super(data);
         this.repo = repo;
-        imeKolona = new String[]{"Id. rezervacije", "Datum rezervacije", "Id. primerka knjige", "Naziv knjige", "Stanje primerka"};
+        imeKolona = new String[]{"Id rezervacije", "Datum rezervacije", "Id primerka knjige", "Naziv knjige"};
     }
 
      @Override
@@ -28,8 +28,6 @@ public class PregledRezervacijaModel extends DataModel<Rezervacija> {
                 return r.getRezervisanPrimerak().getId();
             case 3:
                 return r.getRezervisanPrimerak().getKnjiga().getNaziv();
-            case 4:
-                return repo.getMenadzerPozajmica().getPozajmicaPoIdPrimerka(r.getRezervisanPrimerak().getId()).getStatus();
             default:
                 return null;
         }

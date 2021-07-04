@@ -11,11 +11,9 @@ import java.awt.event.KeyEvent;
 public class PregledClanovaRezervacija extends PregledClanovaDialog {
 
     public PregledClanovaRezervacija(Fabrika repo) {
-        super(repo, repo.getMenadzerClanova().getClanoviSaRezervacijom());
+        super(repo, repo.getMenadzerClanova().dobaviClanoveSaRezervacijomZaPreuzimanje());
         initActions();
     }
-
-
 
     @Override
     protected void initGUI() {
@@ -37,6 +35,7 @@ public class PregledClanovaRezervacija extends PregledClanovaDialog {
                     else {
                         Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu((String) tabela.getValueAt(row, 0));
                         new PregledRezervacijaDialog(repo, c);
+                        PregledClanovaRezervacija.this.dispose();
                     }
                 }
             }

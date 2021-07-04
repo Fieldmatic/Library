@@ -1,6 +1,7 @@
 package gui.bibliotekar.pozajmice.rezervacije;
 
 import entities.Pozajmica;
+import entities.PrimerakKnjige;
 import entities.Rezervacija;
 import enumerations.StatusPozajmice;
 import net.miginfocom.swing.MigLayout;
@@ -44,7 +45,7 @@ public class PregledRezervacijaDialog extends JDialog {
     public PregledRezervacijaDialog(Fabrika repo, Clan c) {
         this.repo = repo;
         this.clan = c;
-        this.tabela = new JTable(new PregledRezervacijaModel(repo, clan.getRezervacije()));
+        this.tabela = new JTable(new PregledRezervacijaModel(repo, repo.getMenadzerClanova().dobaviRezervacijeClanaSpremneZaPreuzimanje(c)));
         initDialog();
     }
 
@@ -170,10 +171,12 @@ public class PregledRezervacijaDialog extends JDialog {
                         if (!repo.getMenadzerPozajmica().getPozajmicaPoIdPrimerka(r.getRezervisanPrimerak().getId()).getStatus().equals(StatusPozajmice.vracena))
                             JOptionPane.showMessageDialog(null, "Primerak nije vracen.", "Greška", JOptionPane.WARNING_MESSAGE);
                         else {
-                            Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(r.getRezervisanPrimerak(), clan);
+                            PrimerakKnjige rezervisanPrimerak = r.getRezervisanPrimerak();
+                            Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(rezervisanPrimerak, clan);
                             if (!clan.uslovPozajmice())
                                 JOptionPane.showMessageDialog(null, "Clan: " + clan.getNalog().getKorisnickoIme() + " je posudio maksimalan broj knjiga.", "Greška", JOptionPane.WARNING_MESSAGE);
                             else {
+                                rezervisanPrimerak.setPozajmljen(true);
                                 clan.dodajPozajmicu(p);
                                 try {
                                     repo.getMenadzerPozajmica().dodajPozajmicu(p);
@@ -182,10 +185,12 @@ public class PregledRezervacijaDialog extends JDialog {
                                 }
                                 try {
                                     repo.getMenadzerClanova().azurirajFajl();
+                                    repo.getMenadzerKnjiga().azurirajFajl();
                                 } catch (IOException ex) {
                                     ex.printStackTrace();
                                 }
                                 JOptionPane.showMessageDialog(null, "Pozajmica uspesno dodata.", "Pozajmica", JOptionPane.INFORMATION_MESSAGE);
+                                PregledRezervacijaDialog.this.dispose();
                             }
                         }
                     }
