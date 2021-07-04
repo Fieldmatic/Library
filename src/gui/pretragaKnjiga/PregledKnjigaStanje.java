@@ -38,10 +38,11 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
                             JOptionPane.showMessageDialog(null, "Ni jedan primerak knjige nije dostupan za pozajmljivanje.", "Greška", JOptionPane.WARNING_MESSAGE);
                         else {
                             try {
-                                String korIme = JOptionPane.showInputDialog("Korisnicko ime clana: ");
-                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(korIme);
+                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(JOptionPane.showInputDialog("Korisnicko ime clana: "));
                                 Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(repo.getMenadzerKnjiga().nadjiSlobodanPrimerak((k)), c);
                                 repo.getMenadzerPozajmica().dodajPozajmicu(p);
+                                c.dodajPozajmicu(p);
+                                repo.getMenadzerClanova().azurirajFajl();
                             } catch (NullPointerException | IOException ex) {
                                 JOptionPane.showMessageDialog(null, "Clan nije pronadjen.", "Greška", JOptionPane.WARNING_MESSAGE);
                             }
@@ -51,4 +52,6 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
             }
         });
     }
+
+
 }

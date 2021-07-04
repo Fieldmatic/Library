@@ -46,6 +46,20 @@ public class MenadzerPozajmica {
         int id = 0;
         for (Pozajmica p : getPozajmice())
             if (p.getId() > id) id = p.getId();
-        return new Pozajmica((id == 0) ? 0 : id+1, primerak, LocalDate.now(), LocalDate.now().plusDays(c.getBrojDanaPozajmljenja()), StatusPozajmice.aktivna);
+        return new Pozajmica((id == 0) ? 0 : id+1, primerak, LocalDate.now(), LocalDate.now().plusDays(getBrojDanaPozajmljenja(c)), StatusPozajmice.aktivna);
+    }
+
+     public int getBrojDanaPozajmljenja(Clan c) {
+        switch (c.getClanarina().getTip()) {
+            case djak:
+            case student:
+                return 15;
+            case penzioner:
+                return 21;
+            case pocasniClan:
+                return 30;
+            default:
+                return 10;
+        }
     }
 }
