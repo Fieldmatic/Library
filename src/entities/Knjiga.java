@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -146,6 +147,7 @@ public class Knjiga {
         this.format = format;
     }
 
+    @JsonIgnore
     public int getProsecnaOcena() {
         int avgOcena = 0;
             for (Recenzija r : this.getRecenzije())
