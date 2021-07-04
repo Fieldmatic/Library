@@ -6,18 +6,26 @@ import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PregledPrimerakaKnjigeDialog extends JDialog {
     private Fabrika repo;
     private Knjiga knjiga;
     private JTable tabela;
+    private JTextField tfPretraga;
+    private JPanel pretragaPanel;
     private TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
     protected List<PrimerakKnjige> data;
 
@@ -43,6 +51,7 @@ public class PregledPrimerakaKnjigeDialog extends JDialog {
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         initGUI();
+        initActions();
         this.pack();
         this.setVisible(true);
     }
@@ -67,8 +76,8 @@ public class PregledPrimerakaKnjigeDialog extends JDialog {
             }
         });
 
-        /*tfPretraga =  new JTextField(20);
-        add(pretragaPanel(), BorderLayout.SOUTH);*/
+        tfPretraga =  new JTextField(20);
+        add(pretragaPanel(), BorderLayout.SOUTH);
     }
 
     public void refresh() {
@@ -106,6 +115,67 @@ public class PregledPrimerakaKnjigeDialog extends JDialog {
         });
         sortOrder.put(index, sortOrder.get(index) * -1);
         refresh();
+    }
+
+    private JPanel pretragaPanel() {
+        pretragaPanel = new JPanel();
+        pretragaPanel.setBackground(Color.YELLOW);
+        JLabel lblPretraga = new JLabel("Pretraga:");
+        lblPretraga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
+//        lblPretraga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pretraga.png")));
+        pretragaPanel.add(lblPretraga);
+
+        pretragaPanel.add(tfPretraga);
+
+        tfPretraga.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                changedUpdate(e);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                changedUpdate(e);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (tfPretraga.getText().trim().length() == 0) {
+                    tabelaSorter.setRowFilter(null);
+                } else {
+                    tabelaSorter.setRowFilter(RowFilter.regexFilter("(?i)" + tfPretraga.getText().trim()));
+                }
+            }
+        });
+
+        return pretragaPanel;
+    }
+
+    private void initActions() {
+        tabela.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    int row = tabela.getSelectedRow();
+                    if (row == -1)
+                        JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greška", JOptionPane.WARNING_MESSAGE);
+                    else {
+                        PrimerakKnjige p = repo.getMenadzerKnjiga().pronadjiPrimerakPoId((Integer) tabela.getValueAt(row, 0));
+                        if (p.isPozajmljen() || p.isPopravljaSe())
+                            JOptionPane.showMessageDialog(null, "Izabran primerak nije dostupan za pozajmljenje.", "Greška", JOptionPane.WARNING_MESSAGE);
+                        else {
+                            /*try {
+                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(JOptionPane.showInputDialog("Korisnicko ime clana: "));
+                            } catch (NullPointerException e) {
+                                JOptionPane.showMessageDialog(null, "Clan nije pronadjen.", "Greška", JOptionPane.WARNING_MESSAGE);
+                            }
+                            repo.getMenadzerPozajmica().kreirajPozajmicu(p, repo.getMenadzerClanova());*/
+                        }
+                    }
+                }
+            }
+        });
     }
 
 }

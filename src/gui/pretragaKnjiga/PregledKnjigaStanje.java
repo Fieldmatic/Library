@@ -1,12 +1,15 @@
 package gui.pretragaKnjiga;
 
 import entities.Knjiga;
+import entities.Pozajmica;
 import gui.pregledKnjiga.PregledKnjigaDialog;
 import repository.Fabrika;
+import userEntities.Clan;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.List;
 
 public class PregledKnjigaStanje extends PregledKnjigaDialog {
@@ -20,7 +23,6 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
         initActions();
     }
 
-    @Override
     protected void initActions() {
         tabela.addKeyListener(new KeyAdapter() {
             @Override
@@ -31,8 +33,19 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
                     if (row == -1)
                         JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greška", JOptionPane.WARNING_MESSAGE);
                     else {
-                        Knjiga k = repo.getMenadzerKnjiga().pronadjiKnjiguPoId((int) tabela.getValueAt(row, 0));
-                        new PregledPrimerakaKnjigeDialog(repo, k);
+                        Knjiga k = repo.getMenadzerKnjiga().pronadjiKnjiguPoId((Integer) tabela.getValueAt(row, 0));
+                        if (!repo.getMenadzerKnjiga().imaSlobodanPrimerak(k))
+                            JOptionPane.showMessageDialog(null, "Ni jedan primerak knjige nije dostupan za pozajmljivanje.", "Greška", JOptionPane.WARNING_MESSAGE);
+                        else {
+                            try {
+                                String korIme = JOptionPane.showInputDialog("Korisnicko ime clana: ");
+                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(korIme);
+                                Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(repo.getMenadzerKnjiga().nadjiSlobodanPrimerak((k)), c);
+                                repo.getMenadzerPozajmica().dodajPozajmicu(p);
+                            } catch (NullPointerException | IOException ex) {
+                                JOptionPane.showMessageDialog(null, "Clan nije pronadjen.", "Greška", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
                     }
                 }
             }

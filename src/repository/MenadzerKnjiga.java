@@ -202,4 +202,14 @@ public class MenadzerKnjiga implements Menadzer {
         }
         return ret;
     }
+
+    public boolean imaSlobodanPrimerak(Knjiga k) {
+        return nadjiSlobodanPrimerak(k) != null;
+    }
+
+    public PrimerakKnjige nadjiSlobodanPrimerak(Knjiga k) {
+        for (PrimerakKnjige p : k.getPrimerci())
+            if (!p.isPozajmljen() || !p.isPopravljaSe()) return p;
+        return null;
+    }
 }
