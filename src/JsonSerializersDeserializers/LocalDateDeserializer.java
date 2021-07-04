@@ -1,4 +1,4 @@
-package localDateJson;
+package JsonSerializersDeserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;

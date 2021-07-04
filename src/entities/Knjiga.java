@@ -3,8 +3,8 @@ package entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import localDateJson.LocalDateDeserializer;
-import localDateJson.LocalDateSerializer;
+import JsonSerializersDeserializers.LocalDateDeserializer;
+import JsonSerializersDeserializers.LocalDateSerializer;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -21,6 +21,7 @@ public class Knjiga {
     private boolean iznosiSe;
     private String izdavac;
     private SadrzajKnjige sadrzaj;
+    @JsonManagedReference
     private List<Recenzija> recenzije = new ArrayList<Recenzija>();
     private List<String> tagovi = new ArrayList<String>();
     @JsonManagedReference

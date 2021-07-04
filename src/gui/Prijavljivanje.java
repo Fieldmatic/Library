@@ -101,7 +101,7 @@ public class Prijavljivanje extends JFrame {
                     else if (nalog.getVrstaNaloga() == VrstaNaloga.clan) {
                         Clan c = fabrika.getMenadzerClanova().pronadjiClanaPoNalogu(nalog);
                         JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + c.getIme() + " " + c.getPrezime() + ", clan.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        ClanProzor clan = new ClanProzor(fabrika);
+                        ClanProzor clan = new ClanProzor(fabrika, c);
                         clan.setVisible(true);
                         Prijavljivanje.this.setVisible(false);
                         Prijavljivanje.this.dispose();

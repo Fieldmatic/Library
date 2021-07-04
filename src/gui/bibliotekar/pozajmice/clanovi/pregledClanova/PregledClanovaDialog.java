@@ -22,6 +22,7 @@ public class PregledClanovaDialog extends JDialog {
     protected Fabrika repo;
     protected List<Clan> data;
     protected JTable tabela;
+    protected JPanel pretragaPanel;
     protected JTextField tfPretraga;
     protected TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
 
@@ -120,14 +121,14 @@ public class PregledClanovaDialog extends JDialog {
     }
 
     private JPanel pretragaPanel() {
-        JPanel p = new JPanel();
-        p.setBackground(Color.YELLOW);
+        pretragaPanel = new JPanel();
+        pretragaPanel.setBackground(Color.YELLOW);
         JLabel lblPretraga = new JLabel("Pretraga:");
         lblPretraga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
 //        lblPretraga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pretraga.png")));
-        p.add(lblPretraga);
+        pretragaPanel.add(lblPretraga);
 
-        p.add(tfPretraga);
+        pretragaPanel.add(tfPretraga);
 
         tfPretraga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -150,6 +151,6 @@ public class PregledClanovaDialog extends JDialog {
             }
         });
 
-        return p;
+        return pretragaPanel;
     }
 }
