@@ -41,6 +41,7 @@ public class PretragaKnjigaProzor extends JFrame {
     private JTextField tfIzdavac;
     private JButton btnPretrazi;
     private List<Knjiga> rezultatPretrage;
+    private boolean rezultatPostavljen;
 
     public PretragaKnjigaProzor(Fabrika repo, Korisnik k, boolean samoPretraga) {
         this.repo = repo;
@@ -229,7 +230,12 @@ public class PretragaKnjigaProzor extends JFrame {
     }
 
     private void napraviPresjek(List<Knjiga> knjige) {
-        rezultatPretrage = new ArrayList<>(presjeci(knjige));
+        if (rezultatPretrage.isEmpty() || !rezultatPostavljen) {
+            rezultatPretrage.addAll(knjige);
+            rezultatPostavljen = true;
+        }
+        else
+            rezultatPretrage = new ArrayList<>(presjeci(knjige));
     }
 
     private Set<Knjiga> presjeci(List<Knjiga> knjige) {

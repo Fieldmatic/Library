@@ -118,6 +118,16 @@
     },
     "datum" : "2021-07-04",
     "status" : "zahtevPoslat"
+  }, {
+    "id" : 2,
+    "rezervisanPrimerak" : {
+      "id" : 1,
+      "popravljaSe" : false,
+      "pozajmljen" : true,
+      "ostecen" : false
+    },
+    "datum" : "2021-07-05",
+    "status" : "zahtevPoslat"
   } ]
 }, {
   "jmbg" : "2009200083721",
