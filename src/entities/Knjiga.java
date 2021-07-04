@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -138,6 +139,10 @@ public class Knjiga {
         this.recenzije = recenzije;
     }
 
+    public void dodajRecenziju(Recenzija r){
+        this.recenzije.add(r);
+    }
+
     public Dimension getFormat() {
         return format;
     }
@@ -146,11 +151,13 @@ public class Knjiga {
         this.format = format;
     }
 
+    @JsonIgnore
     public int getProsecnaOcena() {
         int avgOcena = 0;
             for (Recenzija r : this.getRecenzije())
                 avgOcena += r.getOcena();
-        return avgOcena / this.getRecenzije().size();
+        if (this.getRecenzije().size() == 0) return 0;
+        return (avgOcena / this.getRecenzije().size());
     }
 
     @Override

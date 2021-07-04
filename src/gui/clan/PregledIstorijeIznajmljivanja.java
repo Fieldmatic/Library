@@ -159,7 +159,8 @@ public class PregledIstorijeIznajmljivanja extends JFrame {
                         JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greška", JOptionPane.WARNING_MESSAGE);
                     else {
                         Knjiga k = fabrika.getMenadzerKnjiga().pronadjiPrimerakPoId((int) table.getValueAt(row, 1)).getKnjiga();
-                        new PregledAutoraKnjigeDialog(k);
+                        if (fabrika.getMenadzerKnjiga().vecOcenio(k,clan.getNalog().getKorisnickoIme())) JOptionPane.showMessageDialog(PregledIstorijeIznajmljivanja.this, "Vec ste ocenili tu knjigu", "Greška", JOptionPane.WARNING_MESSAGE);
+                        else new OstavljanjeRecenzijeDijalog(fabrika, clan, k);
                     }
                 }
             }
