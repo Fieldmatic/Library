@@ -1,6 +1,7 @@
 package gui;
 
 import enumerations.VrstaNaloga;
+import gui.bibliotekar.BibliotekarAdminProzor;
 import gui.bibliotekar.katalogizacija.BibliotekarKatalogizacijaProzor;
 import gui.bibliotekar.BibliotekarProzor;
 import gui.bibliotekar.pozajmice.BibliotekarPozajmiceProzor;
@@ -93,8 +94,8 @@ public class Prijavljivanje extends JFrame {
                     } else if (nalog.getVrstaNaloga() == VrstaNaloga.admin) {
                         Bibliotekar b = fabrika.getMenadzerBibliotekara().pronadjiBibliotekaraPoNalogu(nalog);
                         JOptionPane.showMessageDialog(contentPane, "Ulogovali ste se kao " + b.getIme() + " " + b.getPrezime() + ", admin bibliotekar.", "Uspesno prijavljivanje", JOptionPane.INFORMATION_MESSAGE);
-                        //kreiranje instance glavnog prozora bibliotekara admina
-                        //postaviti instancu kao vidljivu
+                        BibliotekarAdminProzor bibliotekarAdmin = new BibliotekarAdminProzor(fabrika, b);
+                        bibliotekarAdmin.setVisible(true);
                         Prijavljivanje.this.setVisible(false);
                         Prijavljivanje.this.dispose();
                     }

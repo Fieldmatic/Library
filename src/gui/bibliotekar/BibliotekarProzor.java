@@ -1,12 +1,18 @@
 package gui.bibliotekar;
 
+import entities.Pozajmica;
+import enumerations.StatusPozajmice;
 import gui.Prijavljivanje;
 import gui.bibliotekar.katalogizacija.BibliotekarKatalogizacijaProzor;
+import gui.bibliotekar.katalogizacija.DodavanjeKnjigeProzor;
 import gui.bibliotekar.pozajmice.BibliotekarPozajmiceProzor;
 import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
+import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
+import gui.pregledKnjiga.PregledKnjigaDialog;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
+import userEntities.Clan;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BibliotekarProzor extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -58,10 +66,11 @@ public class BibliotekarProzor extends JFrame {
         dodavanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/dodajKnjigu.png")));
         dodavanjeKnjige.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         dodavanjeKnjige.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                //prozor za dodavanje knjige
+                DodavanjeKnjigeProzor.main(fabrika);}
 
-            }
+
         });
         JMenuItem brisanjeKnjige = new JMenuItem("Brisanje knjige");
         brisanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/brisanjeKnjige.png")));
@@ -88,8 +97,7 @@ public class BibliotekarProzor extends JFrame {
         JMenuItem PregledKnjiga = new JMenuItem("Pregled Knjiga");
         PregledKnjiga.setIcon(new ImageIcon(BibliotekarProzor.class.getResource("/slike/pregled.png")));
         PregledKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledKnjiga.addActionListener(e -> {
-            //prozorzapregled
+        PregledKnjiga.addActionListener(e -> {new PregledKnjigaDialog(fabrika, fabrika.getMenadzerKnjiga().getKnjige());
 
         });
 
@@ -119,7 +127,7 @@ public class BibliotekarProzor extends JFrame {
         JMenuItem PregledClanovaKojiKasne = new JMenuItem("Pregled clanova koji kasne sa vracanjem knjiga");
         PregledClanovaKojiKasne.setIcon(new ImageIcon(BibliotekarProzor.class.getResource("/slike/pregled.png")));
         PregledClanovaKojiKasne.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        //PregledClanovaKojiKasne.addActionListener(e -> pregledKasnjenja(fabrika));
+        PregledClanovaKojiKasne.addActionListener(e -> pregledKasnjenja(fabrika));
 
         JMenuItem DeaktivacijaClana = new JMenuItem("Deaktivacija Clana");
         DeaktivacijaClana.setIcon(new ImageIcon(BibliotekarProzor.class.getResource("/slike/deaktivacija.png")));
@@ -233,5 +241,22 @@ public class BibliotekarProzor extends JFrame {
         Background.setIcon(new ImageIcon(BibliotekarProzor.class.getResource("/slike/bibliotekarPozadina.png")));
         Background.setBounds(0, 0, 907, 574);
         contentPane.add(Background);
+    }
+
+    private Object pregledKasnjenja(Fabrika fabrika) {
+        List<Clan> clanovi = new ArrayList<>();
+        for (Clan c : fabrika.getMenadzerClanova().getClanovi()) {
+            for (Pozajmica p : c.getPozajmice()) {
+                if (p.getStatus().equals(StatusPozajmice.istekla)) {
+                    clanovi.add(c);
+                    break;
+                }
+            }
+        }
+        if (!clanovi.isEmpty())
+            return new PregledKasnjenjaDialog(fabrika, clanovi);
+        else
+            JOptionPane.showMessageDialog(null, "Nema clanova sa kasnjenjem.", "Greška", JOptionPane.WARNING_MESSAGE);
+        return null;
     }
 }
