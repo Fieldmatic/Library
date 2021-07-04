@@ -5,6 +5,7 @@ import repository.Fabrika;
 import userEntities.Clan;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -12,11 +13,15 @@ import java.util.List;
 public class PregledKasnjenjaDialog extends PregledClanovaDialog {
     public PregledKasnjenjaDialog(Fabrika repo, List<Clan> data) {
         super(repo, data);
+        initGui();
         initActions();
     }
 
-    private boolean provjeriUslov() {
-        return !data.isEmpty();
+    private void initGui() {
+        JLabel lblHint = new JLabel("Za pregled kasnjenja izaberite clana.");
+        lblHint.setIcon(new ImageIcon(PregledKasnjenjaDialog.class.getResource("/slike/notification.png")));
+        super.pretragaPanel.add(lblHint);
+        super.setMinimumSize(new Dimension(650, 300));
     }
 
     private void initActions() {
