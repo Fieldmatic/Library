@@ -19,18 +19,18 @@
     "pozajmljenPrimerak" : {
       "id" : 4,
       "popravljaSe" : false,
-      "pozajmljen" : true,
-      "ostecen" : false
+      "pozajmljen" : false,
+      "ostecen" : true
     },
     "datumPocetka" : "2021-07-02",
     "datumKraja" : "2021-07-25",
     "status" : "aktivna"
-  },{
+  }, {
     "id" : 2,
     "pozajmljenPrimerak" : {
       "id" : 6,
       "popravljaSe" : false,
-      "pozajmljen" : true,
+      "pozajmljen" : false,
       "ostecen" : false
     },
     "datumPocetka" : "2021-07-02",
@@ -59,7 +59,7 @@
     "pozajmljenPrimerak" : {
       "id" : 9,
       "popravljaSe" : false,
-      "pozajmljen" : true,
+      "pozajmljen" : false,
       "ostecen" : false
     },
     "datumPocetka" : "2021-07-02",
@@ -118,6 +118,24 @@
     "tip" : "student",
     "datumPocetka" : "2021-01-02",
     "datumKraja" : "2022-01-02"
+  },
+  "pozajmice" : [ ],
+  "rezervacije" : [ ]
+}, {
+  "jmbg" : "2009200083721",
+  "ime" : "Ognjen",
+  "prezime" : "Kerovic",
+  "datumRodjenja" : "2000-09-20",
+  "pol" : "muski",
+  "nalog" : {
+    "korisnickoIme" : "comi123",
+    "lozinka" : "comi321",
+    "vrstaNaloga" : "clan"
+  },
+  "clanarina" : {
+    "tip" : "zaposlen",
+    "datumPocetka" : "2021-07-03",
+    "datumKraja" : "2022-07-03"
   },
   "pozajmice" : [ ],
   "rezervacije" : [ ]

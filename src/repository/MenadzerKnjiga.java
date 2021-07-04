@@ -36,6 +36,17 @@ public class MenadzerKnjiga implements Menadzer {
         return null;
     }
 
+    public PrimerakKnjige pronadjiPrimerakPoId(int id) {
+        for (PrimerakKnjige p : this.primerci) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+
+
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
         knjige = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Knjiga[].class)));
