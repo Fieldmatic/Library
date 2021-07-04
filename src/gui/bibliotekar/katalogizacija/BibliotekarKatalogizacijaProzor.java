@@ -1,11 +1,16 @@
 package gui.bibliotekar.katalogizacija;
 
+import entities.Pozajmica;
+import enumerations.StatusPozajmice;
 import gui.Prijavljivanje;
 import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
+import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
 import gui.pregledKnjiga.PregledKnjigaDialog;
+import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
+import userEntities.Clan;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BibliotekarKatalogizacijaProzor extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -90,21 +97,12 @@ public class BibliotekarKatalogizacijaProzor extends JFrame {
         JMenuItem PregledKnjiga = new JMenuItem("Pregled Knjiga");
         PregledKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PregledKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledKnjiga.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorzapregled
-
-            }
-        });
+        PregledKnjiga.addActionListener(e -> new PregledKnjigaDialog(fabrika, fabrika.getMenadzerKnjiga().getKnjige()));
 
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
         PretragaKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PretragaKnjiga.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPretragu
-            }
-        });
+        PretragaKnjiga.addActionListener(e -> { new PretragaKnjigaProzor(fabrika, bibliotekar);});
         KnjigeMeni.add(PretragaKnjiga);
         KnjigeMeni.add(PregledKnjiga);
         KnjigeMeni.add(knjigeMeniZaAzuriranje);
@@ -125,7 +123,7 @@ public class BibliotekarKatalogizacijaProzor extends JFrame {
         JMenuItem PregledClanovaKojiKasne = new JMenuItem("Pregled clanova koji kasne sa vracanjem knjiga");
         PregledClanovaKojiKasne.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PregledClanovaKojiKasne.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        //PregledClanovaKojiKasne.addActionListener(e -> pregledKasnjenja(fabrika));
+        PregledClanovaKojiKasne.addActionListener(e -> pregledKasnjenja(fabrika));
 
         Clanovi.add(PregledClanova);
         Clanovi.add(PregledClanovaKojiKasne);
@@ -213,5 +211,22 @@ public class BibliotekarKatalogizacijaProzor extends JFrame {
         Background.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/bibliotekarPozadina.png")));
         Background.setBounds(0, 0, 907, 574);
         contentPane.add(Background);
+    }
+
+    private Object pregledKasnjenja(Fabrika fabrika) {
+        List<Clan> clanovi = new ArrayList<>();
+        for (Clan c : fabrika.getMenadzerClanova().getClanovi()) {
+            for (Pozajmica p : c.getPozajmice()) {
+                if (p.getStatus().equals(StatusPozajmice.istekla)) {
+                    clanovi.add(c);
+                    break;
+                }
+            }
+        }
+        if (!clanovi.isEmpty())
+            return new PregledKasnjenjaDialog(fabrika, clanovi);
+        else
+            JOptionPane.showMessageDialog(null, "Nema clanova sa kasnjenjem.", "Greška", JOptionPane.WARNING_MESSAGE);
+        return null;
     }
 }

@@ -17,7 +17,7 @@
   "primerci" : [ {
     "id" : 1,
     "popravljaSe" : false,
-    "pozajmljen" : false,
+    "pozajmljen" : true,
     "ostecen" : false
   }, {
     "id" : 2,

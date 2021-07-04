@@ -11,6 +11,8 @@ import gui.bibliotekar.pozajmice.BibliotekarPozajmiceProzor;
 import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
+import gui.pregledKnjiga.PregledKnjigaDialog;
+import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
 import userEntities.Clan;
@@ -97,17 +99,12 @@ public class BibliotekarAdminProzor extends JFrame {
         JMenuItem PregledKnjiga = new JMenuItem("Pregled Knjiga");
         PregledKnjiga.setIcon(new ImageIcon(BibliotekarAdminProzor.class.getResource("/slike/pregled.png")));
         PregledKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PregledKnjiga.addActionListener(e -> {
-            //prozorzapregled
-
-        });
+        PregledKnjiga.addActionListener(e -> new PregledKnjigaDialog(fabrika, fabrika.getMenadzerKnjiga().getKnjige()));
 
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
         PretragaKnjiga.setIcon(new ImageIcon(BibliotekarAdminProzor.class.getResource("/slike/pregled.png")));
         PretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PretragaKnjiga.addActionListener(e -> {
-            //prozorZaPretragu
-        });
+        PretragaKnjiga.addActionListener(e -> { new PretragaKnjigaProzor(fabrika, bibliotekar);});
         KnjigeMeni.add(PretragaKnjiga);
         KnjigeMeni.add(PregledKnjiga);
         KnjigeMeni.add(knjigeMeniZaAzuriranje);
