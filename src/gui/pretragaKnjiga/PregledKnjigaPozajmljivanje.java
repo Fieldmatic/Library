@@ -10,10 +10,11 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
-public class PregledKnjigaStanje extends PregledKnjigaDialog {
-    public PregledKnjigaStanje(Fabrika repo, List<Knjiga> data) {
+public class PregledKnjigaPozajmljivanje extends PregledKnjigaDialog {
+    public PregledKnjigaPozajmljivanje(Fabrika repo, List<Knjiga> data) {
         super(repo, data);
         pregledKnjigaStanje();
     }
@@ -38,12 +39,21 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
                             JOptionPane.showMessageDialog(null, "Ni jedan primerak knjige nije dostupan za pozajmljivanje.", "Greška", JOptionPane.WARNING_MESSAGE);
                         else {
                             try {
-                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(JOptionPane.showInputDialog("Korisnicko ime clana: "));
-                                Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(repo.getMenadzerKnjiga().nadjiSlobodanPrimerak((k)), c);
-                                repo.getMenadzerPozajmica().dodajPozajmicu(p);
-                                c.dodajPozajmicu(p);
-                                repo.getMenadzerClanova().azurirajFajl();
-                                JOptionPane.showMessageDialog(null, "Pozajmica uspesno dodata.", "Pozajmica", JOptionPane.INFORMATION_MESSAGE);
+                                String korIme = JOptionPane.showInputDialog("Korisnicko ime clana: ");
+                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(korIme);
+                                if (c.getClanarina().getDatumKraja().isBefore(LocalDate.now()))
+                                    JOptionPane.showMessageDialog(null, "Clanu: " + korIme + " je istekla clanarina.", "Greška", JOptionPane.WARNING_MESSAGE);
+                                else {
+                                    Pozajmica p = repo.getMenadzerPozajmica().kreirajPozajmicu(repo.getMenadzerKnjiga().nadjiSlobodanPrimerak((k)), c);
+                                    repo.getMenadzerPozajmica().dodajPozajmicu(p);
+                                    if (!c.uslovPozajmice())
+                                        JOptionPane.showMessageDialog(null, "Clan: " + korIme + " je posudio maksimalan broj knjiga.", "Greška", JOptionPane.WARNING_MESSAGE);
+                                    else {
+                                        c.dodajPozajmicu(p);
+                                        repo.getMenadzerClanova().azurirajFajl();
+                                        JOptionPane.showMessageDialog(null, "Pozajmica uspesno dodata.", "Pozajmica", JOptionPane.INFORMATION_MESSAGE);
+                                    }
+                                }
 
                             } catch (NullPointerException | IOException ex) {
                                 JOptionPane.showMessageDialog(null, "Clan nije pronadjen.", "Greška", JOptionPane.WARNING_MESSAGE);

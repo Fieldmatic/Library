@@ -3,9 +3,12 @@ package gui.pretragaKnjiga;
 import com.toedter.calendar.JDateChooser;
 import entities.Knjiga;
 import enumerations.UlogaAutora;
+import enumerations.VrstaNaloga;
 import enumerations.Zanr;
+import gui.pregledKnjiga.PregledKnjigaDialog;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
+import userEntities.Korisnik;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -21,6 +24,7 @@ import java.util.stream.Stream;
 public class PretragaKnjigaProzor extends JFrame {
 
     private Fabrika repo;
+    private Korisnik korisnik;
     private JPanel contentPane;
     private JTextField tfNazivKnjige;
     private JComboBox<Object> cbNazivSadrzaja;
@@ -35,16 +39,17 @@ public class PretragaKnjigaProzor extends JFrame {
     private JButton btnPretrazi;
     private List<Knjiga> rezultatPretrage;
 
-    public PretragaKnjigaProzor(Fabrika repo) {
+    public PretragaKnjigaProzor(Fabrika repo, Korisnik k) {
         this.repo = repo;
+        this.korisnik = k;
         rezultatPretrage = new ArrayList<>();
         pretragaKnjigaProzor();
     }
 
-    public static void main(Fabrika fabrika) {
+    public static void main(Fabrika fabrika, Korisnik k) {
         EventQueue.invokeLater(() -> {
             try {
-                PretragaKnjigaProzor frame = new PretragaKnjigaProzor(fabrika);
+                PretragaKnjigaProzor frame = new PretragaKnjigaProzor(fabrika, k);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -185,7 +190,10 @@ public class PretragaKnjigaProzor extends JFrame {
         btnPretrazi.addActionListener(e -> {
             uradiPretragu();
             if (!rezultatPretrage.isEmpty())
-                new PregledKnjigaStanje(repo, rezultatPretrage);
+                if (korisnik.getNalog().getVrstaNaloga().equals(VrstaNaloga.bibliotekarZaPozajmice))
+                    new PregledKnjigaPozajmljivanje(repo, rezultatPretrage);
+                else
+                    new PregledKnjigaDialog(repo, rezultatPretrage);
             else
                  JOptionPane.showMessageDialog(this, "Nije pronadjena ni jedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
         });

@@ -5,6 +5,7 @@ import entities.Clanarina;
 import entities.Pozajmica;
 import entities.Rezervacija;
 import enumerations.Pol;
+import enumerations.TipClanarine;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class Clan extends Korisnik {
     private List<Rezervacija> rezervacije = new ArrayList<>();
 
 
-    public Clan(){}
+    public Clan() {
+    }
 
     public Clan(String ime, String prezime, LocalDate datumRodjenja, String jmbg, Pol pol) {
         super(ime, prezime, datumRodjenja, jmbg, pol);
@@ -56,5 +58,16 @@ public class Clan extends Korisnik {
 
     public void dodajPozajmicu(Pozajmica p) {
         pozajmice.add(p);
+    }
+
+    public boolean uslovPozajmice() {
+        if (getClanarina().getTip().equals(TipClanarine.djak) || getClanarina().getTip().equals(TipClanarine.student)
+                || getClanarina().getTip().equals(TipClanarine.dete))
+            return getPozajmice().size() < 3;
+        else if (getClanarina().getTip().equals(TipClanarine.penzioner))
+            return getPozajmice().size() < 3;
+        else if (getClanarina().getTip().equals(TipClanarine.pocasniClan))
+            return getPozajmice().size() < 10;
+        return false;
     }
 }
