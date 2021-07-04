@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import enumerations.Pol;
-import localDateJson.LocalDateDeserializer;
-import localDateJson.LocalDateSerializer;
+import JsonSerializersDeserializers.LocalDateDeserializer;
+import JsonSerializersDeserializers.LocalDateSerializer;
 
 import java.time.LocalDate;
 

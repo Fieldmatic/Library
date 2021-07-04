@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import enumerations.TipClanarine;
-import jsonSerializerDeserializer.LocalDateDeserializer;
-import jsonSerializerDeserializer.LocalDateSerializer;
+import JsonSerializersDeserializers.LocalDateDeserializer;
+import JsonSerializersDeserializers.LocalDateSerializer;
 import userEntities.Clan;
 
 import java.time.LocalDate;

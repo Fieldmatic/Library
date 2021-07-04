@@ -3,8 +3,8 @@ package entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jsonSerializerDeserializer.LocalDateDeserializer;
-import jsonSerializerDeserializer.LocalDateSerializer;
+import JsonSerializersDeserializers.LocalDateDeserializer;
+import JsonSerializersDeserializers.LocalDateSerializer;
 
 import java.awt.*;
 import java.time.LocalDate;
