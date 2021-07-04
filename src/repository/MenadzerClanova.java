@@ -61,7 +61,6 @@ public class MenadzerClanova implements Menadzer {
     }
 
 
-
     public List<Clan> getClanovi() {
         return clanovi;
     }

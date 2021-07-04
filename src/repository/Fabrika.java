@@ -24,7 +24,7 @@ public class Fabrika {
         this.menadzerClanarina = new MenadzerClanarina(menadzerClanova);
         this.menadzerBibliotekara = new MenadzerBibliotekara();
         this.menadzerPozajmica = new MenadzerPozajmica(menadzerClanova, menadzerKnjiga);
-        this.menadzerRezervacija = new MenadzerRezervacija();
+        this.menadzerRezervacija = new MenadzerRezervacija(menadzerClanova, menadzerKnjiga);
         this.menadzerKorisnickihNaloga = new MenadzerKorisnickihNaloga(menadzerBibliotekara, menadzerClanova);
         this.provere = new Provere(menadzerKorisnickihNaloga);
 
@@ -33,9 +33,8 @@ public class Fabrika {
         this.menadzerClanarina.ucitajPodatke();
         this.menadzerBibliotekara.ucitajPodatke();
         this.menadzerPozajmica.ucitajPodatke();
-        //this.menadzerRezervacija.ucitajPodatke();
+        this.menadzerRezervacija.ucitajPodatke();
         this.menadzerKorisnickihNaloga.ucitajPodatke();
-        //mozda treba neki apdejt negde
 
     }
 
