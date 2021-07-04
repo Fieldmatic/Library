@@ -34,6 +34,22 @@ class ClanTest {
     }
 
     @Test
+    void dodajPrevisePozajmica() throws IOException {
+        Pozajmica p1 = fabrika.getMenadzerPozajmica().kreirajPozajmicu(fabrika.getMenadzerKnjiga().nadjiSlobodanPrimerak(fabrika.getMenadzerKnjiga().nadjiKnjigePoNazivu("senke").get(0)),
+                fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara"));
+        fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara").dodajPozajmicu(p1);
+        fabrika.getMenadzerPozajmica().dodajPozajmicu(p1);
+
+        Pozajmica p2 = fabrika.getMenadzerPozajmica().kreirajPozajmicu(fabrika.getMenadzerKnjiga().nadjiSlobodanPrimerak(fabrika.getMenadzerKnjiga().nadjiKnjigePoNazivu("oko otoka").get(0)),
+                fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara"));
+        fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara").dodajPozajmicu(p2);
+        fabrika.getMenadzerPozajmica().dodajPozajmicu(p2);
+
+         Assertions.assertFalse(fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara").uslovPozajmice());
+
+    }
+
+    @Test
     void dodajRezervaciju() {
     }
 }
