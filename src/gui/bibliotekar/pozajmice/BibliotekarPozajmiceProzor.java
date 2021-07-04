@@ -67,7 +67,7 @@ public class BibliotekarPozajmiceProzor extends JFrame {
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
         PretragaKnjiga.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/pregled.png")));
         PretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PretragaKnjiga.addActionListener(e -> { new PretragaKnjigaProzor(fabrika, bibliotekar);});
+        PretragaKnjiga.addActionListener(e -> { new PretragaKnjigaProzor(fabrika, bibliotekar, false);});
         KnjigeMeni.add(PretragaKnjiga);
         KnjigeMeni.add(PregledKnjiga);
 

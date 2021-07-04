@@ -3,7 +3,6 @@ package gui.bibliotekar.katalogizacija;
 import entities.Pozajmica;
 import enumerations.StatusPozajmice;
 import gui.Prijavljivanje;
-import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
 import gui.pregledKnjiga.PregledKnjigaDialog;
@@ -102,7 +101,7 @@ public class BibliotekarKatalogizacijaProzor extends JFrame {
         JMenuItem PretragaKnjiga = new JMenuItem("Pretraga knjiga");
         PretragaKnjiga.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/pregled.png")));
         PretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        PretragaKnjiga.addActionListener(e -> { new PretragaKnjigaProzor(fabrika, bibliotekar);});
+        PretragaKnjiga.addActionListener(e -> { new PretragaKnjigaProzor(fabrika, bibliotekar, true);});
         KnjigeMeni.add(PretragaKnjiga);
         KnjigeMeni.add(PregledKnjiga);
         KnjigeMeni.add(knjigeMeniZaAzuriranje);
