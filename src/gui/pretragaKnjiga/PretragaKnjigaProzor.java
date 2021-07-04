@@ -139,9 +139,9 @@ public class PretragaKnjigaProzor extends JFrame {
 
     private void addComboBox(List<Object> data, JComboBox<Object> cb, JPanel panel) {
         cb = new JComboBox<>();
+        cb.setBackground(Color.LIGHT_GRAY);
         cb.setForeground(Color.WHITE);
         cb.setFont(new Font("Yu Gothic", Font.BOLD, 14));
-        cb.setOpaque(false);
         for (Object o : data)
             cb.addItem(o);
         cb.setPrototypeDisplayValue("XXXXXXXXXXX");
