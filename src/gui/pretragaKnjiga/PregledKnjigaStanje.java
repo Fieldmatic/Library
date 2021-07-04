@@ -19,7 +19,7 @@ public class PregledKnjigaStanje extends PregledKnjigaDialog {
     }
 
     private void pregledKnjigaStanje() {
-        lblInfo.setText("Za informacije o stanju izaberite knjigu.");
+        lblInfo.setText("Izaberite knjigu kako bi je pozajmili");
         initActions();
     }
 
