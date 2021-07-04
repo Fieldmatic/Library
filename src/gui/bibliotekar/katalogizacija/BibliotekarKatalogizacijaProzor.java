@@ -1,7 +1,9 @@
-package gui.bibliotekar;
+package gui.bibliotekar.katalogizacija;
 
 import gui.Prijavljivanje;
+import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
+import gui.pregledKnjiga.PregledKnjigaDialog;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
 
@@ -58,11 +60,11 @@ public class BibliotekarKatalogizacijaProzor extends JFrame {
         dodavanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/dodajKnjigu.png")));
         dodavanjeKnjige.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         dodavanjeKnjige.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                //prozor za dodavanje knjige
-
-            }
+                DodavanjeKnjigeProzor.main(fabrika);}
         });
+
         JMenuItem brisanjeKnjige = new JMenuItem("Brisanje knjige");
         brisanjeKnjige.setIcon(new ImageIcon(BibliotekarKatalogizacijaProzor.class.getResource("/slike/brisanjeKnjige.png")));
         brisanjeKnjige.setFont(new Font("Yu Gothic", Font.BOLD, 12));

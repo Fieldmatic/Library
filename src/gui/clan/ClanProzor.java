@@ -1,7 +1,10 @@
 package gui.clan;
 
 import gui.Prijavljivanje;
+import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
+import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
+import userEntities.Clan;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -16,11 +19,11 @@ public class ClanProzor extends JFrame {
     private JPanel contentPane;
 
 
-    public static void main(String[] args, Fabrika fabrika) {
+    public static void main(String[] args, Fabrika fabrika, Clan c) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ClanProzor frame = new ClanProzor(fabrika);
+                    ClanProzor frame = new ClanProzor(fabrika, c);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -29,7 +32,7 @@ public class ClanProzor extends JFrame {
         });
     }
 
-    public ClanProzor(Fabrika fabrika) {
+    public ClanProzor(Fabrika fabrika, Clan c) {
         setResizable(false);
         setTitle("Clan");
         setIconImage(Toolkit.getDefaultToolkit().getImage(ClanProzor.class.getResource("/slike/logo.jpg")));
@@ -64,9 +67,9 @@ public class ClanProzor extends JFrame {
         pretragaKnjiga.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/pregled.png")));
         pretragaKnjiga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         pretragaKnjiga.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPretragu
-            }
+            @Override
+            public void actionPerformed(ActionEvent e) {PretragaKnjigaProzor.main(fabrika);}
+
         });
         knjigeMeni.add(pretragaKnjiga);
         knjigeMeni.add(pregledKnjiga);
@@ -83,10 +86,10 @@ public class ClanProzor extends JFrame {
         istorijaZaduzenja.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/pregled.png")));
         istorijaZaduzenja.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         istorijaZaduzenja.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozorZaPregledIstorijeZaduzenja
-            }
+            @Override
+            public void actionPerformed(ActionEvent e) {PregledIstorijeIznajmljivanja.main(fabrika, c);}
         });
+
 
         JMenuItem trenutnaZaduzenja = new JMenuItem("Pregled trenutnih zaduzenja");
         trenutnaZaduzenja.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/pregled.png")));

@@ -36,6 +36,12 @@ public class Provere {
         return mtch.matches();
     }
 
+    public boolean validacijaBrojeva(String tekst) {
+        Pattern pattern = Pattern.compile("[0-9]+");
+        Matcher mtch = pattern.matcher(tekst);
+        return mtch.matches();
+    }
+
     public boolean proveraDostupnostiKorisnickogImena(String tekst){
         for (KorisnickiNalog n : menadzerNaloga.getNalozi()){
             if (n.getKorisnickoIme().equals(tekst)) return false;

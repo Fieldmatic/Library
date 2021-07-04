@@ -185,9 +185,9 @@ public class BibliotekarPozajmiceProzor extends JFrame {
         contentPane.add(Background);
     }
 
-    private Object pregledKasnjenja(Fabrika repo) {
+    private Object pregledKasnjenja(Fabrika fabrika) {
             List<Clan> clanovi = new ArrayList<>();
-            for (Clan c : repo.getMenadzerClanova().getClanovi()) {
+            for (Clan c : fabrika.getMenadzerClanova().getClanovi()) {
                 for (Pozajmica p : c.getPozajmice()) {
                     if (p.getStatus().equals(StatusPozajmice.istekla)) {
                         clanovi.add(c);
@@ -196,7 +196,7 @@ public class BibliotekarPozajmiceProzor extends JFrame {
                 }
             }
             if (!clanovi.isEmpty())
-                return new PregledKasnjenjaDialog(repo, clanovi);
+                return new PregledKasnjenjaDialog(fabrika, clanovi);
             else
                 JOptionPane.showMessageDialog(null, "Nema clanova sa kasnjenjem.", "Greška", JOptionPane.WARNING_MESSAGE);
             return null;

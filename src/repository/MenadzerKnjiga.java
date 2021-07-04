@@ -40,6 +40,45 @@ public class MenadzerKnjiga implements Menadzer {
         return null;
     }
 
+    public int dobaviSlobodanIdKnjige() {
+        Knjiga poslednjaKnjiga = this.knjige.get(this.knjige.size() - 1);
+        int idPoslednjeKnjige = poslednjaKnjiga.getId();
+        return idPoslednjeKnjige + 1;
+    }
+
+    public int dobaviSlobodanIdPrimeraka() {
+        Knjiga poslednjaKnjiga = this.knjige.get(this.knjige.size() - 1);
+        List<PrimerakKnjige> primerciKnjige = poslednjaKnjiga.getPrimerci();
+        PrimerakKnjige poslednjiPrimerak;
+        if (primerciKnjige.isEmpty()) {
+            Knjiga pretposlednjaKnjiga = this.knjige.get(this.knjige.size() - 2);
+            poslednjiPrimerak = pretposlednjaKnjiga.getPrimerci().get(pretposlednjaKnjiga.getPrimerci().size() - 1);
+        } else {
+            poslednjiPrimerak = primerciKnjige.get(primerciKnjige.size() - 1);
+        }
+        int idPoslednjegPrimerka = poslednjiPrimerak.getId();
+        return idPoslednjegPrimerka + 1;
+    }
+
+    public boolean knjigaImaPisca(Knjiga knjiga) {
+        for (Autorstvo autor : knjiga.getAutori()) {
+            if (autor.getUloga() == UlogaAutora.pisac)
+                return true;
+        }
+        return false;
+    }
+
+    public PrimerakKnjige pronadjiPrimerakPoId(int id) {
+        for (PrimerakKnjige p : this.primerci) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+
+
     public void ucitajPodatke() throws IOException {
         ObjectMapper obj = new ObjectMapper();
         knjige = new ArrayList(Arrays.asList(obj.readValue(Paths.get(putanjaDoFajla).toFile(), Knjiga[].class)));

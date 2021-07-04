@@ -3,8 +3,8 @@ package entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import localDateJson.LocalDateDeserializer;
-import localDateJson.LocalDateSerializer;
+import JsonSerializersDeserializers.LocalDateDeserializer;
+import JsonSerializersDeserializers.LocalDateSerializer;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -22,6 +22,7 @@ public class Knjiga {
     private boolean iznosiSe;
     private String izdavac;
     private SadrzajKnjige sadrzaj;
+    @JsonManagedReference
     private List<Recenzija> recenzije = new ArrayList<Recenzija>();
     private List<String> tagovi = new ArrayList<String>();
     @JsonManagedReference
@@ -40,6 +41,21 @@ public class Knjiga {
         this.sadrzaj = sadrzaj;
         this.tagovi = tagovi;
         this.autori = autori;
+    }
+
+    public Knjiga(int id, String naziv, Dimension format, LocalDate datumIzdanja, boolean iznosiSe, String izdavac, SadrzajKnjige sadrzaj, List<String> tagovi) {
+        this.id = id;
+        this.naziv = naziv;
+        this.format = format;
+        this.datumIzdanja = datumIzdanja;
+        this.iznosiSe = iznosiSe;
+        this.izdavac = izdavac;
+        this.sadrzaj = sadrzaj;
+        this.tagovi = tagovi;
+    }
+
+    public void dodajNoviPrimerak(PrimerakKnjige primerak) {
+        this.primerci.add(primerak);
     }
 
     public int getId() {
