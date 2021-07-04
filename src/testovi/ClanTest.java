@@ -1,7 +1,9 @@
 package testovi;
 
 import entities.Pozajmica;
+import entities.Rezervacija;
 import enumerations.StatusPozajmice;
+import enumerations.StatusRezervacije;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +11,6 @@ import repository.Fabrika;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ClanTest {
 
@@ -51,5 +51,8 @@ class ClanTest {
 
     @Test
     void dodajRezervaciju() {
+        Rezervacija r = new Rezervacija(1000, fabrika.getMenadzerKnjiga().nadjiSlobodanPrimerak(fabrika.getMenadzerKnjiga().nadjiKnjigePoNazivu("Na drini cuprija").get(0)), LocalDate.now(), StatusRezervacije.zahtevPoslat);
+        fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara").dodajRezervaciju(r);
+        Assertions.assertTrue(fabrika.getMenadzerClanova().pronadjiClanaPoKorImenu("tamara").getRezervacije().contains(r));
     }
 }
