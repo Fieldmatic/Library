@@ -1,19 +1,12 @@
 package repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.Knjiga;
-import entities.Pozajmica;
 import entities.PrimerakKnjige;
 import entities.Rezervacija;
 import enumerations.StatusRezervacije;
-import interfaces.Menadzer;
 import userEntities.Clan;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerRezervacija {

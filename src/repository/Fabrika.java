@@ -1,12 +1,8 @@
 package repository;
 
 import auxiliary.Provere;
-import entities.Pozajmica;
-import enumerations.StatusPozajmice;
-import userEntities.Clan;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class Fabrika {
     private MenadzerKnjiga menadzerKnjiga;
@@ -38,8 +34,6 @@ public class Fabrika {
         this.menadzerRezervacija.ucitajPodatke();
         this.menadzerKorisnickihNaloga.ucitajPodatke();
         this.menadzercena.ucitajPodatke();
-        //mozda treba neki apdejt negde
-
     }
 
     public MenadzerKnjiga getMenadzerKnjiga() {

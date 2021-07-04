@@ -1,6 +1,8 @@
 package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.Rezervacija;
+import enumerations.StatusRezervacije;
 import interfaces.Menadzer;
 import userEntities.Clan;
 import userEntities.KorisnickiNalog;
@@ -65,10 +67,23 @@ public class MenadzerClanova implements Menadzer {
         return clanovi;
     }
 
-    public List<Clan> getClanoviSaRezervacijom() {
+    public List<Clan> dobaviClanoveSaRezervacijomZaPreuzimanje() {
         List<Clan> ret = new ArrayList<>();
         for (Clan c: getClanovi())
-            if (!c.getRezervacije().isEmpty())  ret.add(c);
+            for (Rezervacija rezervacija : c.getRezervacije()) {
+                if (rezervacija.getStatus() == StatusRezervacije.spremnaZaPreuzimanje)
+                    ret.add(c);
+            }
         return ret;
+    }
+
+    public List<Rezervacija> dobaviRezervacijeClanaSpremneZaPreuzimanje(Clan clan) {
+        List<Rezervacija> rezervacijeSpremneZaPreuzimanje = new ArrayList<>();
+        for (Rezervacija rezervacija : clan.getRezervacije()) {
+            if (rezervacija.getStatus() == StatusRezervacije.spremnaZaPreuzimanje) {
+                rezervacijeSpremneZaPreuzimanje.add(rezervacija);
+            }
+        }
+        return rezervacijeSpremneZaPreuzimanje;
     }
 }

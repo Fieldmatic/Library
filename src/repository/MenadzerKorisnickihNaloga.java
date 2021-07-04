@@ -9,7 +9,6 @@ import java.util.List;
 
 public class MenadzerKorisnickihNaloga {
     private List<KorisnickiNalog> nalozi = new ArrayList<>();
-    private static final String putanjaDoFajla = "fajlovi/Nalozi.json";
     private MenadzerBibliotekara menadzerBibliotekara;
     private MenadzerClanova menadzerClanova;
 

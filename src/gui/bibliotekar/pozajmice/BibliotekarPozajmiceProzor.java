@@ -7,6 +7,7 @@ import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
 import gui.bibliotekar.pozajmice.rezervacije.PregledClanovaRezervacija;
+import gui.clan.ClanProzor;
 import gui.pregledKnjiga.PregledKnjigaDialog;
 import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
@@ -116,10 +117,19 @@ public class BibliotekarPozajmiceProzor extends JFrame {
         Rezervacije.setFont(new Font("Yu Gothic", Font.PLAIN, 16));
         menuBar.add(Rezervacije);
 
+        JMenuItem zavrsavanjeRezervacije = new JMenuItem("Zavrsavanje rezervacija");
+        zavrsavanjeRezervacije.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/odobravanje.png")));
+        zavrsavanjeRezervacije.addActionListener(e -> {
+            pregledRezervacija();
+        });
+        zavrsavanjeRezervacije.setFont(new Font("Yu Gothic", Font.BOLD, 12));
+        Rezervacije.add(zavrsavanjeRezervacije);
+
         JMenuItem OdobravanjeRezervacija = new JMenuItem("Odobravanje rezervacija");
         OdobravanjeRezervacija.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/odobravanje.png")));
         OdobravanjeRezervacija.addActionListener(e -> {
-            pregledRezervacija();
+            OdobravanjeRezervacije odobravanje = new OdobravanjeRezervacije(fabrika);
+            odobravanje.setVisible(true);
         });
         OdobravanjeRezervacija.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         Rezervacije.add(OdobravanjeRezervacija);
@@ -186,7 +196,7 @@ public class BibliotekarPozajmiceProzor extends JFrame {
     }
 
     private void pregledRezervacija() {
-        if (fabrika.getMenadzerClanova().getClanoviSaRezervacijom().isEmpty())
+        if (fabrika.getMenadzerClanova().dobaviClanoveSaRezervacijomZaPreuzimanje().isEmpty())
             JOptionPane.showMessageDialog(null, "Nema rezervacija.", "Greška", JOptionPane.WARNING_MESSAGE);
         else
             new PregledClanovaRezervacija(fabrika);
