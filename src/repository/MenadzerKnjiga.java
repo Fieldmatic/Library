@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Autorstvo;
 import entities.Knjiga;
 import entities.PrimerakKnjige;
+import enumerations.UlogaAutora;
 import enumerations.Zanr;
 import interfaces.Menadzer;
 
