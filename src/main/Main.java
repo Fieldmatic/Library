@@ -1,7 +1,6 @@
 package main;
 
 import gui.Prijavljivanje;
-import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
 
 import java.io.IOException;
