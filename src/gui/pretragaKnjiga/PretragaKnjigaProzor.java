@@ -36,7 +36,7 @@ public class PretragaKnjigaProzor extends JFrame {
     private JTextField tfPrezimeAutora;
     private JComboBox<Object> cbUlogaAutora;
     private JTextField tfTagovi;
-    private JTextField tfOcena; // zmijenicu sa StarRating
+    private JTextField tfOcena;
     private JDateChooser dcDatIzdavanja;
     private JTextField tfIzdavac;
     private JButton btnPretrazi;
@@ -193,13 +193,15 @@ public class PretragaKnjigaProzor extends JFrame {
     private void initActions() {
         btnPretrazi.addActionListener(e -> {
             uradiPretragu();
-            if (!rezultatPretrage.isEmpty())
+            if (!rezultatPretrage.isEmpty()) {
                 if (korisnik.getNalog().getVrstaNaloga().equals(VrstaNaloga.bibliotekarZaPozajmice))
                     new PregledKnjigaPozajmljivanje(repo, rezultatPretrage);
                 else if (korisnik.getNalog().getVrstaNaloga().equals(VrstaNaloga.clan) && !samoPretraga)
                     new PregledKnjigaRezervacija(repo, rezultatPretrage, (Clan) korisnik);
                 else
                     new PregledKnjigaDialog(repo, rezultatPretrage);
+                PretragaKnjigaProzor.this.dispose();
+            }
             else
                  JOptionPane.showMessageDialog(this, "Nije pronadjena nijedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
         });
@@ -224,9 +226,6 @@ public class PretragaKnjigaProzor extends JFrame {
             napraviPresjek(nadjiKnjigePoDatIzdavanja(dcDatIzdavanja));
          if (!tfIzdavac.getText().equals(""))
             napraviPresjek(nadjiKnjigePoIzdavacu(tfIzdavac));
-
-        System.out.println(rezultatPretrage);
-
     }
 
     private void napraviPresjek(List<Knjiga> knjige) {

@@ -14,30 +14,18 @@
     "datumPocetka" : "2021-07-02",
     "datumKraja" : "2022-07-02"
   },
-  "pozajmice" : [ {
-    "id" : 1,
-    "pozajmljenPrimerak" : {
-      "id" : 4,
+  "pozajmice" : [ ],
+  "rezervacije" : [ {
+    "id" : 0,
+    "rezervisanPrimerak" : {
+      "id" : 1,
       "popravljaSe" : false,
-      "pozajmljen" : false,
-      "ostecen" : true
-    },
-    "datumPocetka" : "2021-07-02",
-    "datumKraja" : "2021-07-25",
-    "status" : "aktivna"
-  }, {
-    "id" : 2,
-    "pozajmljenPrimerak" : {
-      "id" : 6,
-      "popravljaSe" : false,
-      "pozajmljen" : false,
+      "pozajmljen" : true,
       "ostecen" : false
     },
-    "datumPocetka" : "2021-07-02",
-    "datumKraja" : "2021-07-02",
-    "status" : "istekla"
-  } ],
-  "rezervacije" : [ ]
+    "datum" : "2021-07-04",
+    "status" : "zahtevPoslat"
+  } ]
 }, {
   "jmbg" : "011199582745",
   "ime" : "Milos",
@@ -54,18 +42,7 @@
     "datumPocetka" : "2021-03-02",
     "datumKraja" : "2022-03-02"
   },
-  "pozajmice" : [ {
-    "id" : 3,
-    "pozajmljenPrimerak" : {
-      "id" : 9,
-      "popravljaSe" : false,
-      "pozajmljen" : false,
-      "ostecen" : false
-    },
-    "datumPocetka" : "2021-07-02",
-    "datumKraja" : "2021-07-15",
-    "status" : "aktivna"
-  } ],
+  "pozajmice" : [ ],
   "rezervacije" : [ ]
 }, {
   "jmbg" : "1707199582745",
@@ -101,7 +78,18 @@
     "datumPocetka" : "2021-05-02",
     "datumKraja" : "2022-05-02"
   },
-  "pozajmice" : [ ],
+  "pozajmice" : [ {
+    "id" : 0,
+    "pozajmljenPrimerak" : {
+      "id" : 1,
+      "popravljaSe" : false,
+      "pozajmljen" : true,
+      "ostecen" : false
+    },
+    "datumPocetka" : "2021-07-04",
+    "datumKraja" : "2021-07-19",
+    "status" : "aktivna"
+  } ],
   "rezervacije" : [ ]
 }, {
   "jmbg" : "0307199588745",
@@ -120,7 +108,17 @@
     "datumKraja" : "2022-01-02"
   },
   "pozajmice" : [ ],
-  "rezervacije" : [ ]
+  "rezervacije" : [ {
+    "id" : 1,
+    "rezervisanPrimerak" : {
+      "id" : 1,
+      "popravljaSe" : false,
+      "pozajmljen" : true,
+      "ostecen" : false
+    },
+    "datum" : "2021-07-04",
+    "status" : "zahtevPoslat"
+  } ]
 }, {
   "jmbg" : "2009200083721",
   "ime" : "Ognjen",

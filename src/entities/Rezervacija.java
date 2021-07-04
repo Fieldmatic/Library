@@ -23,6 +23,8 @@ public class Rezervacija {
         this.status = status;
     }
 
+    public Rezervacija() {}
+
     public int getId() {
         return id;
     }

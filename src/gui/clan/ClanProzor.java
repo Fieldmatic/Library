@@ -91,7 +91,18 @@ public class ClanProzor extends JFrame {
             public void actionPerformed(ActionEvent e) {PregledIstorijeIznajmljivanja.main(fabrika, c);}
         });
 
+
+        JMenuItem trenutnaZaduzenja = new JMenuItem("Pregled trenutnih zaduzenja");
+        trenutnaZaduzenja.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/pregled.png")));
+        trenutnaZaduzenja.setFont(new Font("Yu Gothic", Font.BOLD, 12));
+        trenutnaZaduzenja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //prozorZaPregledTrenutnihZaduzenja
+            }
+        });
+
         iznajmljivanja.add(istorijaZaduzenja);
+        iznajmljivanja.add(trenutnaZaduzenja);
 
         JLabel IkonicaRezervacije = new JLabel("");
         IkonicaRezervacije.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/rezervacije.png")));
@@ -107,15 +118,9 @@ public class ClanProzor extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {PretragaKnjigaProzor.main(fabrika, clan, false);}
 
-        JMenuItem rezervisanje = new JMenuItem("Rezervisi knjigu");
-        rezervisanje.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/rezervisiKnjigu.png")));
-        rezervisanje.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //prozor za rezervisanje knjige
-            }
         });
-        rezervisanje.setFont(new Font("Yu Gothic", Font.BOLD, 12));
-        rezervacije.add(rezervisanje);
+        odobravanjeRezervacije.setFont(new Font("Yu Gothic", Font.BOLD, 12));
+        rezervacije.add(odobravanjeRezervacije);
 
         JLabel ikonicaClanarina = new JLabel("");
         ikonicaClanarina.setIcon(new ImageIcon(ClanProzor.class.getResource("/slike/clanarina.png")));

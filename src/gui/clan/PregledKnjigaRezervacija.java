@@ -27,7 +27,6 @@ public class PregledKnjigaRezervacija extends PregledKnjigaDialog {
 
     private void pregledKnjigaStanje() {
         lblInfo.setText("Izaberite knjigu kako bi je rezervisali");
-        initActions();
     }
 
     protected void initActions() {
@@ -52,6 +51,7 @@ public class PregledKnjigaRezervacija extends PregledKnjigaDialog {
                                 clan.dodajRezervaciju(rezervacija);
                                 fabrika.getMenadzerClanova().azurirajFajl();
                                 JOptionPane.showMessageDialog(null, "Rezervacija je uspešno dodata.", "Rezervacija", JOptionPane.INFORMATION_MESSAGE);
+                                PregledKnjigaRezervacija.this.dispose();
                             }
                         }
                     }

@@ -54,6 +54,7 @@ public class PregledKnjigaPozajmljivanje extends PregledKnjigaDialog {
                                         repo.getMenadzerClanova().azurirajFajl();
                                         repo.getMenadzerKnjiga().azurirajFajl();
                                         JOptionPane.showMessageDialog(null, "Pozajmica uspesno dodata.", "Pozajmica", JOptionPane.INFORMATION_MESSAGE);
+                                        PregledKnjigaPozajmljivanje.this.dispose();
                                     }
                                 }
 
