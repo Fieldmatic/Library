@@ -129,6 +129,12 @@ public class Knjiga {
         this.format = format;
     }
 
+    public int getProsecnaOcena() {
+        int avgOcena = 0;
+            for (Recenzija r : this.getRecenzije())
+                avgOcena += r.getOcena();
+        return avgOcena / this.getRecenzije().size();
+    }
 
     @Override
     public String toString() {
@@ -145,4 +151,5 @@ public class Knjiga {
                 ", autori=" + autori +
                 '}';
     }
+
 }
