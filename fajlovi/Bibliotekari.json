@@ -53,4 +53,17 @@
     "lozinka": "ivan",
     "vrstaNaloga": "bibliotekarZaKatalogizaciju"
   }
-} ]
+},
+  {
+    "jmbg": "0000000000000",
+    "ime": "admin",
+    "prezime": "admin",
+    "datumRodjenja": "2000-07-15",
+    "pol": "muski",
+    "nalog": {
+      "korisnickoIme": "admin",
+      "lozinka": "admin",
+      "vrstaNaloga": "admin"
+    }
+  }
+]

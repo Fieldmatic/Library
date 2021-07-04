@@ -1,0 +1,57 @@
+[ {
+  "tip" : "dete",
+  "trajanje" : "godinu",
+  "cena" : 800.0
+}, {
+  "tip" : "student",
+  "trajanje" : "godinu",
+  "cena" : 800.0
+}, {
+  "tip" : "penzioner",
+  "trajanje" : "godinu",
+  "cena" : 800.0
+}, {
+  "tip" : "pocasniClan",
+  "trajanje" : "godinu",
+  "cena" : 1500.0
+}, {
+  "tip" : "zaposlen",
+  "trajanje" : "godinu",
+  "cena" : 1000.0
+}, {
+  "tip" : "nezaposlen",
+  "trajanje" : "godinu",
+  "cena" : 900.0
+}, {
+  "tip" : "djak",
+  "trajanje" : "godinu",
+  "cena" : 600.0
+}, {
+  "tip" : "dete",
+  "trajanje" : "polaGodine",
+  "cena" : 400.0
+}, {
+  "tip" : "student",
+  "trajanje" : "polaGodine",
+  "cena" : 300.0
+}, {
+  "tip" : "penzioner",
+  "trajanje" : "polaGodine",
+  "cena" : 400.0
+}, {
+  "tip" : "pocasniClan",
+  "trajanje" : "polaGodine",
+  "cena" : 750.0
+}, {
+  "tip" : "zaposlen",
+  "trajanje" : "polaGodine",
+  "cena" : 500.0
+}, {
+  "tip" : "nezaposlen",
+  "trajanje" : "polaGodine",
+  "cena" : 450.0
+}, {
+  "tip" : "djak",
+  "trajanje" : "polaGodine",
+  "cena" : 300.0
+} ]

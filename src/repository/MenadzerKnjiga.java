@@ -1,17 +1,19 @@
 package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.Autor;
 import entities.Autorstvo;
 import entities.Knjiga;
 import entities.PrimerakKnjige;
 import enumerations.UlogaAutora;
+import enumerations.Zanr;
 import interfaces.Menadzer;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class MenadzerKnjiga implements Menadzer {
@@ -120,5 +122,92 @@ public class MenadzerKnjiga implements Menadzer {
 
     public List<PrimerakKnjige> getPrimerci() {
         return primerci;
+    }
+
+    public List<Knjiga> nadjiKnjigePoNazivu(String naziv) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige())
+            if (k.getNaziv().toLowerCase().equals(naziv.toLowerCase()))
+                ret.add(k);
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoNazivuSadrzaja(String nazivSadrzaja) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige())
+            if (k.getSadrzaj().getNaziv().toLowerCase().equals(nazivSadrzaja.toLowerCase()))
+                ret.add(k);
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoZanru(Zanr zanr) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige())
+            for (Zanr z : k.getSadrzaj().getZanrovi())
+                if (z.equals(zanr)) {
+                    ret.add(k);
+                    break;
+                }
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoImenuAutora(String imeAutora) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige())
+            for (Autorstvo a: k.getAutori())
+                if (a.getAutor().getIme().toLowerCase().equals(imeAutora.toLowerCase())) {
+                    ret.add(k);
+                    break;
+                }
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoPrezimenuAutora(String prezimeAutora) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige())
+            for (Autorstvo a: k.getAutori())
+                if (a.getAutor().getPrezime().toLowerCase().equals(prezimeAutora.toLowerCase())) {
+                    ret.add(k);
+                    break;
+                }
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoTagovima(String tag) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige())
+            for (String s: k.getTagovi())
+                if (s.toLowerCase().equals(tag.toLowerCase())) {
+                    ret.add(k);
+                    break;
+                }
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoOceni(int ocena) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige()) {
+            if (k.getProsecnaOcena() == ocena)
+                ret.add(k);
+        }
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoDatIzdavanja(Date datum) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige()) {
+            if (k.getDatumIzdanja().equals(datum))
+                ret.add(k);
+        }
+        return ret;
+    }
+
+    public List<Knjiga> nadjiKnjigePoIzdavacu(String izdavac) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (Knjiga k : getKnjige()) {
+            if (k.getIzdavac().toLowerCase().equals(izdavac.toLowerCase()))
+                ret.add(k);
+        }
+        return ret;
     }
 }

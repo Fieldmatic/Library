@@ -17,6 +17,7 @@ public class Fabrika {
     private MenadzerRezervacija menadzerRezervacija;
     private MenadzerKorisnickihNaloga menadzerKorisnickihNaloga;
     private Provere provere;
+    private MenadzerCena menadzercena;
 
     public Fabrika() throws IOException {
         this.menadzerKnjiga = new MenadzerKnjiga();
@@ -27,6 +28,7 @@ public class Fabrika {
         this.menadzerRezervacija = new MenadzerRezervacija(menadzerClanova, menadzerKnjiga);
         this.menadzerKorisnickihNaloga = new MenadzerKorisnickihNaloga(menadzerBibliotekara, menadzerClanova);
         this.provere = new Provere(menadzerKorisnickihNaloga);
+        this.menadzercena = new MenadzerCena();
 
         this.menadzerKnjiga.ucitajPodatke();
         this.menadzerClanova.ucitajPodatke();
@@ -35,6 +37,8 @@ public class Fabrika {
         this.menadzerPozajmica.ucitajPodatke();
         this.menadzerRezervacija.ucitajPodatke();
         this.menadzerKorisnickihNaloga.ucitajPodatke();
+        this.menadzercena.ucitajPodatke();
+        //mozda treba neki apdejt negde
 
     }
 
@@ -69,4 +73,5 @@ public class Fabrika {
         return provere;
     }
 
+    public MenadzerCena getMenadzercena() { return menadzercena; }
 }

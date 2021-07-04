@@ -1,6 +1,7 @@
 package gui.pretragaKnjiga;
 
 import com.toedter.calendar.JDateChooser;
+import entities.Knjiga;
 import enumerations.UlogaAutora;
 import enumerations.Zanr;
 import net.miginfocom.swing.MigLayout;
@@ -10,7 +11,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,11 +25,19 @@ public class PretragaKnjigaProzor extends JFrame {
     private JComboBox<Object> cbZanr;
     private JTextField tfImeAutora;
     private JTextField tfPrezimeAutora;
-    private JTextField tfUlogaAutora;
+    private JComboBox<Object> cbUlogaAutora;
     private JTextField tfTagovi;
     private JTextField tfOcena; // zmijenicu sa StarRating
     private JDateChooser dcDatIzdavanja;
     private JTextField tfIzdavac;
+    private JButton btnPretrazi;
+    private List<Knjiga> rezultatPretrage;
+
+    public PretragaKnjigaProzor(Fabrika repo) {
+        this.repo = repo;
+        rezultatPretrage = new ArrayList<>();
+        pretragaKnjigaProzor();
+    }
 
     public static void main(Fabrika fabrika) {
         EventQueue.invokeLater(() -> {
@@ -40,15 +49,11 @@ public class PretragaKnjigaProzor extends JFrame {
         });
     }
 
-    public PretragaKnjigaProzor(Fabrika repo) {
-        this.repo = repo;
-        pretragaKnjigaProzor();
-    }
-
     private void pretragaKnjigaProzor() {
         setTitle("Pretraga knjiga");
         setIconImage(Toolkit.getDefaultToolkit().getImage(PretragaKnjigaProzor.class.getResource("/slike/logo.jpg")));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getRootPane().setDefaultButton(btnPretrazi);
         setLocationRelativeTo(null);
         setResizable(false);
         initGUI();
@@ -65,36 +70,37 @@ public class PretragaKnjigaProzor extends JFrame {
         contentPane.setLayout(layout);
 
         addLabel("Naziv:", contentPane);
+        tfNazivKnjige = new JTextField();
         addTextField(tfNazivKnjige, contentPane);
 
+        cbNazivSadrzaja = new JComboBox<>();
+        cbZanr = new JComboBox<>();
         addSadrzajPanel();
+        cbUlogaAutora = new JComboBox<>();
         addAutorPanel();
 
         addLabel("Tagovi:", contentPane);
+        tfTagovi = new JTextField();
         addTextField(tfTagovi, contentPane);
 
         addLabel("Ocena:", contentPane);
+        tfOcena = new JTextField();
         addTextField(tfOcena, contentPane);
 
         addLabel("Datum izdavanja:", contentPane);
+        dcDatIzdavanja = new JDateChooser();
         addDateChooser(dcDatIzdavanja);
 
         addLabel("Izdavac", contentPane);
+        tfIzdavac = new JTextField();
         addTextField(tfIzdavac, contentPane);
 
         addButtonPretrazi();
+        initActions();
     }
 
-    private void addButtonPretrazi() {
-        JButton btnPretrazi = new JButton("Pretrazi");
-        btnPretrazi.setBackground(Color.BLUE);
-        btnPretrazi.setForeground(UIManager.getColor("Button.background"));
-        btnPretrazi.setFont(new Font("Yu Gothic UI", Font.BOLD, 14));
-        getContentPane().add(btnPretrazi, "center, span 2");
-    }
 
     private void addDateChooser(JDateChooser dc) {
-        dc = new JDateChooser();
         dc.setBackground(Color.BLACK);
         dc.setForeground(Color.WHITE);
         getContentPane().add(dc);
@@ -123,45 +129,139 @@ public class PretragaKnjigaProzor extends JFrame {
         autorPanel.setBorder(BorderFactory.createTitledBorder(null, "Autor", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Yu Gothic", Font.BOLD, 12)));
 
         addLabel("Ime:", autorPanel);
+        tfImeAutora = new JTextField();
         addTextField(tfImeAutora, autorPanel);
         addLabel("Prezime:", autorPanel);
+        tfPrezimeAutora = new JTextField();
         addTextField(tfPrezimeAutora, autorPanel);
         addLabel("Uloga:", autorPanel);
-        addComboBox(Arrays.asList(UlogaAutora.values()), cbZanr, autorPanel);
+        addComboBox(Arrays.asList(UlogaAutora.values()), cbUlogaAutora, autorPanel);
 
         getContentPane().add(autorPanel, "wrap, span");
 
     }
 
     private void addComboBox(List<Object> data, JComboBox<Object> cb, JPanel panel) {
-        cb = new JComboBox<>();
         cb.setBackground(Color.LIGHT_GRAY);
         cb.setForeground(Color.WHITE);
         cb.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         for (Object o : data)
             cb.addItem(o);
         cb.setPrototypeDisplayValue("XXXXXXXXXXX");
+        cb.setSelectedItem(null);
         panel.add(cb);
     }
 
 
     private void addTextField(JTextField tf, JPanel panel) {
-        tf = initTextField();
+        initTextField(tf);
         panel.add(tf);
     }
 
-    private JTextField initTextField() {
-        JTextField tf = new JTextField();
+    private void initTextField(JTextField tf) {
         tf.setForeground(Color.WHITE);
         tf.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         tf.setOpaque(false);
         tf.setColumns(10);
-        return tf;
     }
 
     private void addLabel(String text, JPanel panel) {
         JLabel lbl = new JLabel(text);
         lbl.setFont(new Font("Yu Gothic UI", Font.BOLD, 14));
         panel.add(lbl);
+    }
+
+    private void addButtonPretrazi() {
+        btnPretrazi = new JButton("Pretrazi");
+        btnPretrazi.setBackground(Color.BLUE);
+        btnPretrazi.setForeground(UIManager.getColor("Button.background"));
+        btnPretrazi.setFont(new Font("Yu Gothic UI", Font.BOLD, 14));
+        getContentPane().add(btnPretrazi, "center, span 2");
+    }
+
+    private void initActions() {
+        btnPretrazi.addActionListener(e -> {
+            uradiPretragu();
+        });
+    }
+
+    private void uradiPretragu() {
+        if (!tfNazivKnjige.getText().equals(""))
+            napraviPresjek(nadjiKnjigePoNazivu(tfNazivKnjige));
+        if (cbNazivSadrzaja.getSelectedItem() != null)
+            napraviPresjek(nadjiKnjigePoNazivuSadrzaja(cbNazivSadrzaja));
+         if (cbZanr.getSelectedItem() != null)
+            napraviPresjek(nadjiKnjigePoZanru(cbZanr));
+         if (!tfImeAutora.getText().equals(""))
+            napraviPresjek(nadjiKnjigePoImenuAutora(tfImeAutora));
+         if (!tfPrezimeAutora.getText().equals(""))
+            napraviPresjek(nadjiKnjigePoPrezimenuAutora(tfPrezimeAutora));
+         if (!tfTagovi.getText().equals(""))
+            napraviPresjek(nadjiKnjigePoTagovima(tfTagovi));
+         if (!tfOcena.getText().equals(""))
+            napraviPresjek(nadjiKnjigePoOceni(tfOcena));
+         if (dcDatIzdavanja.getDate() != null)
+            napraviPresjek(nadjiKnjigePoDatIzdavanja(dcDatIzdavanja));
+         if (!tfIzdavac.getText().equals(""))
+            napraviPresjek(nadjiKnjigePoIzdavacu(tfIzdavac));
+
+        System.out.println(rezultatPretrage);
+
+    }
+
+    private void napraviPresjek(List<Knjiga> knjige) {
+        if (rezultatPretrage.isEmpty())
+                rezultatPretrage.addAll(knjige);
+        else {
+            rezultatPretrage = new ArrayList<>(presjeci(knjige));
+        }
+
+    }
+
+    private Set<Knjiga> presjeci(List<Knjiga> knjige) {
+       return rezultatPretrage.stream()
+          .distinct()
+          .filter(knjige::contains)
+          .collect(Collectors.toSet());
+    }
+
+    private List<Knjiga> nadjiKnjigePoIzdavacu(JTextField tfIzdavac) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoIzdavacu(tfIzdavac.getText());
+    }
+
+    private List<Knjiga> nadjiKnjigePoDatIzdavanja(JDateChooser dcDatIzdavanja) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoDatIzdavanja(dcDatIzdavanja.getDate());
+    }
+
+    private List<Knjiga> nadjiKnjigePoOceni(JTextField tfOcena) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoOceni(Integer.parseInt(tfOcena.getText()));
+    }
+
+    private List<Knjiga> nadjiKnjigePoTagovima(JTextField tfTagovi) {
+        List<Knjiga> ret = new ArrayList<>();
+        for (String s: tfTagovi.getText().split(","))
+            ret.addAll(repo.getMenadzerKnjiga().nadjiKnjigePoTagovima(s.trim()));
+        return ret;
+    }
+
+    private List<Knjiga> nadjiKnjigePoPrezimenuAutora(JTextField tfPrezimeAutora) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoPrezimenuAutora(tfPrezimeAutora.getText());
+    }
+
+    private List<Knjiga> nadjiKnjigePoImenuAutora(JTextField tfImeAutora) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoImenuAutora(tfImeAutora.getText());
+    }
+
+    private List<Knjiga> nadjiKnjigePoZanru(JComboBox<Object> cbZanr) {
+       return repo.getMenadzerKnjiga().nadjiKnjigePoZanru((Zanr) cbZanr.getSelectedItem());
+    }
+
+    private List<Knjiga> nadjiKnjigePoNazivuSadrzaja(JComboBox<Object> cbNazivSadrzaja) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoNazivuSadrzaja((String) cbNazivSadrzaja.getSelectedItem());
+    }
+
+
+    private List<Knjiga> nadjiKnjigePoNazivu (JTextField tfNazivKnjige) {
+        return repo.getMenadzerKnjiga().nadjiKnjigePoNazivu(tfNazivKnjige.getText());
     }
 }

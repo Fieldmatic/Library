@@ -10,6 +10,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Knjiga {
     private int id;
@@ -145,6 +146,12 @@ public class Knjiga {
         this.format = format;
     }
 
+    public int getProsecnaOcena() {
+        int avgOcena = 0;
+            for (Recenzija r : this.getRecenzije())
+                avgOcena += r.getOcena();
+        return avgOcena / this.getRecenzije().size();
+    }
 
     @Override
     public String toString() {
@@ -160,5 +167,26 @@ public class Knjiga {
                 ", tagovi=" + tagovi +
                 ", autori=" + autori +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Knjiga knjiga = (Knjiga) o;
+        return getId() == knjiga.getId() &&
+                getNaziv().equals(knjiga.getNaziv()) &&
+                Objects.equals(getFormat(), knjiga.getFormat()) &&
+                getDatumIzdanja().equals(knjiga.getDatumIzdanja()) &&
+                getIzdavac().equals(knjiga.getIzdavac()) &&
+                getSadrzaj().equals(knjiga.getSadrzaj()) &&
+                Objects.equals(getRecenzije(), knjiga.getRecenzije()) &&
+                Objects.equals(getTagovi(), knjiga.getTagovi()) &&
+                getAutori().equals(knjiga.getAutori());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNaziv(), getFormat(), getDatumIzdanja(), getIzdavac(), getSadrzaj(), getRecenzije(), getTagovi(), getAutori());
     }
 }
