@@ -108,7 +108,7 @@ public class BibliotekarProzor extends JFrame {
         PretragaKnjiga.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PretragaKnjigaProzor.main(fabrika, bibliotekar, true);}
+                PretragaKnjigaProzor.main(fabrika, bibliotekar, false );}
 
         });
         KnjigeMeni.add(PretragaKnjiga);
