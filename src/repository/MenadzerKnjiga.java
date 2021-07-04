@@ -1,8 +1,11 @@
 package repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.Autor;
+import entities.Autorstvo;
 import entities.Knjiga;
 import entities.PrimerakKnjige;
+import enumerations.UlogaAutora;
 import interfaces.Menadzer;
 
 import java.io.*;
@@ -34,6 +37,34 @@ public class MenadzerKnjiga implements Menadzer {
             }
         }
         return null;
+    }
+
+    public int dobaviSlobodanIdKnjige() {
+        Knjiga poslednjaKnjiga = this.knjige.get(this.knjige.size() - 1);
+        int idPoslednjeKnjige = poslednjaKnjiga.getId();
+        return idPoslednjeKnjige + 1;
+    }
+
+    public int dobaviSlobodanIdPrimeraka() {
+        Knjiga poslednjaKnjiga = this.knjige.get(this.knjige.size() - 1);
+        List<PrimerakKnjige> primerciKnjige = poslednjaKnjiga.getPrimerci();
+        PrimerakKnjige poslednjiPrimerak;
+        if (primerciKnjige.isEmpty()) {
+            Knjiga pretposlednjaKnjiga = this.knjige.get(this.knjige.size() - 2);
+            poslednjiPrimerak = pretposlednjaKnjiga.getPrimerci().get(pretposlednjaKnjiga.getPrimerci().size() - 1);
+        } else {
+            poslednjiPrimerak = primerciKnjige.get(primerciKnjige.size() - 1);
+        }
+        int idPoslednjegPrimerka = poslednjiPrimerak.getId();
+        return idPoslednjegPrimerka + 1;
+    }
+
+    public boolean knjigaImaPisca(Knjiga knjiga) {
+        for (Autorstvo autor : knjiga.getAutori()) {
+            if (autor.getUloga() == UlogaAutora.pisac)
+                return true;
+        }
+        return false;
     }
 
     public void ucitajPodatke() throws IOException {

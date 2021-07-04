@@ -1,15 +1,12 @@
 package gui.bibliotekar;
 
-import entities.Pozajmica;
-import enumerations.StatusPozajmice;
 import gui.Prijavljivanje;
+import gui.bibliotekar.katalogizacija.BibliotekarKatalogizacijaProzor;
 import gui.bibliotekar.pozajmice.BibliotekarPozajmiceProzor;
 import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
-import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
 import repository.Fabrika;
 import userEntities.Bibliotekar;
-import userEntities.Clan;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,8 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BibliotekarProzor extends JFrame {
     private static final long serialVersionUID = 1L;

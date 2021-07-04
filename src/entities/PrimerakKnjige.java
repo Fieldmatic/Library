@@ -7,9 +7,9 @@ public class PrimerakKnjige {
     private int id;
     @JsonBackReference
     private Knjiga knjiga;
-    private boolean popravljaSe;
-    private boolean pozajmljen;
-    private boolean ostecen;
+    private boolean popravljaSe = false;
+    private boolean pozajmljen = false;
+    private boolean ostecen = false;
 
     public PrimerakKnjige() {}
 
@@ -19,6 +19,11 @@ public class PrimerakKnjige {
         this.popravljaSe = popravljaSe;
         this.pozajmljen = pozajmljen;
         this.ostecen = ostecen;
+    }
+
+    public PrimerakKnjige(int id, Knjiga knjiga) {
+        this.id = id;
+        this.knjiga = knjiga;
     }
 
     public int getId() {

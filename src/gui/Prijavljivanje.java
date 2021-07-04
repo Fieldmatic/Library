@@ -1,7 +1,7 @@
 package gui;
 
 import enumerations.VrstaNaloga;
-import gui.bibliotekar.BibliotekarKatalogizacijaProzor;
+import gui.bibliotekar.katalogizacija.BibliotekarKatalogizacijaProzor;
 import gui.bibliotekar.BibliotekarProzor;
 import gui.bibliotekar.pozajmice.BibliotekarPozajmiceProzor;
 import gui.clan.ClanProzor;
