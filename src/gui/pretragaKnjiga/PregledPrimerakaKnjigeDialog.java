@@ -1,7 +1,7 @@
-package gui.pregledKnjiga;
+package gui.pretragaKnjiga;
 
 import entities.Knjiga;
-import gui.Prijavljivanje;
+import entities.PrimerakKnjige;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 
@@ -20,27 +20,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PregledKnjigaDialog extends JDialog  {
-    protected Fabrika repo;
-    protected List<Knjiga> data;
-    protected JTable tabela;
-    protected JTextField tfPretraga;
-    protected TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
-    protected JLabel lblInfo;
+public class PregledPrimerakaKnjigeDialog extends JDialog {
+    private Fabrika repo;
+    private Knjiga knjiga;
+    private JTable tabela;
+    private JTextField tfPretraga;
+    private JPanel pretragaPanel;
+    private TableRowSorter<AbstractTableModel> tabelaSorter = new TableRowSorter<>();
+    protected List<PrimerakKnjige> data;
 
-    public PregledKnjigaDialog(Fabrika repo, List<Knjiga> data) {
+
+    private Map<Integer, Integer> sortOrder = new HashMap<Integer, Integer>() {{
+        put(0, 1);
+        put(1, 1);
+        put(2, 1);
+        put(3, 1);
+    }};
+
+    public PregledPrimerakaKnjigeDialog(Fabrika repo, Knjiga k) {
         this.repo = repo;
-        this.data = data;
-        this.tabela = new JTable(new PregledKnjigaModel(this.data));
+        this.knjiga = k;
+        this.tabela = new JTable(new PregledPrimerakaKnjigeModel(k.getPrimerci()));
         initDialog();
-        initActions();
     }
 
+
+
     private void initDialog() {
-        this.setTitle("Pregled knjiga");
+        this.setTitle("Pregled primeraka knjige: " + knjiga.getNaziv());
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         initGUI();
+        initActions();
         this.pack();
         this.setVisible(true);
     }
@@ -70,34 +81,29 @@ public class PregledKnjigaDialog extends JDialog  {
     }
 
     public void refresh() {
-        PregledKnjigaModel m = (PregledKnjigaModel) this.tabela.getModel();
+        PregledPrimerakaKnjigeModel m = (PregledPrimerakaKnjigeModel) this.tabela.getModel();
         m.fireTableDataChanged();
     }
-
-    private Map<Integer, Integer> sortOrder = new HashMap<Integer, Integer>() {{
-        put(0, 1);
-        put(1, 1);
-        put(2, 1);
-        put(3, 1);
-        put(4, 1);
-        put(5, 1);
-    }};
 
     protected void sort(int index) {
         // index of table column
 
-        this.data.sort(new Comparator<Knjiga>() {
+        this.data.sort(new Comparator<PrimerakKnjige>() {
             int retVal = 0;
 
-            public int compare(Knjiga c1, Knjiga c2) {
+            public int compare(PrimerakKnjige p1, PrimerakKnjige p2) {
                 switch (index) {
                     case 0:
-                        retVal = c1.getNaziv().compareTo(c2.getNaziv());
+                        retVal = Integer.compare(p1.getId(), p2.getId());
                         break;
                     case 1:
-                        retVal = c1.getDatumIzdanja().compareTo(c2.getDatumIzdanja());
+                        retVal = Boolean.compare(p1.isPozajmljen(), p2.isPozajmljen());
+                        break;
                     case 2:
-                        retVal = c1.getSadrzaj().getNaziv().compareTo(c2.getSadrzaj().getNaziv());
+                        retVal = Boolean.compare(p1.isOstecen(), p2.isOstecen());
+                        break;
+                    case 3:
+                        retVal = Boolean.compare(p1.isPopravljaSe(), p2.isPopravljaSe());
                         break;
                     default:
                         System.out.println("Prosirena tabela");
@@ -112,18 +118,14 @@ public class PregledKnjigaDialog extends JDialog  {
     }
 
     private JPanel pretragaPanel() {
-        JPanel p = new JPanel();
-        p.setBackground(Color.YELLOW);
+        pretragaPanel = new JPanel();
+        pretragaPanel.setBackground(Color.YELLOW);
         JLabel lblPretraga = new JLabel("Pretraga:");
         lblPretraga.setFont(new Font("Yu Gothic", Font.BOLD, 12));
 //        lblPretraga.setIcon(new ImageIcon(BibliotekarPozajmice.class.getResource("/slike/pretraga.png")));
+        pretragaPanel.add(lblPretraga);
 
-        lblInfo = new JLabel("Za informacije o autorima izaberite knjigu.");
-        lblInfo.setBounds(500, 100, 65, 58);
-        lblInfo.setIcon(new ImageIcon(Prijavljivanje.class.getResource("/slike/notification.png")));
-        p.add(lblPretraga);
-        p.add(tfPretraga);
-        p.add(lblInfo);
+        pretragaPanel.add(tfPretraga);
 
         tfPretraga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -145,10 +147,11 @@ public class PregledKnjigaDialog extends JDialog  {
                 }
             }
         });
-        return p;
+
+        return pretragaPanel;
     }
 
-    protected void initActions() {
+    private void initActions() {
         tabela.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -158,11 +161,21 @@ public class PregledKnjigaDialog extends JDialog  {
                     if (row == -1)
                         JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greška", JOptionPane.WARNING_MESSAGE);
                     else {
-                        Knjiga k = repo.getMenadzerKnjiga().pronadjiKnjiguPoId((int) tabela.getValueAt(row, 0));
-                        new PregledAutoraKnjigeDialog(k);
+                        PrimerakKnjige p = repo.getMenadzerKnjiga().pronadjiPrimerakPoId((Integer) tabela.getValueAt(row, 0));
+                        if (p.isPozajmljen() || p.isPopravljaSe())
+                            JOptionPane.showMessageDialog(null, "Izabran primerak nije dostupan za pozajmljenje.", "Greška", JOptionPane.WARNING_MESSAGE);
+                        else {
+                            /*try {
+                                Clan c = repo.getMenadzerClanova().pronadjiClanaPoKorImenu(JOptionPane.showInputDialog("Korisnicko ime clana: "));
+                            } catch (NullPointerException e) {
+                                JOptionPane.showMessageDialog(null, "Clan nije pronadjen.", "Greška", JOptionPane.WARNING_MESSAGE);
+                            }
+                            repo.getMenadzerPozajmica().kreirajPozajmicu(p, repo.getMenadzerClanova());*/
+                        }
                     }
                 }
             }
         });
     }
+
 }

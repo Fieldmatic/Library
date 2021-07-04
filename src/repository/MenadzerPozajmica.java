@@ -1,16 +1,13 @@
 package repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Pozajmica;
 import entities.PrimerakKnjige;
-import interfaces.Menadzer;
+import enumerations.StatusPozajmice;
 import userEntities.Clan;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MenadzerPozajmica {
@@ -43,5 +40,26 @@ public class MenadzerPozajmica {
 
     public List<Pozajmica> getPozajmice() {
         return pozajmice;
+    }
+
+    public Pozajmica kreirajPozajmicu(PrimerakKnjige primerak, Clan c) {
+        int id = 0;
+        for (Pozajmica p : getPozajmice())
+            if (p.getId() > id) id = p.getId();
+        return new Pozajmica((id == 0) ? 0 : id+1, primerak, LocalDate.now(), LocalDate.now().plusDays(getBrojDanaPozajmljenja(c)), StatusPozajmice.aktivna);
+    }
+
+     public int getBrojDanaPozajmljenja(Clan c) {
+        switch (c.getClanarina().getTip()) {
+            case djak:
+            case student:
+                return 15;
+            case penzioner:
+                return 21;
+            case pocasniClan:
+                return 30;
+            default:
+                return 10;
+        }
     }
 }

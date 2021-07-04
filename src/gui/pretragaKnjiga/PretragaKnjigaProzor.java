@@ -11,8 +11,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -182,6 +184,10 @@ public class PretragaKnjigaProzor extends JFrame {
     private void initActions() {
         btnPretrazi.addActionListener(e -> {
             uradiPretragu();
+            if (!rezultatPretrage.isEmpty())
+                new PregledKnjigaStanje(repo, rezultatPretrage);
+            else
+                 JOptionPane.showMessageDialog(this, "Nije pronadjena ni jedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
         });
     }
 

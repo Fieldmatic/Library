@@ -54,4 +54,7 @@ public class Clan extends Korisnik {
                 '}';
     }
 
+    public void dodajPozajmicu(Pozajmica p) {
+        pozajmice.add(p);
+    }
 }
