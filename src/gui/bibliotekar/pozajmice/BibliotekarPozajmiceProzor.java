@@ -6,6 +6,7 @@ import gui.Prijavljivanje;
 import gui.bibliotekar.pozajmice.clanovi.RegistracijaClana;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaDialog;
 import gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja.PregledKasnjenjaDialog;
+import gui.bibliotekar.pozajmice.rezervacije.PregledClanovaRezervacija;
 import gui.pregledKnjiga.PregledKnjigaDialog;
 import gui.pretragaKnjiga.PretragaKnjigaProzor;
 import repository.Fabrika;
@@ -24,8 +25,8 @@ import java.util.List;
 
 public class BibliotekarPozajmiceProzor extends JFrame {
     private static final long serialVersionUID = 1L;
+    private Fabrika fabrika;
     private JPanel contentPane;
-
 
     public static void main(String[] args, Fabrika fabrika, Bibliotekar bibliotekar) {
         EventQueue.invokeLater(() -> {
@@ -39,6 +40,7 @@ public class BibliotekarPozajmiceProzor extends JFrame {
     }
 
     public BibliotekarPozajmiceProzor(Fabrika fabrika, Bibliotekar bibliotekar) {
+        this.fabrika = fabrika;
         setResizable(false);
         setTitle("Bibliotekar - pozajmice");
         setIconImage(Toolkit.getDefaultToolkit().getImage(BibliotekarPozajmiceProzor.class.getResource("/slike/logo.jpg")));
@@ -119,7 +121,7 @@ public class BibliotekarPozajmiceProzor extends JFrame {
         JMenuItem OdobravanjeRezervacija = new JMenuItem("Odobravanje rezervacija");
         OdobravanjeRezervacija.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/odobravanje.png")));
         OdobravanjeRezervacija.addActionListener(e -> {
-            //prozorZaOdobravanjeRezervacije
+            pregledRezervacija();
         });
         OdobravanjeRezervacija.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         Rezervacije.add(OdobravanjeRezervacija);
@@ -183,6 +185,14 @@ public class BibliotekarPozajmiceProzor extends JFrame {
         Background.setIcon(new ImageIcon(BibliotekarPozajmiceProzor.class.getResource("/slike/bibliotekarPozadina.png")));
         Background.setBounds(0, 0, 907, 574);
         contentPane.add(Background);
+    }
+
+    private void pregledRezervacija() {
+        if (fabrika.getMenadzerClanova().getClanoviSaRezervacijom().isEmpty())
+            JOptionPane.showMessageDialog(null, "Nema rezervacija.", "Greška", JOptionPane.WARNING_MESSAGE);
+        else
+            new PregledClanovaRezervacija(fabrika);
+
     }
 
     private Object pregledKasnjenja(Fabrika fabrika) {

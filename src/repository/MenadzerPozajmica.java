@@ -38,6 +38,13 @@ public class MenadzerPozajmica {
         }
     }
 
+    public Pozajmica getPozajmicaPoIdPrimerka(int idPrimerka) {
+        for (Pozajmica p : getPozajmice())
+            if (p.getPozajmljenPrimerak().getId() == idPrimerka)
+                return p;
+        return null;
+    }
+
     public List<Pozajmica> getPozajmice() {
         return pozajmice;
     }

@@ -22,14 +22,12 @@ public class PregledKnjigaPozajmljivanje extends PregledKnjigaDialog {
 
     private void pregledKnjigaStanje() {
         lblInfo.setText("Izaberite knjigu kako bi je pozajmili");
-        initActions();
     }
 
     protected void initActions() {
         tabela.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                //super.keyPressed(e);
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     int row = tabela.getSelectedRow();
                     if (row == -1)
