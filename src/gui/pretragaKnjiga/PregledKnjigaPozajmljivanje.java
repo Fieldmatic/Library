@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class PregledKnjigaStanje extends PregledKnjigaDialog {
-    public PregledKnjigaStanje(Fabrika repo, List<Knjiga> data) {
+public class PregledKnjigaPozajmljivanje extends PregledKnjigaDialog {
+    public PregledKnjigaPozajmljivanje(Fabrika repo, List<Knjiga> data) {
         super(repo, data);
         pregledKnjigaStanje();
     }

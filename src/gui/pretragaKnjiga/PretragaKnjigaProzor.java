@@ -185,7 +185,7 @@ public class PretragaKnjigaProzor extends JFrame {
         btnPretrazi.addActionListener(e -> {
             uradiPretragu();
             if (!rezultatPretrage.isEmpty())
-                new PregledKnjigaStanje(repo, rezultatPretrage);
+                new PregledKnjigaPozajmljivanje(repo, rezultatPretrage);
             else
                  JOptionPane.showMessageDialog(this, "Nije pronadjena ni jedna takva knjiga", "Nema takve knjige", JOptionPane.INFORMATION_MESSAGE);
         });
