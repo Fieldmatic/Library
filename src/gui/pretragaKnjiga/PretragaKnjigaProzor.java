@@ -209,6 +209,7 @@ public class PretragaKnjigaProzor extends JFrame {
     }
 
     private void uradiPretragu() {
+        rezultatPostavljen = false;
         if (!tfNazivKnjige.getText().equals(""))
             napraviPresjek(nadjiKnjigePoNazivu(tfNazivKnjige));
         if (cbNazivSadrzaja.getSelectedItem() != null)

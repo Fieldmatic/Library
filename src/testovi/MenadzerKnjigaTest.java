@@ -17,6 +17,7 @@ class MenadzerKnjigaTest {
 
     private MenadzerKnjiga menadzerKnjiga;
     private List<Knjiga> rezultatPretrage;
+    private boolean rezultatPostavljen;
 
 
     @BeforeEach
@@ -71,7 +72,7 @@ class MenadzerKnjigaTest {
 
     @Test
     void presekPretrage1() {
-        napraviPresjek(menadzerKnjiga.nadjiKnjigePoNazivu("na drini cuprija"));
+        napraviPresjek(menadzerKnjiga.nadjiKnjigePoNazivu("Na drini cuprija"));
         napraviPresjek(menadzerKnjiga.nadjiKnjigePoNazivuSadrzaja("beletristika"));
         napraviPresjek(menadzerKnjiga.nadjiKnjigePoZanru(Zanr.istorijski));
         napraviPresjek(menadzerKnjiga.nadjiKnjigePoImenuAutora("Ivo"));
@@ -93,7 +94,12 @@ class MenadzerKnjigaTest {
     }
 
     private void napraviPresjek(List<Knjiga> knjige) {
-        rezultatPretrage = new ArrayList<>(presjeci(knjige));
+        if (rezultatPretrage.isEmpty() || !rezultatPostavljen) {
+            rezultatPretrage.addAll(knjige);
+            rezultatPostavljen = true;
+        }
+        else
+            rezultatPretrage = new ArrayList<>(presjeci(knjige));
     }
 
     private Set<Knjiga> presjeci(List<Knjiga> knjige) {
