@@ -48,7 +48,6 @@ public class DetaljnoKasnjenjeDialog extends JDialog {
             this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             this.setLocationRelativeTo(null);
             initGUI();
-            this.pack();
             this.setVisible(true);
     }
 
