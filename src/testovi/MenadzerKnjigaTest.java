@@ -95,7 +95,7 @@ class MenadzerKnjigaTest {
     }
 
     private void napraviPresjek(List<Knjiga> knjige) {
-        if (rezultatPretrage.isEmpty() || !rezultatPostavljen) {
+        if (rezultatPretrage.isEmpty() && !rezultatPostavljen) {
             rezultatPretrage.addAll(knjige);
             rezultatPostavljen = true;
         }
