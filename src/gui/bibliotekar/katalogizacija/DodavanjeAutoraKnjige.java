@@ -3,6 +3,7 @@ package gui.bibliotekar.katalogizacija;
 import entities.*;
 import enumerations.UlogaAutora;
 import enumerations.Zanr;
+import gui.clan.PregledIstorijeIznajmljivanja;
 import repository.Fabrika;
 
 import javax.swing.*;
@@ -162,6 +163,11 @@ public class DodavanjeAutoraKnjige extends JFrame  {
         dodajKnjigu.setBounds(330, 280, 150, 40);
         dodajKnjigu.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         contentPane.add(dodajKnjigu);
+
+        JLabel Background = new JLabel("");
+        Background.setIcon(new ImageIcon(DodavanjeAutoraKnjige.class.getResource("/slike/backgroundTabela.jpg")));
+        Background.setBounds(0, 0, 1189, 386);
+        contentPane.add(Background);
     }
 
 }

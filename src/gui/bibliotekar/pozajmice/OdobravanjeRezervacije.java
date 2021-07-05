@@ -2,10 +2,15 @@ package gui.bibliotekar.pozajmice;
 
 import entities.Rezervacija;
 import enumerations.StatusRezervacije;
+import gui.clan.PregledIstorijeIznajmljivanja;
+import gui.pretragaKnjiga.PozadinskiPanel;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -39,8 +44,42 @@ public class OdobravanjeRezervacije extends JFrame {
         tabela.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         tabela.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabela.getTableHeader().setReorderingAllowed(false);
+        tabela.setOpaque(false);
         JScrollPane sc = new JScrollPane(tabela);
-        add(sc, "pushx, growx");
+        sc.getViewport().setOpaque(false);
+        sc.setOpaque(false);
+
+        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tabela.setOpaque(false);
+        tabela.setGridColor(Color.BLACK);
+        tabela.setBorder(null);
+        tabela.getTableHeader().setOpaque(false);
+        tabela.getTableHeader().setBackground(Color.GRAY);
+        tabela.setForeground(Color.BLACK);
+        tabela.setSurrendersFocusOnKeystroke(true);
+        tabela.setSelectionBackground(Color.GRAY);
+        tabela.setSelectionForeground(Color.WHITE);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.setFillsViewportHeight(true);
+        ((DefaultTableCellRenderer) tabela.getDefaultRenderer(Object.class)).setOpaque(false);
+        tabela.setFont(new Font("Yu Gothic", Font.BOLD, 13));
+        tabela.setBackground(Color.WHITE);
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        cellRenderer.setOpaque(false);
+        cellRenderer.setBackground(Color.WHITE);
+        tabela.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+        sc.setViewportView(tabela);
+
+        PozadinskiPanel panel = new PozadinskiPanel("src/slike/backgroundTabela.jpg");
+        panel.setLayout(layout);
+        panel.add(sc, "pushx, growx");
+        add(panel, "pushx, growx");
+
 
         tabela.getTableHeader().addMouseListener(new MouseAdapter() {
             @Override
@@ -48,6 +87,7 @@ public class OdobravanjeRezervacije extends JFrame {
                 int index = tabela.getTableHeader().columnAtPoint(e.getPoint());
             }
         });
+
         add(pretragaPanel(), BorderLayout.SOUTH);
     }
 

@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import entities.Knjiga;
 import entities.SadrzajKnjige;
 import enumerations.Zanr;
+import gui.clan.PregledIstorijeIznajmljivanja;
 import repository.Fabrika;
 
 import javax.swing.*;
@@ -276,9 +277,15 @@ public class DodavanjeKnjigeProzor extends JFrame {
                 return true;
             }
         });
+
         dodajAutore.setBounds(300, 186, 150, 40);
         dodajAutore.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         contentPane.add(dodajAutore);
+
+        JLabel Background = new JLabel("");
+        Background.setIcon(new ImageIcon(DodavanjeKnjigeProzor.class.getResource("/slike/backgroundTabela.jpg")));
+        Background.setBounds(0, 0, 1189, 600);
+        contentPane.add(Background);
 
     }
 
