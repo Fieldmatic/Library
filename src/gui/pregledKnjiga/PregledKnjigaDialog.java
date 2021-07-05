@@ -2,6 +2,7 @@ package gui.pregledKnjiga;
 
 import entities.Knjiga;
 import gui.Prijavljivanje;
+import gui.pretragaKnjiga.PozadinskiPanel;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 
@@ -9,6 +10,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -54,8 +56,26 @@ public class PregledKnjigaDialog extends JDialog  {
         tabela.getTableHeader().setReorderingAllowed(false);
         tabelaSorter.setModel((AbstractTableModel) tabela.getModel());
         tabela.setRowSorter(tabelaSorter);
+        tabela.setOpaque(false);
+        ((DefaultTableCellRenderer) tabela.getDefaultRenderer(Object.class)).setOpaque(false);
         JScrollPane sc = new JScrollPane(tabela);
-        add(sc, "pushx, growx");
+        sc.getViewport().setOpaque(false);
+        sc.setOpaque(false);
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setOpaque(false);
+        tabela.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(4).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(5).setCellRenderer(cellRenderer);
+
+
+
+        PozadinskiPanel panel = new PozadinskiPanel("src/slike/backgroundTabela.jpg");
+        panel.setLayout(layout);
+        panel.add(sc, "pushx, growx");
+        add(panel, "pushx, growx");
 
         tabela.getTableHeader().addMouseListener(new MouseAdapter() {
             @Override

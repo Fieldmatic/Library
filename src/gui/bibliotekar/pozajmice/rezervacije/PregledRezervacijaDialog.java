@@ -4,6 +4,7 @@ import entities.Pozajmica;
 import entities.PrimerakKnjige;
 import entities.Rezervacija;
 import enumerations.StatusPozajmice;
+import gui.pretragaKnjiga.PozadinskiPanel;
 import net.miginfocom.swing.MigLayout;
 import repository.Fabrika;
 import userEntities.Clan;
@@ -64,13 +65,14 @@ public class PregledRezervacijaDialog extends JDialog {
     private void initGUI() {
         MigLayout layout = new MigLayout();
         setLayout(layout);
-
         tabela.setFont(new Font("Yu Gothic", Font.BOLD, 12));
         tabela.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabela.getTableHeader().setReorderingAllowed(false);
         tabelaSorter.setModel((AbstractTableModel) tabela.getModel());
         tabela.setRowSorter(tabelaSorter);
         JScrollPane sc = new JScrollPane(tabela);
+        PozadinskiPanel p = new PozadinskiPanel("src/slike/backgroundTabela.jpg");
+        p.add(sc);
         add(sc, "pushx, growx");
 
         tabela.getTableHeader().addMouseListener(new MouseAdapter() {

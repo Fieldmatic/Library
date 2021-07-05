@@ -9,17 +9,18 @@ import java.io.IOException;
 
 public class PozadinskiPanel extends JPanel {
 
-  private BufferedImage image;
+    private final String putanja;
+    private BufferedImage image;
 
-    public PozadinskiPanel() {
-
+    public PozadinskiPanel(String putanjaSlike) {
+        this.putanja = putanjaSlike;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-          image = ImageIO.read(new File("src/slike/registracijaPozadina.jpg"));
+          image = ImageIO.read(new File(putanja));
        } catch (IOException ex) {
             System.out.println("PozadinskiPanel: Pozadinska slika nije ucitana!");
        }

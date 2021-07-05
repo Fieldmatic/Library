@@ -74,7 +74,7 @@ public class PretragaKnjigaProzor extends JFrame {
     }
 
     private void initGUI() {
-        contentPane = new PozadinskiPanel();
+        contentPane = new PozadinskiPanel("src/slike/registracijaPozadina.jpg");
         contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         setContentPane(contentPane);
