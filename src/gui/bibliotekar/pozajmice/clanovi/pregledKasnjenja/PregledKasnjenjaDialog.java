@@ -21,7 +21,6 @@ public class PregledKasnjenjaDialog extends PregledClanovaDialog {
         JLabel lblHint = new JLabel("Za pregled kasnjenja izaberite clana.");
         lblHint.setIcon(new ImageIcon(PregledKasnjenjaDialog.class.getResource("/slike/notification.png")));
         super.pretragaPanel.add(lblHint);
-        super.setMinimumSize(new Dimension(650, 300));
     }
 
     private void initActions() {

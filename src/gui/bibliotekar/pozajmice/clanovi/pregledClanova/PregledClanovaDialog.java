@@ -40,8 +40,8 @@ public class PregledClanovaDialog extends JDialog {
         this.setTitle("Pregled clanova");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         initGUI();
-        this.pack();
         this.setVisible(true);
     }
 
@@ -85,9 +85,10 @@ public class PregledClanovaDialog extends JDialog {
 
         PozadinskiPanel panel = new PozadinskiPanel("src/slike/backgroundTabela.jpg");
         panel.setLayout(layout);
-        panel.add(sc, "pushx, growx");
-        add(panel, "pushx, growx");
-        panel.repaint();
+        panel.add(sc, "push, grow");
+        add(panel, "push, grow");
+        this.setSize(new Dimension(1000, 600));
+
 
         tabela.getTableHeader().addMouseListener(new MouseAdapter() {
             @Override

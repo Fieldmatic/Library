@@ -3,6 +3,7 @@ package gui.bibliotekar.pozajmice.clanovi.pregledKasnjenja;
 import entities.Pozajmica;
 import enumerations.StatusPozajmice;
 import gui.bibliotekar.pozajmice.clanovi.pregledClanova.PregledClanovaModel;
+import gui.pretragaKnjiga.PozadinskiPanel;
 import net.miginfocom.swing.MigLayout;
 import userEntities.Clan;
 
@@ -61,8 +62,41 @@ public class DetaljnoKasnjenjeDialog extends JDialog {
         tabela.getTableHeader().setReorderingAllowed(false);
         tabelaSorter.setModel((AbstractTableModel) tabela.getModel());
         tabela.setRowSorter(tabelaSorter);
+        tabela.setOpaque(false);
+
         JScrollPane sc = new JScrollPane(tabela);
-        add(sc, "pushx, growx");
+        sc.setViewportView(tabela);
+        sc.getViewport().setOpaque(false);
+        sc.setOpaque(false);
+
+        tabela.setGridColor(Color.BLACK);
+        tabela.setBorder(null);
+        tabela.getTableHeader().setOpaque(false);
+        tabela.getTableHeader().setBackground(Color.GRAY);
+        tabela.setForeground(Color.BLACK);
+        tabela.setSurrendersFocusOnKeystroke(true);
+        tabela.setSelectionBackground(Color.GRAY);
+        tabela.setSelectionForeground(Color.WHITE);
+        tabela.setFillsViewportHeight(true);
+        ((DefaultTableCellRenderer) tabela.getDefaultRenderer(Object.class)).setOpaque(false);
+        tabela.setFont(new Font("Yu Gothic", Font.BOLD, 13));
+        tabela.setBackground(Color.WHITE);
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        cellRenderer.setOpaque(false);
+        cellRenderer.setBackground(Color.WHITE);
+        tabela.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(2).setCellRenderer(cellRenderer);
+        tabela.getColumnModel().getColumn(3).setCellRenderer(cellRenderer);
+
+        PozadinskiPanel panel = new PozadinskiPanel("src/slike/backgroundTabela.jpg");
+        panel.setLayout(layout);
+        panel.add(sc, "push, grow");
+        add(panel, "push, grow");
+        this.setSize(new Dimension(1000, 600));
+
 
         tabela.getTableHeader().addMouseListener(new MouseAdapter() {
             @Override
