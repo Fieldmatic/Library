@@ -25,6 +25,7 @@ class MenadzerKnjigaTest {
         menadzerKnjiga = new MenadzerKnjiga();
         menadzerKnjiga.ucitajPodatke();
         rezultatPretrage = new ArrayList<>();
+        rezultatPostavljen = false;
     }
 
     @Test
